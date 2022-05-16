@@ -1,0 +1,1384 @@
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Mopays</ion-title>
+    <ion-buttons slot="end">
+      <ion-button class="badge-button" (click)="goInbox(inboxItems)">
+        <ion-icon class="noteicon" name="chatbox-ellipses" style="color: white;"></ion-icon>
+        <ion-badge mode="ios" *ngIf="inboxItems.length > 0" [class.badge-one]="inboxItems.length < 10"
+          [class.badge-two]="inboxItems.length >= 10" color="danger">
+          {{inboxItems.length}}
+        </ion-badge>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button class="badge-button" (click)="goNotify()">
+        <ion-icon class="noteicon" name="notifications" color="light"></ion-icon>
+        <ion-badge mode="ios" *ngIf="notifyItems.length > 0" [class.badge-one]="notifyItems.length < 10"
+          [class.badge-two]="notifyItems.length >= 10" color="danger">
+          {{notifyItems.length}}
+        </ion-badge>
+      </ion-button>
+    </ion-buttons>
+
+    <!--<ion-buttons slot="end">
+      <ion-button fill="clear" (click)="searchAll()">
+        <ion-icon class="noteicon" name="search" style="color: white;"></ion-icon>
+      </ion-button>
+     </ion-buttons>-->
+
+    <ion-buttons slot="end" style="padding-right: 15px;" (click)="goMyProfile()">
+      <div *ngIf="!currentUserId && !photoURL" class="profile-pic" [style.background-image]="'url(' + pic + ')'"></div>
+      <div *ngIf="currentUserId && photoURL" class="profile-pic" [style.background-image]="'url(' + photoURL + ')'">
+      </div>
+    </ion-buttons>
+
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <div scrollX="true">
+      <ion-chip class="scrollX" (click)="goEssential()">
+        <ion-icon name="list-outline" color="light"></ion-icon>
+        <ion-label color="light" class="custom-font">Essentials</ion-label>
+      </ion-chip>
+      <ion-chip class="scrollX" (click)="goBusiness()">
+        <ion-icon name="briefcase" color="light"></ion-icon>
+        <ion-label color="light" class="custom-font">Business</ion-label>
+      </ion-chip>
+      <ion-chip class="scrollX" (click)="goListings()">
+        <ion-icon name="cart" color="light"></ion-icon>
+        <ion-label color="light" class="custom-font">Annonces</ion-label>
+      </ion-chip>
+      <ion-chip class="scrollX" (click)="goServicePage()">
+        <ion-icon name="list-circle" color="light"></ion-icon>
+        <ion-label color="light" class="custom-font">Services</ion-label>
+      </ion-chip>
+      <ion-chip class="scrollX" (click)="goGallery()">
+        <ion-icon name="images" color="light"></ion-icon>
+        <ion-label color="light" class="custom-font">Photos</ion-label>
+      </ion-chip>
+      <ion-chip class="scrollX" (click)="showEvent()">
+        <ion-icon name="calendar" color="light"></ion-icon>
+        <ion-label color="light" class="custom-font">Events</ion-label>
+      </ion-chip>
+      <ion-chip class="scrollX" (click)="goPeople()">
+        <ion-icon name="people" color="light"></ion-icon>
+        <ion-label color="light" class="custom-font">People</ion-label>
+      </ion-chip>
+      <ion-chip class="scrollX" (click)="goJob()">
+        <ion-icon name="document-text" color="light"></ion-icon>
+        <ion-label color="light" class="custom-font">Jobs</ion-label>
+      </ion-chip>
+      <ion-chip class="scrollX" (click)="goGroup()">
+        <ion-icon name="people-circle" color="light"></ion-icon>
+        <ion-label color="light" class="custom-font">Groups</ion-label>
+      </ion-chip>
+      <ion-chip class="scrollX" (click)="goBasicMap()">
+        <ion-icon name="location" color="light"></ion-icon>
+        <ion-label color="light" class="custom-font">Maps</ion-label>
+      </ion-chip>
+    </div>
+  </ion-toolbar>
+
+
+
+
+</ion-header>
+
+<ion-content>
+  <div class="header-image" style="background-color: #00a8e1;">
+
+  </div>
+
+  <div class="essentials">
+    <div class="search-content">
+      <ion-item lines="none">
+        <ion-buttons slot="start" (click)="goMyProfile()">
+          <div *ngIf="!currentUserId && !photoURL" class="my-profile-pic" [style.background-image]="'url(' + pic + ')'">
+          </div>
+          <div *ngIf="currentUserId && photoURL" class="my-profile-pic"
+            [style.background-image]="'url(' + photoURL + ')'"></div>
+        </ion-buttons>
+        <h5 (click)="showModal()">Hello ... How are you doing ?</h5>
+      </ion-item>
+      <ion-item lines="full" (click)="showModal()">
+        <h6 style="color: gray;">Post a message, question, photo here ...</h6>
+      </ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-button fill="clear" size="small" (click)="selectPhoto()">
+              <ion-icon name="images" size="small" style="color: green; margin-right: 5px;"></ion-icon>
+              <small>Photo</small>
+            </ion-button>
+          </ion-col>
+          <span class="verticalLine"></span>
+          <ion-col>
+            <ion-button fill="clear" size="small" (click)="showModal()">
+              <ion-icon name="videocam" size="small" style="color: red; margin-right: 5px;"></ion-icon>
+              <small>Video</small>
+            </ion-button>
+          </ion-col>
+          <span class="verticalLine"></span>
+          <ion-col>
+            <ion-button fill="clear" size="small" (click)="showModal()">
+              <ion-icon name="location" size="small" style="color: purple; margin-right: 5px;"></ion-icon>
+              <small>Location</small>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+
+  <div class="announcements">
+    <ion-item class="transparent ion-no-padding" lines="none">
+      <!-- Similar List -->
+      <h6 class="font-bold ion-text-wrap custom-font
+      ion-padding-start ion-no-margin" slot="start" style="color: #00a8e1;">
+        Announcements
+        <ion-icon name="alert-circle" color="medium"></ion-icon>
+      </h6>
+      <ion-buttons slot="end" (click)="goFeedCategory()">
+        <ion-button color="medium">
+          <ion-icon slot="icon-only" md="filter" ios="filter"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="12">
+          <ion-slides [options]="optionannouncements">
+            <ion-slide *ngFor="let item of announcementsList?.slice().reverse()">
+              <ion-card class="announcement-card">
+                <ion-item lines="none">
+                  <ion-avatar slot="start" class="story-avatar" [ngClass]="{'seen': false}">
+                    <img [src]="item.image">
+                  </ion-avatar>
+                  <ion-label class="custom-font">
+                    {{item.name}}
+                    <!--<p>{{item.timeStamp | DateFormat | lowercase}}</p>-->
+                    <p class="custom-font">{{item.Date | DateFormat | lowercase}}</p>
+                  </ion-label>
+                  <ion-buttons slot="end" (click)="presentActionSheetAnnouncement(item.description)">
+                    <ion-button color="medium">
+                      <ion-icon slot="icon-only" md="ellipsis-vertical-outline" ios="ellipsis-horizontal-outline">
+                      </ion-icon>
+                    </ion-button>
+                  </ion-buttons>
+                </ion-item>
+                <ion-card-content class="post-list-content" (click)="readMore(item)">
+
+                  <p class="ion-no-margin-top custom-font
+                      ion-padding-start ion-padding-end">
+                    {{ (item.description.length>200)? (item.description | slice:0:200)+'...read more' :
+                    (item.description) }}
+                  </p>
+                </ion-card-content>
+              </ion-card>
+            </ion-slide>
+          </ion-slides>
+          <ion-list *ngIf="announcementsList.length === 0">
+            <ion-item *ngFor="let i of [1]">
+              <ion-avatar slot="start">
+                <ion-skeleton-text animated style="width: 50px; height: 50px;"></ion-skeleton-text>
+              </ion-avatar>
+              <ion-label>
+                <ion-skeleton-text animated style="width: 40%; height: 8px;"></ion-skeleton-text>
+                <ion-skeleton-text animated style="width: 20%; height: 4px;"></ion-skeleton-text>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <div class="pub-adverts">
+    <ion-item class="transparent ion-no-padding" lines="none">
+      <!-- Similar List -->
+      <h6 class="font-bold ion-text-wrap custom-font
+      ion-padding-start ion-no-margin" slot="start" style="color: #00a8e1;">
+        Photos</h6>
+      <!-- See All -->
+      <span class="text-size-sm text-color-accent font-regular custom-font" slot="end" (click)="goGallery()">View more
+      </span>
+    </ion-item>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="12">
+          <ion-slides [options]="optionGallery">
+            <ion-slide *ngFor="let item of galleryList?.reverse()" (click)="goGallery()">
+              <ion-card class="card-custom">
+                <div class="gallery-thumbnail" [style.backgroundImage]="'url(' + item.image + ')'">
+                  <div class="gallery-caption custom-font">
+                    {{ (item.description.length>50)? (item.description | slice:0:50)+'...' : (item.description) }}
+                  </div>
+                </div>
+              </ion-card>
+            </ion-slide>
+          </ion-slides>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <ion-card class="post-list-card" *ngFor="let item of feeditems?.slice(0,2)">
+    <ion-item lines="none">
+      <ion-avatar slot="start" class="story-avatar" [ngClass]="{'seen': false}">
+        <img [src]="item.Photo" (click)="viewProfiles(item.UserId)" *ngIf="!item.anonymousUser">
+        <img src="assets/imgs/profile.jpg" (click)="anonymousProfile()" *ngIf="item.anonymousUser">
+      </ion-avatar>
+      <ion-label class="custom-font" (click)="viewProfiles(item.UserId)" *ngIf="!item.anonymousUser">
+        {{item.Name}} <img *ngIf="item.Verified" src="assets/checked.png"
+          style="width: 15px; height: 15px; display: inline-block;">
+        <!--<p>{{item.timeStamp | DateFormat | lowercase}}</p>-->
+        <p class="custom-font">{{item.Date | DateFormat | lowercase}}</p>
+      </ion-label>
+      <ion-label class="custom-font" (click)="anonymousProfile()" *ngIf="item.anonymousUser">
+        {{item.Name}}, {{item.age}}, {{ item.guestLocation }}
+        <!--<p>{{item.timeStamp | DateFormat | lowercase}}</p>-->
+        <p class="custom-font">{{item.Date | DateFormat | lowercase}}</p>
+      </ion-label>
+      <ion-buttons slot="end" *ngIf="item.UserId != currentuserId"
+        (click)="presentActionSheetNonUser(item.key, item.Name, item.description)">
+        <ion-button color="medium">
+          <ion-icon slot="icon-only" md="ellipsis-vertical-outline" ios="ellipsis-horizontal-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="end" *ngIf="item.UserId == currentuserId"
+        (click)="presentActionSheetUser(item.key, item, item.description)">
+        <ion-button color="medium">
+          <ion-icon slot="icon-only" md="ellipsis-vertical-outline" ios="ellipsis-horizontal-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+
+    <ion-card-content class="post-list-content">
+
+      <p class="ion-no-margin-top custom-font
+          ion-padding-start ion-padding-end">{{item.description}}</p>
+      <p class="ion-no-margin-top custom-font 
+          ion-padding-start ion-padding-end" *ngIf="item.location">{{item.location}}</p>
+      <br>
+
+      <div *ngIf="item.video">
+        <video controls>
+          <source src="{{item.video}}#t=0.1" type="video/mp4" />
+        </video>
+      </div>
+
+      <div *ngIf="item.youtube" style="margin: 0px; width: 100%;" class="iframe-container">
+        <div id="{{item.youtube}}"></div>
+      </div>
+
+      <div *ngIf="item.location">
+        <agm-map [latitude]="item.latitude" [longitude]="item.longitude" [zoom]="zoom">
+          <agm-marker [latitude]="item.latitude" [longitude]="item.longitude" [markerDraggable]="false"></agm-marker>
+        </agm-map>
+      </div>
+
+      <ion-slides id="slider" pager="true" *ngIf="item.images" [options]="slideOptions">
+        <ion-slide *ngFor="let img of item.images" (click)="zoomImages(img.src, item.key)">
+          <ion-img src="{{img.src}}"></ion-img>
+        </ion-slide>
+      </ion-slides>
+
+    </ion-card-content>
+
+    <ion-item lines="none" class="ion-no-padding" style="margin-left: 10px;">
+      <ion-buttons slot="start">
+        <ion-button color="medium" *ngIf="item.haveILiked === false" [disabled]="this.anonymousUser"
+          (click)="likePost(item, item.key)">
+          <ion-icon slot="start" name="heart-outline" color="medium"></ion-icon>
+          <small>Likes - {{item.Score}}</small>
+        </ion-button>
+        <ion-button color="medium" *ngIf="item.haveILiked === true" [disabled]="this.anonymousUser"
+          (click)="unlikePost(item, item.key)">
+          <ion-icon slot="start" name="heart" color="danger"></ion-icon>
+          <small>Likes - {{item.Score}}</small>
+        </ion-button>
+        <ion-button color="medium" (click)="goCommy(item.key, item.UserId, item.commentLength)">
+          <ion-icon slot="start" name="chatbox-outline" color="medium"></ion-icon>
+          <small>Comments - {{item.commentLength}}</small>
+        </ion-button>
+        <ion-button color="medium" (click)="shareSheetShare(item.description)"
+          *ngIf="item.description != null && !item.images">
+          <ion-icon slot="start" name="arrow-redo-circle-outline" color="medium"></ion-icon>
+          <small>Share</small>
+        </ion-button>
+        <ion-button color="medium" (click)="shareSheetShareImage(item.images[0].src)"
+          *ngIf="item.description == null && item.images">
+          <ion-icon slot="start" name="arrow-redo-circle-outline" color="medium"></ion-icon>
+          <small>Share</small>
+        </ion-button>
+        <ion-button color="medium" (click)="shareSheetShareImageText(item.images[0].src, item.description)"
+          *ngIf="item.description != null && item.images">
+          <ion-icon slot="start" name="arrow-redo-circle-outline" color="medium"></ion-icon>
+          <small>Share</small>
+        </ion-button>
+      </ion-buttons>
+
+      <!--<ion-buttons slot="end">
+        <ion-button color="medium">
+          <ion-icon size="small" slot="start" name="eye-outline"></ion-icon>
+     
+        </ion-button>
+      </ion-buttons>-->
+    </ion-item>
+  </ion-card>
+
+  <!--<ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>-->
+
+
+  <ion-list *ngIf="feeditems.length === 0">
+    <ion-item *ngFor="let i of [1,2]">
+      <ion-avatar slot="start">
+        <ion-skeleton-text animated style="width: 50px; height: 50px;"></ion-skeleton-text>
+      </ion-avatar>
+      <ion-label>
+        <ion-skeleton-text animated style="width: 40%; height: 8px;"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 20%; height: 4px;"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!--<div class="top-featuress">-->
+  <!--<ion-item class="transparent ion-no-padding" lines="none">
+     
+      <h6 class="font-bold ion-text-wrap
+      ion-padding-start ion-no-margin custom-font" slot="start" style="color: #00a8e1;">
+      Essentials</h6>
+      
+      <span class="text-size-sm text-color-accent font-regular custom-font" slot="end" (click)="goEssential()">View more
+        </span>
+    </ion-item>-->
+
+  <!--<ion-item class="transparent ion-no-padding" lines="none">
+
+      <h6 class="font-bold ion-text-wrap custom-font
+      ion-padding-start ion-no-margin" slot="start" style="color: #00a8e1;">
+      Essentials</h6>
+    
+      <span class="text-size-sm text-color-accent font-regular custom-font" slot="end" (click)="goEssential()">View more
+        </span>
+    </ion-item>
+
+     <div class="stories-card sliderBook">
+     <ion-list lines="none" class="story-list" *ngFor="let item of essentiaList" (click)="item.type === 'page'? goPage(item.url): goLink(item.link)">
+    <ion-item lines="none" class="story-item">
+      <ion-avatar class="story-avatars">
+        <img src="{{item.img}}">
+      </ion-avatar>
+    </ion-item>
+    <div class="story-author">
+      <ion-text color="dark" style="font-size: 13px;">
+        {{item.name}}
+      </ion-text>
+    </div>  
+    </ion-list>
+    </div> -->
+
+  <!--<ion-grid>
+      <ion-row>
+        <ion-col size="3" *ngFor="let item of essentiaList" (click)="item.type === 'page'? goPage(item.url): goLink(item.link)">
+          <img src="{{item.img}}" alt="" class="image-round">
+          <div class="ion-text-center">
+            <h6 class="ion-text-center" style="font-size: 12px;" class="custom-font">{{item.name}}</h6>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>-->
+  <!--</div>-->
+
+  <div class="top-features">
+    <ion-item class="transparent ion-no-padding" lines="none">
+      <!-- Similar List -->
+      <h6 class="font-bold ion-text-wrap
+      ion-padding-start ion-no-margin custom-font" slot="start" style="color: #00a8e1;">
+        Latest News</h6>
+      <span class="text-size-sm text-color-accent font-regular custom-font" slot="end" (click)="goNews()">View more
+      </span>
+    </ion-item>
+
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="12">
+          <ion-slides [options]="optionsmass">
+            <ion-slide *ngFor="let post of posts" (click)="goToPostDetails(post)">
+              <ion-card class="image-card">
+                <img src="{{post.media_url}}" alt="" style="height:120px; width: 100%">
+                <ion-card-content>
+                  <ion-card-subtitle class="card-caption ion-no-padding" style="text-align: left;">
+                    <span style="color: black; margin: 0px;" *ngIf="post.title && post.title.rendered">
+                      {{ (post.title.rendered.length>20)? (post.title.rendered | slice:0:20)+'...read more' :
+                      (post.title.rendered) }}
+                    </span>
+                  </ion-card-subtitle>
+                </ion-card-content>
+              </ion-card>
+            </ion-slide>
+          </ion-slides>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <!-- <div class="container-view">
+    <ion-card class="card-custom" *ngFor="let post of posts" (click)="goToPostDetails(post)">
+          <img src="{{post.media_url}}" width="100%" height="270px" *ngIf="post.media_url">
+      
+      <ion-grid>
+        <ion-row>
+          <ion-col size="auto" size="12">
+            <ion-button fill="clear" size="small" color="medium">
+              {{post.date}}
+            </ion-button>
+          </ion-col>
+          <ion-col class="ion-padding" size="12">
+            <div class="card-caption" *ngIf="post.title && post.title.rendered" style="color:black; font-weight: bold">
+              {{post.title.rendered}}
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </div> -->
+
+  <div class="top-features">
+    <ion-item class="transparent ion-no-padding" lines="none">
+      <h6 class="font-bold ion-text-wrap custom-font
+      ion-padding-start ion-no-margin" slot="start" style="color: #00a8e1;">
+        Essentials</h6>
+
+      <span class="text-size-sm text-color-accent font-regular custom-font" slot="end" (click)="goEssential()">View more
+      </span>
+    </ion-item>
+
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="12">
+          <ion-slides [options]="essentials">
+            <ion-slide *ngFor="let item of essentiaList"
+              (click)="item.type === 'page'? goPage(item.url): goLink(item.link)">
+              <div class="stories-card sliderBook">
+                <ion-list lines="none" class="story-list">
+                  <ion-item lines="none" class="story-item">
+                    <ion-avatar class="story-avatars">
+                      <img src="{{item.img}}">
+                    </ion-avatar>
+                  </ion-item>
+                  <div class="story-author">
+                    <ion-text color="dark" style="font-size: 13px;">
+                      {{item.name}}
+                    </ion-text>
+                  </div>
+                </ion-list>
+              </div>
+            </ion-slide>
+          </ion-slides>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+  </div>
+
+
+  <div class="ads">
+    <ion-slides [options]="slideOpts" class="slidetwo">
+      <ion-slide *ngFor="let step of advertstwo" (click)="goAdsDetails(step.url)" class="background-size"
+        [ngStyle]="{ 'background': 'url(' + step.image + ')'}">
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <ion-card class="post-list-card" *ngFor="let item of feeditems?.slice(2,5)">
+    <ion-item lines="none">
+      <ion-avatar slot="start" class="story-avatar" [ngClass]="{'seen': false}">
+        <img [src]="item.Photo" (click)="viewProfiles(item.UserId)" *ngIf="!item.anonymousUser">
+        <img src="assets/imgs/profile.jpg" (click)="anonymousProfile()" *ngIf="item.anonymousUser">
+      </ion-avatar>
+      <ion-label class="custom-font" (click)="viewProfiles(item.UserId)" *ngIf="!item.anonymousUser">
+        {{item.Name}} <img *ngIf="item.Verified" src="assets/checked.png"
+          style="width: 15px; height: 15px; display: inline-block;">
+        <!--<p>{{item.timeStamp | DateFormat | lowercase}}</p>-->
+        <p class="custom-font">{{item.Date | DateFormat | lowercase}}</p>
+      </ion-label>
+      <ion-label class="custom-font" (click)="anonymousProfile()" *ngIf="item.anonymousUser">
+        {{item.Name}}, {{item.age}}, {{ item.guestLocation }}
+        <!--<p>{{item.timeStamp | DateFormat | lowercase}}</p>-->
+        <p class="custom-font">{{item.Date | DateFormat | lowercase}}</p>
+      </ion-label>
+      <ion-buttons slot="end" *ngIf="item.UserId != currentuserId"
+        (click)="presentActionSheetNonUser(item.key, item.Name, item.description)">
+        <ion-button color="medium">
+          <ion-icon slot="icon-only" md="ellipsis-vertical-outline" ios="ellipsis-horizontal-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="end" *ngIf="item.UserId == currentuserId"
+        (click)="presentActionSheetUser(item.key, item, item.description)">
+        <ion-button color="medium">
+          <ion-icon slot="icon-only" md="ellipsis-vertical-outline" ios="ellipsis-horizontal-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+
+    <ion-card-content class="post-list-content">
+
+      <p class="ion-no-margin-top custom-font
+          ion-padding-start ion-padding-end">{{item.description}}</p>
+      <p class="ion-no-margin-top custom-font 
+          ion-padding-start ion-padding-end" *ngIf="item.location">{{item.location}}</p>
+      <br>
+
+      <div *ngIf="item.video">
+        <video controls>
+          <source src="{{item.video}}#t=0.1" type="video/mp4" />
+        </video>
+      </div>
+
+      <div *ngIf="item.youtube" style="margin: 0px; width: 100%;" class="iframe-container">
+        <div id="{{item.youtube}}"></div>
+      </div>
+
+      <div *ngIf="item.location">
+        <agm-map [latitude]="item.latitude" [longitude]="item.longitude" [zoom]="zoom">
+          <agm-marker [latitude]="item.latitude" [longitude]="item.longitude" [markerDraggable]="false"></agm-marker>
+        </agm-map>
+      </div>
+
+      <ion-slides id="slider" pager="true" *ngIf="item.images" [options]="slideOptions">
+        <ion-slide *ngFor="let img of item.images" (click)="zoomImages(img.src, item.key)">
+          <ion-img src="{{img.src}}"></ion-img>
+        </ion-slide>
+      </ion-slides>
+
+    </ion-card-content>
+
+    <ion-item lines="none" class="ion-no-padding" style="margin-left: 10px;">
+      <ion-buttons slot="start">
+        <ion-button color="medium" *ngIf="item.haveILiked === false" [disabled]="this.anonymousUser"
+          (click)="likePost(item, item.key)">
+          <ion-icon slot="start" name="heart-outline" color="medium"></ion-icon>
+          <small>Likes - {{item.Score}}</small>
+        </ion-button>
+        <ion-button color="medium" *ngIf="item.haveILiked === true" [disabled]="this.anonymousUser"
+          (click)="unlikePost(item, item.key)">
+          <ion-icon slot="start" name="heart" color="danger"></ion-icon>
+          <small>Likes - {{item.Score}}</small>
+        </ion-button>
+        <ion-button color="medium" (click)="goCommy(item.key, item.UserId, item.commentLength)">
+          <ion-icon slot="start" name="chatbox-outline" color="medium"></ion-icon>
+          <small>Comments - {{item.commentLength}}</small>
+        </ion-button>
+        <ion-button color="medium" (click)="shareSheetShare(item.description)"
+          *ngIf="item.description != null && !item.images">
+          <ion-icon slot="start" name="arrow-redo-circle-outline" color="medium"></ion-icon>
+          <small>Share</small>
+        </ion-button>
+        <ion-button color="medium" (click)="shareSheetShareImage(item.images[0].src)"
+          *ngIf="item.description == null && item.images">
+          <ion-icon slot="start" name="arrow-redo-circle-outline" color="medium"></ion-icon>
+          <small>Share</small>
+        </ion-button>
+        <ion-button color="medium" (click)="shareSheetShareImageText(item.images[0].src, item.description)"
+          *ngIf="item.description != null && item.images">
+          <ion-icon slot="start" name="arrow-redo-circle-outline" color="medium"></ion-icon>
+          <small>Share</small>
+        </ion-button>
+      </ion-buttons>
+
+      <!--<ion-buttons slot="end">
+        <ion-button color="medium">
+          <ion-icon size="small" slot="start" name="eye-outline"></ion-icon>
+     
+        </ion-button>
+      </ion-buttons>-->
+    </ion-item>
+  </ion-card>
+
+  <!--<ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>-->
+
+
+  <ion-list *ngIf="feeditems.length === 0">
+    <ion-item *ngFor="let i of [1,2,3]">
+      <ion-avatar slot="start">
+        <ion-skeleton-text animated style="width: 50px; height: 50px;"></ion-skeleton-text>
+      </ion-avatar>
+      <ion-label>
+        <ion-skeleton-text animated style="width: 40%; height: 8px;"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 20%; height: 4px;"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+
+  <div class="top-features">
+    <ion-item class="transparent ion-no-padding" lines="none">
+      <!-- Similar List -->
+      <h6 class="font-bold ion-text-wrap
+      ion-padding-start ion-no-margin custom-font" slot="start" style="color: #00a8e1;">
+        Top Features</h6>
+    </ion-item>
+
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="12">
+          <ion-slides [options]="optionsmass">
+            <ion-slide *ngFor="let item of topFeatures" (click)="goPageFeatures(item.url)">
+              <ion-card class="image-card">
+                <img src="{{item.img}}" alt="" style="height:120px; width: 100%">
+                <ion-card-content>
+                  <ion-card-subtitle class="name_title">
+                    <h2 style="color: black;" class="custom-font">{{item.name}}</h2>
+                  </ion-card-subtitle>
+                </ion-card-content>
+              </ion-card>
+            </ion-slide>
+          </ion-slides>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <ion-card class="post-list-card" *ngFor="let item of feeditems?.slice(5,7)">
+    <ion-item lines="none">
+      <ion-avatar slot="start" class="story-avatar" [ngClass]="{'seen': false}">
+        <img [src]="item.Photo" (click)="viewProfiles(item.UserId)" *ngIf="!item.anonymousUser">
+        <img src="assets/imgs/profile.jpg" (click)="anonymousProfile()" *ngIf="item.anonymousUser">
+      </ion-avatar>
+      <ion-label class="custom-font" (click)="viewProfiles(item.UserId)" *ngIf="!item.anonymousUser">
+        {{item.Name}} <img *ngIf="item.Verified" src="assets/checked.png"
+          style="width: 15px; height: 15px; display: inline-block;">
+        <!--<p>{{item.timeStamp | DateFormat | lowercase}}</p>-->
+        <p class="custom-font">{{item.Date | DateFormat | lowercase}}</p>
+      </ion-label>
+      <ion-label class="custom-font" (click)="anonymousProfile()" *ngIf="item.anonymousUser">
+        {{item.Name}}, {{item.age}}, {{ item.guestLocation }}
+        <!--<p>{{item.timeStamp | DateFormat | lowercase}}</p>-->
+        <p class="custom-font">{{item.Date | DateFormat | lowercase}}</p>
+      </ion-label>
+      <ion-buttons slot="end" *ngIf="item.UserId != currentuserId"
+        (click)="presentActionSheetNonUser(item.key, item.Name, item.description)">
+        <ion-button color="medium">
+          <ion-icon slot="icon-only" md="ellipsis-vertical-outline" ios="ellipsis-horizontal-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="end" *ngIf="item.UserId == currentuserId"
+        (click)="presentActionSheetUser(item.key, item, item.description)">
+        <ion-button color="medium">
+          <ion-icon slot="icon-only" md="ellipsis-vertical-outline" ios="ellipsis-horizontal-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+
+    <ion-card-content class="post-list-content">
+
+      <p class="ion-no-margin-top custom-font
+          ion-padding-start ion-padding-end">{{item.description}}</p>
+      <p class="ion-no-margin-top custom-font 
+          ion-padding-start ion-padding-end" *ngIf="item.location">{{item.location}}</p>
+      <br>
+
+      <div *ngIf="item.video">
+        <video controls>
+          <source src="{{item.video}}#t=0.1" type="video/mp4" />
+        </video>
+      </div>
+
+      <div *ngIf="item.youtube" style="margin: 0px; width: 100%;" class="iframe-container">
+        <div id="{{item.youtube}}"></div>
+      </div>
+
+      <div *ngIf="item.location">
+        <agm-map [latitude]="item.latitude" [longitude]="item.longitude" [zoom]="zoom">
+          <agm-marker [latitude]="item.latitude" [longitude]="item.longitude" [markerDraggable]="false"></agm-marker>
+        </agm-map>
+      </div>
+
+      <ion-slides id="slider" pager="true" *ngIf="item.images" [options]="slideOptions">
+        <ion-slide *ngFor="let img of item.images" (click)="zoomImages(img.src, item.key)">
+          <ion-img src="{{img.src}}"></ion-img>
+        </ion-slide>
+      </ion-slides>
+
+    </ion-card-content>
+
+    <ion-item lines="none" class="ion-no-padding" style="margin-left: 10px;">
+      <ion-buttons slot="start">
+        <ion-button color="medium" *ngIf="item.haveILiked === false" [disabled]="this.anonymousUser"
+          (click)="likePost(item, item.key)">
+          <ion-icon slot="start" name="heart-outline" color="medium"></ion-icon>
+          <small>Likes - {{item.Score}}</small>
+        </ion-button>
+        <ion-button color="medium" *ngIf="item.haveILiked === true" [disabled]="this.anonymousUser"
+          (click)="unlikePost(item, item.key)">
+          <ion-icon slot="start" name="heart" color="danger"></ion-icon>
+          <small>Likes - {{item.Score}}</small>
+        </ion-button>
+        <ion-button color="medium" (click)="goCommy(item.key, item.UserId, item.commentLength)">
+          <ion-icon slot="start" name="chatbox-outline" color="medium"></ion-icon>
+          <small>Comments - {{item.commentLength}}</small>
+        </ion-button>
+        <ion-button color="medium" (click)="shareSheetShare(item.description)"
+          *ngIf="item.description != null && !item.images">
+          <ion-icon slot="start" name="arrow-redo-circle-outline" color="medium"></ion-icon>
+          <small>Share</small>
+        </ion-button>
+        <ion-button color="medium" (click)="shareSheetShareImage(item.images[0].src)"
+          *ngIf="item.description == null && item.images">
+          <ion-icon slot="start" name="arrow-redo-circle-outline" color="medium"></ion-icon>
+          <small>Share</small>
+        </ion-button>
+        <ion-button color="medium" (click)="shareSheetShareImageText(item.images[0].src, item.description)"
+          *ngIf="item.description != null && item.images">
+          <ion-icon slot="start" name="arrow-redo-circle-outline" color="medium"></ion-icon>
+          <small>Share</small>
+        </ion-button>
+      </ion-buttons>
+
+      <!--<ion-buttons slot="end">
+        <ion-button color="medium">
+          <ion-icon size="small" slot="start" name="eye-outline"></ion-icon>
+     
+        </ion-button>
+      </ion-buttons>-->
+    </ion-item>
+  </ion-card>
+
+  <!--<ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>-->
+
+
+  <ion-list *ngIf="feeditems.length === 0">
+    <ion-item *ngFor="let i of [1,2]">
+      <ion-avatar slot="start">
+        <ion-skeleton-text animated style="width: 50px; height: 50px;"></ion-skeleton-text>
+      </ion-avatar>
+      <ion-label>
+        <ion-skeleton-text animated style="width: 40%; height: 8px;"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 20%; height: 4px;"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <div class="ads">
+    <ion-slides [options]="slideOpts" class="slidetwo">
+      <ion-slide *ngFor="let step of adverts" (click)="goAdsDetails(step.url)" class="background-size"
+        [ngStyle]="{ 'background': 'url(' + step.image + ')'}">
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <div class="pub-adverts">
+    <ion-item class="transparent ion-no-padding" lines="none">
+      <!-- Similar List -->
+      <h6 class="font-bold ion-text-wrap custom-font
+      ion-padding-start ion-no-margin" slot="start" style="color: #00a8e1;">
+        PUB</h6>
+      <!-- See All -->
+      <span class="text-size-sm text-color-accent font-regular custom-font" slot="end" (click)="goPub()">View more
+      </span>
+    </ion-item>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="12">
+          <ion-slides [options]="optionsm">
+            <ion-slide *ngFor="let item of pubList | slice:0:10" (click)="goDetails(item.key)">
+              <ion-card *ngIf="item.image" class="card-custom">
+                <div class="card-thumbnail" [style.backgroundImage]="'url(' + item.image + ')'">
+                  <!--<div class="card-caption custom-font">
+                    {{item.name}}
+                  </div>-->
+                </div>
+              </ion-card>
+              <ion-card *ngIf="item.images" class="card-custom">
+                <div class="card-thumbnail" [style.backgroundImage]="'url(' + item.images[0].src + ')'">
+                  <!--<div class="card-caption custom-font">
+                    {{item.name}}
+                  </div>-->
+                </div>
+              </ion-card>
+            </ion-slide>
+          </ion-slides>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <ion-card class="post-list-card" *ngFor="let item of feeditems?.slice(7,12)">
+    <ion-item lines="none">
+      <ion-avatar slot="start" class="story-avatar" [ngClass]="{'seen': false}">
+        <img [src]="item.Photo" (click)="viewProfiles(item.UserId)" *ngIf="!item.anonymousUser">
+        <img src="assets/imgs/profile.jpg" (click)="anonymousProfile()" *ngIf="item.anonymousUser">
+      </ion-avatar>
+      <ion-label class="custom-font" (click)="viewProfiles(item.UserId)" *ngIf="!item.anonymousUser">
+        {{item.Name}} <img *ngIf="item.Verified" src="assets/checked.png"
+          style="width: 15px; height: 15px; display: inline-block;">
+        <!--<p>{{item.timeStamp | DateFormat | lowercase}}</p>-->
+        <p class="custom-font">{{item.Date | DateFormat | lowercase}}</p>
+      </ion-label>
+      <ion-label class="custom-font" (click)="anonymousProfile()" *ngIf="item.anonymousUser">
+        {{item.Name}}, {{item.age}}, {{ item.guestLocation }}
+        <!--<p>{{item.timeStamp | DateFormat | lowercase}}</p>-->
+        <p class="custom-font">{{item.Date | DateFormat | lowercase}}</p>
+      </ion-label>
+      <ion-buttons slot="end" *ngIf="item.UserId != currentuserId"
+        (click)="presentActionSheetNonUser(item.key, item.Name, item.description)">
+        <ion-button color="medium">
+          <ion-icon slot="icon-only" md="ellipsis-vertical-outline" ios="ellipsis-horizontal-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="end" *ngIf="item.UserId == currentuserId"
+        (click)="presentActionSheetUser(item.key, item, item.description)">
+        <ion-button color="medium">
+          <ion-icon slot="icon-only" md="ellipsis-vertical-outline" ios="ellipsis-horizontal-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+
+    <ion-card-content class="post-list-content">
+
+      <p class="ion-no-margin-top custom-font
+          ion-padding-start ion-padding-end">{{item.description}}</p>
+      <p class="ion-no-margin-top custom-font 
+          ion-padding-start ion-padding-end" *ngIf="item.location">{{item.location}}</p>
+      <br>
+
+      <div *ngIf="item.video">
+        <video controls>
+          <source src="{{item.video}}#t=0.1" type="video/mp4" />
+        </video>
+      </div>
+
+      <div *ngIf="item.youtube" style="margin: 0px; width: 100%;" class="iframe-container">
+        <div id="{{item.youtube}}"></div>
+      </div>
+
+      <div *ngIf="item.location">
+        <agm-map [latitude]="item.latitude" [longitude]="item.longitude" [zoom]="zoom">
+          <agm-marker [latitude]="item.latitude" [longitude]="item.longitude" [markerDraggable]="false"></agm-marker>
+        </agm-map>
+      </div>
+
+      <ion-slides id="slider" pager="true" *ngIf="item.images" [options]="slideOptions">
+        <ion-slide *ngFor="let img of item.images" (click)="zoomImages(img.src, item.key)">
+          <ion-img src="{{img.src}}"></ion-img>
+        </ion-slide>
+      </ion-slides>
+
+    </ion-card-content>
+
+    <ion-item lines="none" class="ion-no-padding" style="margin-left: 10px;">
+      <ion-buttons slot="start">
+        <ion-button color="medium" *ngIf="item.haveILiked === false" [disabled]="this.anonymousUser"
+          (click)="likePost(item, item.key)">
+          <ion-icon slot="start" name="heart-outline" color="medium"></ion-icon>
+          <small>Likes - {{item.Score}}</small>
+        </ion-button>
+        <ion-button color="medium" *ngIf="item.haveILiked === true" [disabled]="this.anonymousUser"
+          (click)="unlikePost(item, item.key)">
+          <ion-icon slot="start" name="heart" color="danger"></ion-icon>
+          <small>Likes - {{item.Score}}</small>
+        </ion-button>
+        <ion-button color="medium" (click)="goCommy(item.key, item.UserId, item.commentLength)">
+          <ion-icon slot="start" name="chatbox-outline" color="medium"></ion-icon>
+          <small>Comments - {{item.commentLength}}</small>
+        </ion-button>
+        <ion-button color="medium" (click)="shareSheetShare(item.description)"
+          *ngIf="item.description != null && !item.images">
+          <ion-icon slot="start" name="arrow-redo-circle-outline" color="medium"></ion-icon>
+          <small>Share</small>
+        </ion-button>
+        <ion-button color="medium" (click)="shareSheetShareImage(item.images[0].src)"
+          *ngIf="item.description == null && item.images">
+          <ion-icon slot="start" name="arrow-redo-circle-outline" color="medium"></ion-icon>
+          <small>Share</small>
+        </ion-button>
+        <ion-button color="medium" (click)="shareSheetShareImageText(item.images[0].src, item.description)"
+          *ngIf="item.description != null && item.images">
+          <ion-icon slot="start" name="arrow-redo-circle-outline" color="medium"></ion-icon>
+          <small>Share</small>
+        </ion-button>
+      </ion-buttons>
+
+      <!--<ion-buttons slot="end">
+        <ion-button color="medium">
+          <ion-icon size="small" slot="start" name="eye-outline"></ion-icon>
+     
+        </ion-button>
+      </ion-buttons>-->
+    </ion-item>
+  </ion-card>
+
+  <!--<ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>-->
+
+
+  <ion-list *ngIf="feeditems.length === 0">
+    <ion-item *ngFor="let i of [1,2,3,4,5]">
+      <ion-avatar slot="start">
+        <ion-skeleton-text animated style="width: 50px; height: 50px;"></ion-skeleton-text>
+      </ion-avatar>
+      <ion-label>
+        <ion-skeleton-text animated style="width: 40%; height: 8px;"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 20%; height: 4px;"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+
+
+  <div class="top-features">
+    <ion-item class="transparent ion-no-padding" lines="none">
+      <!-- Similar List -->
+      <h6 class="font-bold ion-text-wrap
+      ion-padding-start ion-no-margin custom-font" slot="start" style="color: #00a8e1;">
+        Explore</h6>
+      <!-- See All -->
+      <span class="text-size-sm text-color-accent font-regular" slot="end" (click)="goExploreHome()">View more
+      </span>
+    </ion-item>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="12">
+          <ion-slides [options]="optionsess">
+            <ion-slide *ngFor="let item of exploreList" (click)="goExplore(item.id, item.name)">
+              <ion-card class="image-card">
+                <img src="{{item.backgroundImage}}" alt="" style="height:120px; width: 100%">
+                <ion-card-content>
+                  <ion-card-subtitle class="name_title">
+                    <h6 style="color: black; font-size: 11px;" class="custom-font">{{item.name}}</h6>
+                  </ion-card-subtitle>
+                </ion-card-content>
+              </ion-card>
+            </ion-slide>
+          </ion-slides>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+
+
+  <div class="pub-adverts" *ngIf="!currentUserId">
+    <ion-item class="transparent ion-no-padding" lines="none">
+      <!-- Similar List -->
+      <h6 class="font-bold ion-text-wrap custom-font
+      ion-padding-start ion-no-margin" slot="start" style="color: #00a8e1;">
+        People</h6>
+      <!-- See All -->
+      <span class="text-size-sm text-color-accent font-regular custom-font" slot="end" (click)="goPeople()">View more
+      </span>
+    </ion-item>
+    <div class="stories-card sliderBook">
+      <ion-list lines="none" class="story-list" *ngFor="let item of contactsList" (click)="goProfile(item.uid)">
+        <ion-item lines="none" class="story-item">
+          <ion-avatar class="story-avatar" [ngClass]="{'seen': false}">
+            <img src="{{item.photoURL}}">
+          </ion-avatar>
+        </ion-item>
+        <div class="story-author">
+          <ion-text color="dark" style="font-size: 13px;">
+            {{item.displayName}}
+          </ion-text>
+        </div>
+      </ion-list>
+    </div>
+  </div>
+
+  <div class="pub-adverts" *ngIf="currentUserId">
+
+    <ion-item class="transparent ion-no-padding" lines="none">
+      <!-- Similar List -->
+      <h6 class="font-bold ion-text-wrap custom-font
+      ion-padding-start ion-no-margin" slot="start" style="color: #00a8e1;">
+        People</h6>
+      <!-- See All -->
+      <span class="text-size-sm text-color-accent font-regular custom-font" slot="end" (click)="goPeople()">View more
+      </span>
+    </ion-item>
+
+    <div class="stories-card sliderBook">
+      <ion-list lines="none" class="story-list" *ngFor="let item of contacts" (click)="goProfile(item.uid)">
+        <ion-item lines="none" class="story-item">
+          <ion-avatar class="story-avatar" [ngClass]="{'seen': false}">
+            <img src="{{item.photoURL}}">
+          </ion-avatar>
+        </ion-item>
+        <div class="story-author">
+          <ion-text color="dark" style="font-size: 13px;">
+            {{item.displayName}}
+          </ion-text>
+        </div>
+      </ion-list>
+    </div>
+  </div>
+
+
+
+  <!--<div class="pub-adverts">
+    <ion-item class="transparent ion-no-padding" lines="none">
+     
+      <h6 class="text-size-pp  font-bold ion-text-wrap
+      ion-padding-start ion-no-margin" slot="start" style="color: #00a8e1;">
+      Groups</h6>
+   
+      <span class="text-size-sm text-color-accent font-regular" slot="end" (click)="goGroup()">View more
+        </span>
+    </ion-item> 
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="12">
+          <ion-slides [options]="optionsmass">
+            <ion-slide *ngFor="let item of favourItemsGroup | slice:0:10" (click)="goGroupDetails(item.groupId)">
+              <ion-card class="image-card">
+                <img src="{{item.image}}" alt="" style="height:120px; width: 100%">
+                <ion-card-content>
+                  <ion-card-subtitle class="name_title" >
+                    <h6 style="color: black; font-size: 12px;" class="custom-font">{{item.name}}</h6>
+                    <p>{{item.memberLength}} members</p>
+                  </ion-card-subtitle>
+                </ion-card-content>
+              </ion-card>
+            </ion-slide>
+          </ion-slides>
+        </ion-col>
+        </ion-row>
+      </ion-grid>
+  </div>-->
+
+  <ion-card class="post-list-card" *ngFor="let item of feeditems?.slice(12,20)">
+    <ion-item lines="none">
+      <ion-avatar slot="start" class="story-avatar" [ngClass]="{'seen': false}">
+        <img [src]="item.Photo" (click)="viewProfiles(item.UserId)" *ngIf="!item.anonymousUser">
+        <img src="assets/imgs/profile.jpg" (click)="anonymousProfile()" *ngIf="item.anonymousUser">
+      </ion-avatar>
+      <ion-label class="custom-font" (click)="viewProfiles(item.UserId)" *ngIf="!item.anonymousUser">
+        {{item.Name}} <img *ngIf="item.Verified" src="assets/checked.png"
+          style="width: 15px; height: 15px; display: inline-block;">
+        <!--<p>{{item.timeStamp | DateFormat | lowercase}}</p>-->
+        <p class="custom-font">{{item.Date | DateFormat | lowercase}}</p>
+      </ion-label>
+      <ion-label class="custom-font" (click)="anonymousProfile()" *ngIf="item.anonymousUser">
+        {{item.Name}}, {{item.age}}, {{ item.guestLocation }}
+        <!--<p>{{item.timeStamp | DateFormat | lowercase}}</p>-->
+        <p class="custom-font">{{item.Date | DateFormat | lowercase}}</p>
+      </ion-label>
+      <ion-buttons slot="end" *ngIf="item.UserId != currentuserId"
+        (click)="presentActionSheetNonUser(item.key, item.Name, item.description)">
+        <ion-button color="medium">
+          <ion-icon slot="icon-only" md="ellipsis-vertical-outline" ios="ellipsis-horizontal-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="end" *ngIf="item.UserId == currentuserId"
+        (click)="presentActionSheetUser(item.key, item, item.description)">
+        <ion-button color="medium">
+          <ion-icon slot="icon-only" md="ellipsis-vertical-outline" ios="ellipsis-horizontal-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+
+    <ion-card-content class="post-list-content">
+
+      <p class="ion-no-margin-top custom-font
+          ion-padding-start ion-padding-end">{{item.description}}</p>
+      <p class="ion-no-margin-top custom-font 
+          ion-padding-start ion-padding-end" *ngIf="item.location">{{item.location}}</p>
+      <br>
+
+      <div *ngIf="item.video">
+        <video controls>
+          <source src="{{item.video}}#t=0.1" type="video/mp4" />
+        </video>
+      </div>
+
+      <div *ngIf="item.youtube" style="margin: 0px; width: 100%;" class="iframe-container">
+        <div id="{{item.youtube}}"></div>
+      </div>
+
+      <div *ngIf="item.location">
+        <agm-map [latitude]="item.latitude" [longitude]="item.longitude" [zoom]="zoom">
+          <agm-marker [latitude]="item.latitude" [longitude]="item.longitude" [markerDraggable]="false"></agm-marker>
+        </agm-map>
+      </div>
+
+      <ion-slides id="slider" pager="true" *ngIf="item.images" [options]="slideOptions">
+        <ion-slide *ngFor="let img of item.images" (click)="zoomImages(img.src, item.key)">
+          <ion-img src="{{img.src}}"></ion-img>
+        </ion-slide>
+      </ion-slides>
+
+    </ion-card-content>
+
+    <ion-item lines="none" class="ion-no-padding" style="margin-left: 10px;">
+      <ion-buttons slot="start">
+        <ion-button color="medium" *ngIf="item.haveILiked === false" [disabled]="this.anonymousUser"
+          (click)="likePost(item, item.key)">
+          <ion-icon slot="start" name="heart-outline" color="medium"></ion-icon>
+          <small>Likes - {{item.Score}}</small>
+        </ion-button>
+        <ion-button color="medium" *ngIf="item.haveILiked === true" [disabled]="this.anonymousUser"
+          (click)="unlikePost(item, item.key)">
+          <ion-icon slot="start" name="heart" color="danger"></ion-icon>
+          <small>Likes - {{item.Score}}</small>
+        </ion-button>
+        <ion-button color="medium" (click)="goCommy(item.key, item.UserId, item.commentLength)">
+          <ion-icon slot="start" name="chatbox-outline" color="medium"></ion-icon>
+          <small>Comments - {{item.commentLength}}</small>
+        </ion-button>
+        <ion-button color="medium" (click)="shareSheetShare(item.description)"
+          *ngIf="item.description != null && !item.images">
+          <ion-icon slot="start" name="arrow-redo-circle-outline" color="medium"></ion-icon>
+          <small>Share</small>
+        </ion-button>
+        <ion-button color="medium" (click)="shareSheetShareImage(item.images[0].src)"
+          *ngIf="item.description == null && item.images">
+          <ion-icon slot="start" name="arrow-redo-circle-outline" color="medium"></ion-icon>
+          <small>Share</small>
+        </ion-button>
+        <ion-button color="medium" (click)="shareSheetShareImageText(item.images[0].src, item.description)"
+          *ngIf="item.description != null && item.images">
+          <ion-icon slot="start" name="arrow-redo-circle-outline" color="medium"></ion-icon>
+          <small>Share</small>
+        </ion-button>
+      </ion-buttons>
+
+      <!--<ion-buttons slot="end">
+        <ion-button color="medium">
+          <ion-icon size="small" slot="start" name="eye-outline"></ion-icon>
+     
+        </ion-button>
+      </ion-buttons>-->
+    </ion-item>
+  </ion-card>
+
+  <!--<ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>-->
+
+
+  <ion-list *ngIf="feeditems.length === 0">
+    <ion-item *ngFor="let i of [1,2,3,4,5,6,7,8]">
+      <ion-avatar slot="start">
+        <ion-skeleton-text animated style="width: 50px; height: 50px;"></ion-skeleton-text>
+      </ion-avatar>
+      <ion-label>
+        <ion-skeleton-text animated style="width: 40%; height: 8px;"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 20%; height: 4px;"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+
+  <div class="pub-adverts">
+    <ion-item class="transparent ion-no-padding" lines="none">
+      <!-- Similar List -->
+      <h6 class="font-bold ion-text-wrap
+      ion-padding-start ion-no-margin" slot="start" style="color: #00a8e1;">
+        Annonces</h6>
+      <!-- See All -->
+      <span class="text-size-sm text-color-accent font-regular" slot="end" (click)="goListings()">View more
+      </span>
+    </ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="3" *ngFor="let item of CategoriesList" (click)="goSubCat(item.$key, item.name)">
+          <img src="{{item.img}}" alt="" class="image-round">
+          <div class="ion-text-center">
+            <h6 class="ion-text-center" style="font-size: 12px;">{{item.name}}</h6>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <ion-card class="post-list-card" *ngFor="let item of feeditems?.slice(20, feeditems.length)">
+    <ion-item lines="none">
+      <ion-avatar slot="start" class="story-avatar" [ngClass]="{'seen': false}">
+        <img [src]="item.Photo" (click)="viewProfiles(item.UserId)" *ngIf="!item.anonymousUser">
+        <img src="assets/imgs/profile.jpg" (click)="anonymousProfile()" *ngIf="item.anonymousUser">
+      </ion-avatar>
+      <ion-label class="custom-font" (click)="viewProfiles(item.UserId)" *ngIf="!item.anonymousUser">
+        {{item.Name}} <img *ngIf="item.Verified" src="assets/checked.png"
+          style="width: 15px; height: 15px; display: inline-block;">
+        <!--<p>{{item.timeStamp | DateFormat | lowercase}}</p>-->
+        <p class="custom-font">{{item.Date | DateFormat | lowercase}}</p>
+      </ion-label>
+      <ion-label class="custom-font" (click)="anonymousProfile()" *ngIf="item.anonymousUser">
+        {{item.Name}}, {{item.age}}, {{ item.guestLocation }}
+        <!--<p>{{item.timeStamp | DateFormat | lowercase}}</p>-->
+        <p class="custom-font">{{item.Date | DateFormat | lowercase}}</p>
+      </ion-label>
+      <ion-buttons slot="end" *ngIf="item.UserId != currentuserId"
+        (click)="presentActionSheetNonUser(item.key, item.Name, item.description)">
+        <ion-button color="medium">
+          <ion-icon slot="icon-only" md="ellipsis-vertical-outline" ios="ellipsis-horizontal-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="end" *ngIf="item.UserId == currentuserId"
+        (click)="presentActionSheetUser(item.key, item, item.description)">
+        <ion-button color="medium">
+          <ion-icon slot="icon-only" md="ellipsis-vertical-outline" ios="ellipsis-horizontal-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+
+    <ion-card-content class="post-list-content">
+
+      <p class="ion-no-margin-top custom-font
+          ion-padding-start ion-padding-end">{{item.description}}</p>
+      <p class="ion-no-margin-top custom-font 
+          ion-padding-start ion-padding-end" *ngIf="item.location">{{item.location}}</p>
+      <br>
+
+      <div *ngIf="item.video">
+        <video controls>
+          <source src="{{item.video}}#t=0.1" type="video/mp4" />
+        </video>
+      </div>
+
+      <div *ngIf="item.youtube" style="margin: 0px; width: 100%;" class="iframe-container">
+        <div id="{{item.youtube}}"></div>
+      </div>
+
+      <div *ngIf="item.location">
+        <agm-map [latitude]="item.latitude" [longitude]="item.longitude" [zoom]="zoom">
+          <agm-marker [latitude]="item.latitude" [longitude]="item.longitude" [markerDraggable]="false"></agm-marker>
+        </agm-map>
+      </div>
+
+      <ion-slides id="slider" pager="true" *ngIf="item.images" [options]="slideOptions">
+        <ion-slide *ngFor="let img of item.images" (click)="zoomImages(img.src, item.key)">
+          <ion-img src="{{img.src}}"></ion-img>
+        </ion-slide>
+      </ion-slides>
+
+    </ion-card-content>
+
+    <ion-item lines="none" class="ion-no-padding" style="margin-left: 10px;">
+      <ion-buttons slot="start">
+        <ion-button color="medium" *ngIf="item.haveILiked === false" [disabled]="this.anonymousUser"
+          (click)="likePost(item, item.key)">
+          <ion-icon slot="start" name="heart-outline" color="medium"></ion-icon>
+          <small>Likes - {{item.Score}}</small>
+        </ion-button>
+        <ion-button color="medium" *ngIf="item.haveILiked === true" [disabled]="this.anonymousUser"
+          (click)="unlikePost(item, item.key)">
+          <ion-icon slot="start" name="heart" color="danger"></ion-icon>
+          <small>Likes - {{item.Score}}</small>
+        </ion-button>
+        <ion-button color="medium" (click)="goCommy(item.key, item.UserId, item.commentLength)">
+          <ion-icon slot="start" name="chatbox-outline" color="medium"></ion-icon>
+          <small>Comments - {{item.commentLength}}</small>
+        </ion-button>
+        <ion-button color="medium" (click)="shareSheetShare(item.description)"
+          *ngIf="item.description != null && !item.images">
+          <ion-icon slot="start" name="arrow-redo-circle-outline" color="medium"></ion-icon>
+          <small>Share</small>
+        </ion-button>
+        <ion-button color="medium" (click)="shareSheetShareImage(item.images[0].src)"
+          *ngIf="item.description == null && item.images">
+          <ion-icon slot="start" name="arrow-redo-circle-outline" color="medium"></ion-icon>
+          <small>Share</small>
+        </ion-button>
+        <ion-button color="medium" (click)="shareSheetShareImageText(item.images[0].src, item.description)"
+          *ngIf="item.description != null && item.images">
+          <ion-icon slot="start" name="arrow-redo-circle-outline" color="medium"></ion-icon>
+          <small>Share</small>
+        </ion-button>
+      </ion-buttons>
+
+      <!--<ion-buttons slot="end">
+        <ion-button color="medium">
+          <ion-icon size="small" slot="start" name="eye-outline"></ion-icon>
+     
+        </ion-button>
+      </ion-buttons>-->
+    </ion-item>
+  </ion-card>
+
+  <!--<ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>-->
+
+
+  <ion-list *ngIf="feeditems.length === 0">
+    <ion-item *ngFor="let i of [1,2,3,4,5]">
+      <ion-avatar slot="start">
+        <ion-skeleton-text animated style="width: 50px; height: 50px;"></ion-skeleton-text>
+      </ion-avatar>
+      <ion-label>
+        <ion-skeleton-text animated style="width: 40%; height: 8px;"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 20%; height: 4px;"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+
+  <div class="pub-adverts">
+    <ion-item class="transparent ion-no-padding" lines="none">
+      <!-- Similar List -->
+      <h6 class="font-bold ion-text-wrap
+      ion-padding-start ion-no-margin" slot="start" style="color: #00a8e1;">
+        Get in Touch</h6>
+    </ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="3" (click)="goFacebook()">
+          <img src="assets/contact/facebook.png" alt="" class="image-round">
+          <div class="ion-text-center">
+            <h6 class="ion-text-center" style="font-size: 12px;">Facebook</h6>
+          </div>
+        </ion-col>
+        <ion-col size="3" (click)="goInstagram()">
+          <img src="assets/contact/instagram.png" alt="" class="image-round">
+          <div class="ion-text-center">
+            <h6 class="ion-text-center" style="font-size: 12px;">Instagram</h6>
+          </div>
+        </ion-col>
+        <ion-col size="3" (click)="goTwitter()">
+          <img src="assets/contact/twitter.png" alt="" class="image-round">
+          <div class="ion-text-center">
+            <h6 class="ion-text-center" style="font-size: 12px;">Twitter</h6>
+          </div>
+        </ion-col>
+        <ion-col size="3" (click)="goWhatsApp()">
+          <img src="assets/contact/whatsapp.png" alt="" class="image-round">
+          <div class="ion-text-center">
+            <h6 class="ion-text-center" style="font-size: 12px; font-family: 'Josefin Sans', sans-serif;">WhatsApp</h6>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button class="sellbutton" (click)="goAllUpload()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" style="margin-bottom: 60px;">
+    <ion-fab-button class="sellbuttons" (click)="searchAll()">
+      <ion-icon name="search" style="color: black;"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

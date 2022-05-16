@@ -1,0 +1,50 @@
+.profile {
+    width: 60px;
+    height: 60px;
+    margin: 0;
+}
+.drivermemberType {
+    color: #9b9b9f;
+    font-size: 14px;
+}
+.imageIcon {
+    width: 25px;
+}
+.docIcon {
+    color: #fff;
+    padding: 2px;
+    border-radius: 7px;
+    margin-right: 15px;
+}
+.rightArrow {
+    width: 16px;
+    right: 7px;
+    position: absolute;
+}
+.background-size {
+    height: 300px;
+    position: relative;
+}
+
+// .iframe-container {
+//     position: relative;
+//     width: 100%;
+//     padding-bottom: 56.25%;
+//     height: 0;
+// }
+
+// .iframe-container div {
+//     position: absolute;
+//     width: 100%;
+//     height: 100%;
+//     top: 0;
+//     left: 0;
+// }
+
+.line_div {
+    width: 100%;
+    height: 3px;
+    background: lightgray;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

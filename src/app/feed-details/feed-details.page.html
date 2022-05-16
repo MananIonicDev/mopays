@@ -1,0 +1,161 @@
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Feed
+    </ion-title>
+  </ion-toolbar> 
+</ion-header>
+
+<ion-content>
+    <ion-card class="post-list-card" *ngIf="feeds">
+      <ion-item lines="none">
+        <ion-avatar slot="start" *ngIf="feeds.Photo">
+          <img [src]="feeds.Photo" (click)="viewProfiles(feeds.UserId)">
+        </ion-avatar>
+        <ion-label class="custom-font">
+          {{feeds.Name}}
+          <!--<p>{{item.timeStamp | DateFormat | lowercase}}</p>-->
+          <p class="custom-font" *ngIf="feeds.Date">{{feeds.Date | DateFormat | lowercase}}</p>
+        </ion-label>
+        <ion-buttons slot="end" *ngIf="feeds.UserId != currentuserId">
+          <ion-button color="medium">
+            <ion-icon slot="icon-only" md="ellipsis-vertical-outline" ios="ellipsis-horizontal-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <ion-buttons slot="end" *ngIf="feeds.UserId == currentuserId" (click)="presentActionSheetUser(feeds.$key, feeds.description)">
+          <ion-button color="medium">
+            <ion-icon slot="icon-only" md="ellipsis-vertical-outline" ios="ellipsis-horizontal-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+
+      <ion-card-content class="post-list-content">
+
+        <p class="ion-no-margin-top custom-font
+            ion-padding-start ion-padding-end">{{feeds.description}}</p>
+            <p class="ion-no-margin-top custom-font
+            ion-padding-start ion-padding-end" *ngIf="feeds.location">{{feeds.location}}</p>
+            <br>
+
+          
+      <div *ngIf="feeds.video">
+        <video controls>
+          <source src="{{feeds.video}}#t=0.1" type="video/mp4" />
+       </video>
+      </div>
+
+      <div *ngIf="feeds.location">
+        <agm-map [latitude]="feeds.latitude" [longitude]="feeds.longitude" [zoom]="zoom">
+          <agm-marker [latitude]="feeds.latitude" [longitude]="feeds.longitude" [markerDraggable]="false"></agm-marker>
+        </agm-map>
+      </div>
+     
+      <ion-slides id="slider" pager="true" *ngIf="feeds.images" [options]="slideOptions">
+        <ion-slide *ngFor="let img of feeds.images">
+          <ion-img src="{{img.src}}"></ion-img>
+        </ion-slide>
+      </ion-slides>
+
+      </ion-card-content>
+
+      <ion-item lines="none" class="ion-no-padding" style="margin-left: 10px;">
+        <ion-buttons slot="start">
+          <ion-button color="medium" *ngIf="haveILiked === false" (click)="likePost(feeds.$key, feeds.UserId)">
+            <ion-icon slot="start" name="heart-outline" color="medium"></ion-icon>
+            <small>{{feeds.Score}}</small>
+          </ion-button>
+          <ion-button color="medium" *ngIf="haveILiked === true" (click)="unlikePost(feeds.$key)">
+            <ion-icon slot="start" name="heart" color="danger"></ion-icon>
+            <small>{{feeds.Score}}</small>
+          </ion-button>
+          <!--<ion-button color="medium" (click)="goCommy(feeds.$key, feeds.UserId, feeds.commentLength)">
+            <ion-icon slot="start" name="chatbox-outline" color="medium"></ion-icon>
+            <small>{{feeds.commentLength}}</small>
+          </ion-button>-->
+          <ion-button color="medium" (click)="shareSheetShare(feeds.description)" *ngIf="feeds.description != null && !feeds.images">
+            <ion-icon slot="start" name="return-up-forward-outline" color="medium"></ion-icon>
+            <small></small>
+          </ion-button>
+          <ion-button color="medium" (click)="shareSheetShareImage(feeds.images[0].src)" *ngIf="feeds.description == null && feeds.images">
+            <ion-icon slot="start" name="return-up-forward-outline" color="medium"></ion-icon>
+            <small></small>
+          </ion-button>
+          <ion-button color="medium" (click)="shareSheetShareImageText(feeds.images[0].src, feeds.description)" *ngIf="feeds.description != null && feeds.images">
+            <ion-icon slot="start" name="return-up-forward-outline" color="medium"></ion-icon>
+            <small></small>
+          </ion-button>
+        </ion-buttons>
+
+        <ion-buttons slot="end">
+          <ion-button color="medium">
+            <ion-icon size="small" slot="start" name="eye-outline"></ion-icon>
+            <!--<small>20</small>-->
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+    </ion-card>
+    <br>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col class="ion-no-padding" size="12">
+          <!-- List -->
+          <ion-list lines="none">
+            <!-- List header -->
+            <ion-list-header>
+              <!-- List header title -->
+              <span class="text-color-follow text-size-xs font-bold">
+                {{feedsComment.length}} Comments</span>
+            </ion-list-header>
+            <!-- Card -->
+            
+            <ion-card class="box-shadow border-radius" *ngFor="let item of feedsComment">
+              <!-- Card header -->
+              <ion-card-header class="ion-no-padding">
+                <ion-item class="transparent" lines="none">
+                  <!-- Avatar -->
+                  <ion-avatar slot="start" (click)="viewProfiles(item.userId)">
+                    <img [src]="item.photoURL">
+                  </ion-avatar>
+                  <ion-label>
+                    <!-- Avatar title -->
+                    <h3 class="text-color-follow text-size-xs font-bold ion-text-wrap" (click)="viewProfiles(item.userId)">
+                      {{item.displayName}}</h3>
+                    <!-- Time -->
+                    <h3 class="text-color-follow text-size-sm font-regular ion-text-wrap">
+                      {{item.date | DateFormat | lowercase }}</h3>
+                  </ion-label>
+                  <!--<ion-label class="icon-star-section" (click)="presentActionSheet(item.id, item)">
+                    <ion-icon class="icon-color-accent icon-font-sm" slot="start" name="ellipsis-vertical"></ion-icon>
+                  </ion-label>-->
+                </ion-item>
+              </ion-card-header>
+              <!-- Card content -->
+              <ion-card-content class="ion-no-padding-top">
+                <!-- Card content description -->
+                <p class="text-color-follow text-size-xs font-regular ion-text-wrap">
+                  {{item.message}}
+                </p>
+              </ion-card-content>
+            </ion-card>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+  <ion-footer translucent>
+    <ion-row class="input-position">
+       <ion-col size="9">
+         <ion-input class="input restrict" type="text" placeholder="Type a message" [(ngModel)]="message" padding-start>
+         </ion-input>
+       </ion-col>
+       <ion-col size="1" no-padding align-self-center>
+         <ion-button no-margin fill="clear" (click)="send()" [disabled]="">
+           <ion-icon class="send-icon" color="primary" name="send"></ion-icon>
+         </ion-button>
+       </ion-col>
+     </ion-row>
+     </ion-footer>

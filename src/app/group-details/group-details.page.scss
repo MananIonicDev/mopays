@@ -1,0 +1,106 @@
+/*.header-image {
+    background-color: #00a8e1;
+    --background-color: #00a8e1;
+    --background: #00a8e1;
+    height: 20vh;
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+    //position: relative;
+    z-index: -1;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.essentials {
+    margin-top: -35px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: white;
+    -webkit-box-shadow: 0px 0px 55px -16px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 55px -16px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 55px -16px rgba(0, 0, 0, 0.75);
+    // background: #F5F5F5;
+    position: relative !important;
+}
+
+.sellbutton{
+    --ion-item-background: #00a8e1;
+    --background: #00a8e1;
+    --ion-item-color: #fff;
+  }*/
+
+
+  /*  Style Action Sheet Layout 2
+===========================================*/
+
+// Settings Big Image
+
+.header-image {
+    height: 300px;
+    position: relative;
+  
+    &:before {
+      //content: "";
+      position: absolute;
+      background-color: var(--cs-gradient-primary);
+      top:0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+    }
+  
+  
+    ion-item {
+      position: absolute;
+      bottom: 32px;
+      right: 16px;
+      left: 16px;
+      --inner-padding-end: 0;
+    }
+  }
+  
+  
+  ion-grid {
+    margin-top: -30px;
+    border-radius: 30px;
+    overflow: hidden;
+  
+    ion-col {
+      background: var(--cs-background-primary);
+    }
+  }
+  
+  ion-card-header {
+    ion-item {
+      --inner-padding-end: 0;
+  
+  ion-label {
+    overflow: visible;
+  }
+    }
+  }
+  
+  ion-card-content {
+    ion-item {
+      --inner-padding-end: 0;
+  
+      ion-label {
+        height: 250px !important;
+      }
+  
+      .background-size {
+        height: 100%;
+      }
+  
+      .small-image {
+        height: 100%;
+  
+        .background-size {
+          height: calc(50% - 4px);
+        }
+      }
+    }
+  }
+  

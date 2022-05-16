@@ -1,0 +1,171 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+<!-- ACTION SHEET -- COMPONENT 1-->
+<ion-content parallax-header (ionScroll)="logScrolling($event)" [scrollEvents]="true">
+  <!-- Parallax Big Image -->
+  <div class="header-image background-size" [ngStyle]="{'background': 'url(' + items.image + ')'}">
+    <!-- Share Button --->
+    <!--<ion-fab vertical="top" horizontal="end" slot="fixed">
+      <ion-fab-button (click)="presentActionSheet(data, $event)">
+        <ion-icon class="icon-color-accent icon-font-sm icon-round box-shadow" [name]="data.shareIcon"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>-->
+  </div>
+  <!--Content-->
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <!-- Description -->
+      <ion-col size="12">
+        <ion-card class="no-border-radius no-box-shadow ion-no-margin
+        ion-padding-start ion-padding-end ion-padding-top">
+          <ion-card-content>
+            <ion-item lines="none" class="transparent ion-no-padding">
+              <ion-label>
+
+                <h2 class="text-size-md text-color-accent font-bold ion-padding-bottom">
+                  {{items.name}}</h2>
+                <h3 *ngIf="items.Date"
+                  class="text-size-sm text-color-primary font-regular ion-text-wrap margin-half-top">
+                  Created: {{items.Date | DateFormat | lowercase}}
+                </h3>
+                <div class="ratting">
+                  <ion-icon [name]="items.totalRatting >= 1 ? 'star-outline':'star'"
+                    [color]="items.totalRatting >= 1 ? 'warning':'medium'">
+                  </ion-icon>
+                  <ion-icon [name]="items.totalRatting >= 2 ? 'star-outline':'star'"
+                    [color]="items.totalRatting >= 2 ? 'warning':'medium'">
+                  </ion-icon>
+                  <ion-icon [name]="items.totalRatting >= 3 ? 'star-outline':'star'"
+                    [color]="items.totalRatting >= 3 ? 'warning':'medium'">
+                  </ion-icon>
+                  <ion-icon [name]="items.totalRatting >= 4 ? 'star-outline':'star'"
+                    [color]="items.totalRatting >= 4 ? 'warning':'medium'">
+                  </ion-icon>
+                  <ion-icon [name]="items.totalRatting >= 5 ? 'star-outline':'star'"
+                    [color]="items.totalRatting >= 5 ? 'warning':'medium'">
+                  </ion-icon>
+                  ({{items.ratting}} Ratings)
+                </div>
+                <br>
+                <h3 class="text-size-xs text-color-accent font-bold" (click)="callNo(items.phoneNumber)">
+                  <ion-icon name="call" style="color: blue;"></ion-icon> {{items.phoneNumber}}
+                </h3>
+                <ion-row style="text-align: center;">
+                  <ion-col *ngIf="items.whatsapp" (click)="goWhatsApp(items.whatsapp)">
+                    <ion-icon name="logo-whatsapp" style="zoom:1.0; color: green;"></ion-icon>
+                    <br>
+                    <h3 class="text-size-xs text-color-accent font-bold">WhatsApp</h3>
+                  </ion-col>
+                  <ion-col *ngIf="items.facebook" (click)="goLink(items.facebook)">
+                    <ion-icon name="logo-facebook" color="tertiary" style="zoom:1.0;"></ion-icon>
+                    <br>
+                    <h3 class="text-size-xs text-color-accent font-bold">Facebook</h3>
+                  </ion-col>
+                </ion-row>
+                <br>
+                <p class="text-size-xs text-color-accent font-regular ion-text-wrap">
+                  {{items.description}}</p>
+              </ion-label>
+            </ion-item>
+            <ion-buttons style="float: right;">
+              <ion-button color="dark" fill="clear"
+                (click)="shareSheetShareImageText(items.image, items.description)">
+                <ion-icon slot="start" name="arrow-redo-circle-outline" style="zoom: 1.0;" color="dark"></ion-icon>
+                <h3 class="text-size-xs text-color-accent font-bold">Share</h3>
+              </ion-button>
+            </ion-buttons>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <div class="line_div"></div>
+
+
+
+      <!-- Slider Images-->
+      <ion-col class="ion-no-padding-start ion-no-padding-end ion-padding-bottom" size="12">
+        <h2 class="text-size-xs text-color-accent font-bold ion-padding-start
+        ion-no-margin ion-float-start">Gallery</h2>
+        <!--<h2 class="text-size-xs text-color-accent font-regular ion-padding-end
+        ion-no-margin ion-float-end" (click)="goProduct()">View All</h2>-->
+      </ion-col>
+
+      <p class="ion-padding" *ngIf="itemsProduct.length === 0">No Gallery yet</p>
+
+      <ion-col class="ion-padding slider" size="12">
+        <!-- Card with image -->
+        <ion-card class="no-border-radius no-box-shadow" *ngFor="let item of itemsProduct">
+          <!-- Card with image header -->
+          <ion-card-header class="ion-no-padding">
+            <!-- Card image -->
+            <ion-img class="border-radius" [src]="item.image" (click)="zoomImage(item.image)"></ion-img>
+          </ion-card-header>
+          <!-- Card with image content -->
+          <ion-card-content class="ion-no-padding content-style">
+            <!-- Card with image content title -->
+            <h2 class="text-size-xs text-color-accent font-bold ion-text-wrap"
+              style="padding-left: 15px; padding-bottom: 10px;">
+              {{item.name}}</h2>
+            <!-- Card with image content price -->
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <!-- Commnets --->
+      <div class="line_div"></div>
+
+      <ion-col class="ion-padding-top" size="12">
+        <h2 class="text-size-xs text-color-accent font-bold ion-padding-start
+        ion-padding-top ion-no-margin ion-float-start">{{itemsComment.length}} Comments</h2>
+        <h2 class="text-size-xs text-color-accent font-regular ion-padding-end
+        ion-no-margin ion-float-end ion-padding-top"></h2>
+      </ion-col>
+
+      <ion-col size="12" class="ion-padding-end ion-padding-start reviews">
+        <ion-card class="no-border-radius no-box-shadow ion-no-margin" *ngFor="let item of itemsComment">
+          <ion-item class="transparent ion-no-padding" lines="none">
+            <ion-avatar slot="start">
+              <img [src]="item.photoURL" (click)="viewProfiles(item.userId)">
+            </ion-avatar>
+            <ion-label>
+              <h3 class="text-size-xs font-bold text-color-accent" (click)="viewProfiles(item.userId)">
+                {{item.displayName}} <img *ngIf="item.Verified" src="assets/checked.png"
+                  style="width: 15px; height: 15px; display: inline-block;">
+              </h3>
+              <h3 class="text-size-sm font-regular text-color-accent">{{item.time | DateFormat | lowercase}}</h3>
+              <div class="rating">{{item.rate}}<ion-icon name="star"></ion-icon>
+              </div>
+              <h3 class="text-size-xs font-regular text-color-accent ion-text-wrap
+              ion-padding-top">{{item.description}}
+              </h3>
+            </ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+
+
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+
+  <ion-grid *ngIf="items.userId === currentUserId">
+    <ion-row>
+      <ion-col size="6">
+        <ion-button expand="block" (click)="addProduct()">Add Product</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button expand="block" (click)="editBusiness()">Edit Service</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-button expand="full" (click)="goComment(items.userId)">Comment</ion-button>
+
+</ion-footer>

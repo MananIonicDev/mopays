@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit Post</ion-title>
+    <ion-buttons slot="end">
+        <ion-button fill="clear" color="light" (click)="addFeedTextOnly()" *ngIf="items.description && !images">
+         Update
+        </ion-button>
+        <ion-button fill="clear" color="light" (click)="addFeedImageOnly()" *ngIf="!items.description  && images">
+          Update
+        </ion-button>
+        <ion-button fill="clear" color="light" (click)="addFeedTextImage()" *ngIf="items.description && images">
+         Update
+        </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+<ion-list>
+
+<ion-item class="transparent input box-shadow border-radius" lines="none">
+  <ion-textarea rows="10" cols="1" placeholder="Share your moment" [(ngModel)]="items.description"></ion-textarea>
+</ion-item>
+
+<ion-grid *ngIf="images">
+  <ion-row>
+    <ion-col size="3" *ngFor="let image of images">
+      <img [src]="image.src"/>
+      <ion-icon name="close" color="danger" (click)="removePhoto(image)"></ion-icon>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+
+
+
+<ion-list lines="none">
+  <ion-item (click)="presentImageSheet()">
+    <!--<input id="file" type='file' style="display: none;"(change)="onSelectFileImage($event)" />-->
+    <ion-icon name="camera" style="color: green;" slot="start"></ion-icon>
+  <ion-label>
+    <h6>Add Images</h6>
+  </ion-label>
+</ion-item>
+
+
+</ion-list>
+
+ 
+         
+      </ion-list>
+   
+</ion-content>

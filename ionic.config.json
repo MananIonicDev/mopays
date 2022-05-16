@@ -1,0 +1,7 @@
+{
+  "name": "manish-mopays",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

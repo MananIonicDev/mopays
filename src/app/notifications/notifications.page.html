@@ -1,0 +1,93 @@
+
+ <!-- Theme Search Bars Layout 2 -->
+ <ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Notifications</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col size="12">
+        <!-- List -->
+         <ion-list>
+            <ion-item *ngFor="let item of notificationList?.slice().reverse()" [class.unread]="item.read === false" [class.read]="item.read === true"> 
+              <!--Avatar-->
+              <ion-avatar slot="start" class="story-avatar" [ngClass]="{'seen': false}" (click)="view(item)">
+                <img [src]="item.photoURL">
+              </ion-avatar>
+              <ion-label (click)="view(item)" >
+                <!--Title-->
+                <h2 class="text-size-xs  font-bold">
+                  {{item.displayName}}</h2>
+                  <p *ngIf="item.type === 'business'">commented on your business</p>
+                  <p *ngIf="item.type === 'feed'">commented on your Post</p>
+                  <!--<p *ngIf="item.type === 'group'">commented on your Group Post</p>
+                  <p *ngIf="item.type === 'group-likes'">like your Group Post</p>-->
+                  <p *ngIf="item.type === 'service'">commented on your Services</p>
+                  <p *ngIf="item.type === 'announce'">commented on your Announces</p>
+                  <p *ngIf="item.type === 'job'">commented on your Jobs</p>
+                  <p *ngIf="item.type === 'follow'">Followed you</p>
+                  <p *ngIf="item.type === 'followback'">Followed back with you</p>
+                  <p *ngIf="item.type === 'feed-like'">like your Post</p>
+                  <p *ngIf="item.type === 'photo-like'">like your Photo</p>
+                <h3 class="text-size-sm text-color-prima font-regular">
+                  {{item.time | DateFormat | lowercase}}</h3>
+                  <div *ngIf="item.typer === 'follow'">
+                    <ion-row class="ion-no-padding">
+                      <ion-col>
+                        <ion-button (click)="followBack(item.postId, item)" expand="block" style="text-transform: none;">Follow Back</ion-button>
+                      </ion-col>
+                      <ion-col>
+                        <ion-button (click)="ignoreBack(item.postId, item)" expand="block" fill="outline" style="text-transform: none;">Ignore</ion-button>
+                      </ion-col>
+                    </ion-row>
+                  </div>
+              </ion-label>
+              <div slot="end">
+                <ion-button fill="clear" *ngIf="item.typer === 'comment'" (click)="view(item)">
+                  <ion-icon name="chatbox" color="primary"></ion-icon>
+                </ion-button>
+                <ion-button fill="clear" *ngIf="item.typer === 'like'" (click)="view(item)">
+                  <ion-icon name="thumbs-up" color="primary"></ion-icon>
+                </ion-button>
+                <ion-button fill="clear" (click)="actions(item.id, item)" *ngIf="item.read === false">
+                  <ion-icon name="ellipsis-vertical" color="primary"></ion-icon>
+                </ion-button>
+                <ion-button fill="clear" (click)="action(item.id, item)" *ngIf="item.read === true">
+                  <ion-icon name="ellipsis-vertical" color="primary"></ion-icon>
+                </ion-button>
+              </div>
+            </ion-item>
+         </ion-list>
+
+            <!--<section *ngIf="contacts.length == 0">
+              <div *ngFor="let item of dummy">
+                <ion-list lines="none">
+                  <ion-item>
+                    <ion-avatar slot="start">
+                      <ion-skeleton-text animated></ion-skeleton-text>
+                    </ion-avatar>
+                    <ion-label>
+                      <h3>
+                        <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                      </h3>
+                      <p>
+                        <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                      </p>
+                    </ion-label>
+                  </ion-item>
+                </ion-list>
+              </div>
+            </section>
+            </div>
+
+            
+        </ion-list>-->
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  </ion-content>

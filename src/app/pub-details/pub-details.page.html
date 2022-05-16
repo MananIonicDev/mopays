@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content> 
+
+  <ion-slides *ngIf="items.images" pager="true" [options]="slideOpts">
+    <ion-slide *ngFor="let item of items.images" class="background-size"
+      [ngStyle]="{ 'background': 'url(' + item.src + ')'}">
+    </ion-slide>
+  </ion-slides>
+
+  <img *ngIf="items.image" src="{{items.image}}" width="100%" height="auto" />
+
+  <ion-list class="ion-no-margin">
+    <ion-item>
+      <ion-icon name="people-circle" slot="start" class="docIcon" style="color: #e4405f"></ion-icon>
+      {{items.name}}
+    </ion-item>
+    <ion-item *ngIf="items.phone" (click)="callNo(items.phone)">
+      <ion-icon name="call" slot="start" class="docIcon" style="color: #363535"></ion-icon>
+      {{items.phone}}
+    </ion-item>
+    <ion-item *ngIf="items.website" (click)="goLink(items.website)">
+      <ion-icon name="globe" slot="start" class="docIcon" style="color: #038a1a"></ion-icon>
+      {{items.website}}
+    </ion-item>
+    <ion-item *ngIf="items.brochurelink" (click)="downloadAndOpenPdfBus(items.brochurelink)">
+      <ion-icon name="globe" slot="start" class="docIcon" style="color: #8a0303"></ion-icon>
+      Brochure
+    </ion-item>
+    <ion-item lines="none" *ngIf="items.socialone || items.socialtwo || items.socialthree">
+      <ion-icon *ngIf="items.socialone" (click)="goLink(items.socialone)" name="logo-facebook" slot="start"
+        class="docIcon" style="color: #6150f5"></ion-icon>
+      <ion-icon *ngIf="items.socialtwo" (click)="goLink(items.socialtwo)" name="logo-twitter" slot="start"
+        class="docIcon" style="color: #20dcf5"></ion-icon>
+      <ion-icon *ngIf="items.socialthree" (click)="goLink(items.socialthree)" name="logo-instagram" slot="start"
+        class="docIcon" style="color: #8a0303"></ion-icon>
+    </ion-item>
+    <!-- <ion-item *ngIf="items.socialtwo" (click)="goLink(items.socialtwo)">
+    <ion-icon name="logo-twitter" slot="start" class="docIcon" style="color: #20dcf5"></ion-icon>
+    Twitter
+  </ion-item>
+  <ion-item *ngIf="items.socialthree" (click)="goLink(items.socialthree)">
+    <ion-icon name="logo-instagram" slot="start" class="docIcon" style="color: #8a0303"></ion-icon>
+    Instagram
+  </ion-item> -->
+  </ion-list>
+
+  <div class="line_div"></div>
+
+    <div *ngIf="items.description">
+      <h5 class="font-bold ion-text-wrap custom-font
+      ion-padding-start ion-no-margin" style="color: #00a8e1;">
+        Description
+      </h5>
+      <p class="font-bold ion-text-wrap custom-font
+      ion-padding-start">
+        {{items.description}}
+      </p>
+    </div>
+
+  <div class="line_div"></div>
+    <!-- <iframe height="250" class="iframe" [src]="sanitize(vid)" frameborder="0"
+    allowfullscreen></iframe> -->
+    
+    <ion-card *ngIf="items.youtube" style="margin: 0px; width: 100%;" class="iframe-container">
+      <ion-card-content style="padding: 0px;">
+        <div id="{{items.youtube}}"></div>
+      </ion-card-content>
+    </ion-card>
+
+</ion-content>
+<ion-footer>
+  <ion-button *ngIf="items.images" expand="block" (click)="sharePUB(items.name, items.images[0].src, items.website)">Share</ion-button>
+  <ion-button *ngIf="items.image" expand="block" (click)="sharePUB(items.name, items.image, items.website)">Share</ion-button>
+</ion-footer>

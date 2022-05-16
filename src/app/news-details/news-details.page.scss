@@ -1,0 +1,123 @@
+/* Style component 4
+=============================*/
+
+ion-col,
+ion-grid,
+ion-row {
+  background: var(--cs-background-primary);
+
+  ion-item {
+    --inner-padding-end: 0;
+
+    ion-label {
+      flex: unset;
+
+      .icon-star-section {
+        display: flex;
+
+        ion-icon {
+          margin: 0 !important;
+        }
+      }
+    }
+  }
+}
+
+.header-image {
+  position: relative;
+  height: 300px;
+
+  &::before {
+    //content: "";
+    position: absolute;
+    background-color: var(--cs-gradient-primary);
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+  }
+
+  .social {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+
+  ion-item {
+    --inner-padding-end: 0;
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+  }
+}
+
+.line-area {
+  border: 2px dashed black;
+  //margin: 10px;
+  position: absolute;
+  width: 90%;
+  height: 2px;
+  }
+
+  .title-icon{
+    font-size: 32px;
+}
+.title-text{
+    padding-left: 5px;
+    align-self: center;
+}
+.first-tick{
+    font-size: 25px;
+    position: absolute;
+    left: -24px;
+    top: -4px;
+}
+.second-tick{
+    font-size: 25px;
+    position: absolute;
+    left: -28px;
+    top: -4px;
+}
+.custom-footer{
+    height: 65px;
+}
+
+.attach-icon {
+    font-size: 2.2em;
+    color: black;
+    transform: rotate(-45deg);
+    margin-left: -10px;
+}
+
+.send-icon{
+    font-size: 1.8em;
+}
+
+.attachment-row-left{
+    background: #0c96df;
+    min-height: 10vw;
+    display: flex;
+    align-items: center;
+    border-top-right-radius: 5vw;
+    border-bottom-right-radius: 5vw;
+    color: white;
+    position: relative;
+}
+
+
+.reviews {
+  ion-item {
+    ion-avatar {
+      align-self: start;
+      width: 40px;
+      height: 40px;
+    }
+
+    ion-label {
+      align-self: start;
+    }
+  }
+}
+
+

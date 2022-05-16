@@ -1,0 +1,41 @@
+
+ <!-- Theme Search Bars Layout 2 -->
+ <ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{items.name}} Members</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar placeholder="Search people" [(ngModel)]="term"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+     
+      <ion-col size="12">
+        <!-- List -->
+        <ion-list>
+          <div>
+            <ion-item class="transparent box-shadow border-radius ion-margin-top
+            margin-half-start margin-half-end" lines="none"
+            *ngFor="let item of myGroupMembers | filter:term" (click)="goProfile(item.uid)"> 
+              <!--Avatar-->
+              <ion-avatar slot="start" class="story-avatar" [ngClass]="{'seen': false}">
+                <img [src]="item.photoURL">
+              </ion-avatar>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs  font-bold">
+                  {{item.displayName}}</h2>
+              </ion-label>
+              <ion-button fill="outline" *ngIf="item.uid === items.userId">Admin</ion-button>
+            </ion-item>
+            </div>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  </ion-content>

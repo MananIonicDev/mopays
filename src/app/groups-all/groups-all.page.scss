@@ -1,0 +1,37 @@
+.topfeatures{
+    padding: 5px !important;
+  .image-card {
+    margin: 0;
+    border-radius: 4px;
+    height: 95%;
+    min-height: 120px;
+  
+    .name_title{
+      font-size: 16px;
+      font-weight: bold;
+    }
+  }
+  }
+
+  .view{
+    --background: gray;
+    background: gray;
+    color: white;
+    --color: white;
+  }
+
+  .noteJoined{
+    --background: #00a8e1;
+    background: #00a8e1;
+    color: white;
+    font-size: 13px;
+    --color: white;
+  }
+
+  .Joined{
+    --background: red;
+    background: red;
+    color: white;
+    font-size: 13px;
+    --color: white;
+  }

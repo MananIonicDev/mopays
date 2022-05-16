@@ -1,0 +1,139 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Complete Profile
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="skip()" color="light">Skip</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="ion-padding">
+    <ion-item *ngIf="user">
+      <ion-avatar slot="start">
+        <img src="{{photoURL || pic }}">
+      </ion-avatar>
+      <ion-label text-wrap>
+        <ion-button (click)="presentImageSheet()">
+          <ion-icon name="camera" color="light" slot="start"></ion-icon>
+          Add Profile Picture
+        </ion-button>
+      </ion-label>
+    </ion-item>
+  </div>
+  <ion-list-header color="medium">
+    Complete Profile
+  </ion-list-header>
+  <ion-item *ngIf="user">
+    <ion-label position="fixed">Name</ion-label>
+    <ion-input type="string" [(ngModel)]="name"></ion-input>
+    <!--<ion-button slot="end" color="success" expand="full" (click)="updateUsername()">Update</ion-button>-->
+  </ion-item>
+  <ion-item>
+    <ion-label position="fixed">About You</ion-label>
+    <ion-input type="string" [(ngModel)]="about"></ion-input>
+    <!--<ion-button slot="end" color="success" expand="full" (click)="updateAbout()">Update</ion-button>-->
+  </ion-item>
+  <ion-item>
+    <ion-label position="fixed">Date of Birth</ion-label>
+    <ion-datetime display-format="YYYY-MM-DD" [(ngModel)]="dob" placeholder="Select Date of Birth">
+    </ion-datetime>
+    <!--<ion-button slot="end" color="success" expand="full" (click)="updateDOB()">Update</ion-button>-->
+  </ion-item>
+  <ion-item>
+    <ion-label position="fixed">Phone Number</ion-label>
+    <ion-input type="string" [(ngModel)]="phoneNumber"></ion-input>
+    <!--<ion-button slot="end" color="success" expand="full" (click)="updatePhone()">Update</ion-button>-->
+  </ion-item>
+  <ion-item>
+    <ion-label position="fixed">Location</ion-label>
+    <ion-input type="string" [(ngModel)]="nationality"></ion-input>
+    <!--<ion-button slot="end" color="success" expand="full" (click)="updateCountry()">Update</ion-button>-->
+  </ion-item>
+  <ion-item>
+    <ion-label position="fixed">Gender</ion-label>
+    <ion-select [(ngModel)]="gender">
+      <ion-select-option value="Male">Male</ion-select-option>
+      <ion-select-option value="Female">Female</ion-select-option>
+      <ion-select-option value="Transgender">Transgender</ion-select-option>
+    </ion-select>
+    <!--<ion-button slot="end" color="success" expand="full" (click)="updateGender()">Update</ion-button>-->
+  </ion-item>
+  <ion-item>
+    <ion-label position="fixed">Marital Status</ion-label>
+    <ion-select [(ngModel)]="marital">
+      <ion-select-option value="Married">Married</ion-select-option>
+      <ion-select-option value="Single">Single</ion-select-option>
+      <ion-select-option value="Complicated">Complicated</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label position="fixed">Education</ion-label>
+    <ion-input type="string" [(ngModel)]="education"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="fixed">I am here for</ion-label>
+    <ion-select [(ngModel)]="interestfor" placeholder="Select">
+      <ion-select-option *ngFor="let item of favourItems" [value]="item.name">{{item.name}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-list-header color="medium">
+    Social Links
+  </ion-list-header>
+  <ion-item *ngIf="user">
+    <ion-label position="fixed">Facebook</ion-label>
+    <ion-input type="string" [(ngModel)]="facebook"></ion-input>
+  </ion-item>
+  <ion-item *ngIf="user">
+    <ion-label position="fixed">Instagram</ion-label>
+    <ion-input type="string" [(ngModel)]="instagram"></ion-input>
+  </ion-item>
+  <ion-item *ngIf="user">
+    <ion-label position="fixed">Linkedin</ion-label>
+    <ion-input type="string" [(ngModel)]="linkedin"></ion-input>
+  </ion-item>
+  <ion-item *ngIf="user">
+    <ion-label position="fixed">TikTok</ion-label>
+    <ion-input type="string" [(ngModel)]="tiktok"></ion-input>
+  </ion-item>
+  <ion-item *ngIf="user">
+    <ion-label position="fixed">Email</ion-label>
+    <ion-input type="string" [(ngModel)]="email"></ion-input>
+  </ion-item>
+  <!--<ion-list-header color="medium">
+    Sensitive Updates
+  </ion-list-header>
+  <ion-item *ngIf="user">
+    <ion-label position="fixed">Email</ion-label>
+    <ion-input type="string" [(ngModel)]="email"></ion-input>
+    <ion-button slot="end" color="success" expand="full" (click)="updateEmail()">Update</ion-button>
+  </ion-item>
+  <ion-item *ngIf="user">
+    <ion-label position="fixed">Password</ion-label>
+    <ion-input type="string" placeholder="**********" [(ngModel)]="password"></ion-input>
+    <ion-button slot="end" color="success" expand="full" (click)="updatePassword()">Update</ion-button>
+  </ion-item>-->
+  <ion-row>
+    <ion-col>
+      <ion-text class="error" text-center>{{error}}</ion-text>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-text class="error" text-center>{{linkError}}</ion-text>
+    </ion-col>
+  </ion-row>
+</ion-content>
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-button (click)="skip()" expand="block">Do This Later</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button (click)="saveProfile()" expand="block">Continue</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

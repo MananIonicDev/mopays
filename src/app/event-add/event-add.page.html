@@ -1,0 +1,102 @@
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button routerLink="/events"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add Event</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-padding">
+    <ion-row>
+
+      <ion-col class="ion-no-padding" size="12">
+        <div class="profile-image">
+         
+    
+          <div *ngIf="!url" (click)="presentImageSheet()">
+              <img src="assets/upload.jpg">
+          </div>
+     
+          <div *ngIf="url">
+              <img [src]="url" >
+          </div>
+         
+           <div class="image-upload" (click)="presentImageSheet()">
+             <!--<label for="file-input">-->
+              <label>
+                <ion-icon name="camera" class="input" color="primary"> </ion-icon>
+              </label>
+              <!--<input id="file-input" type='file' (change)="onSelectFile($event)" />-->
+          </div>
+    
+        </div>
+      </ion-col>
+
+      <ion-col class="ion-no-padding" size="12">
+        <!---Input field name -->
+        <ion-item class="transparent input box-shadow border-radius" lines="none">
+          <ion-input type="text" [(ngModel)]="name"
+          placeholder="Event Name"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col class="ion-no-padding" size="12">
+        <!---Input field name -->
+        <ion-item class="transparent input box-shadow border-radius" lines="none">
+          <ion-datetime [(ngModel)]="date" displayFormat="MM DD YY" placeholder="Select Date"></ion-datetime>
+        </ion-item>
+      </ion-col>
+
+      <ion-col class="ion-no-padding" size="12">
+        <!---Input field name -->
+        <ion-item class="transparent input box-shadow border-radius" lines="none">
+          <ion-input type="text"
+          placeholder="Venue" [(ngModel)]="location" (focusin)="shareLocation()"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <br><br><br>
+
+      <ion-col size="12" class="ion-no-padding">
+        <!---Input field description -->
+        <ion-item class="transparent input box-shadow border-radius" lines="none">
+          <ion-textarea rows="4" 
+          placeholder="Description" [(ngModel)]="description"></ion-textarea>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12" class="ion-no-padding">
+          <h5><b>Event Creator</b></h5>
+      </ion-col>
+
+      <ion-col class="ion-no-padding" size="12">
+        <!---Input field name -->
+        <ion-item class="transparent input box-shadow border-radius" lines="none">
+          <ion-input type="text" [(ngModel)]="displayName"
+          placeholder="Your Name"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col class="ion-no-padding" size="12">
+        <!---Input field name -->
+        <ion-item class="transparent input box-shadow border-radius" lines="none">
+          <ion-input type="number" [(ngModel)]="phoneNumber"
+          placeholder="Your Phone"></ion-input>
+        </ion-item>
+      </ion-col>
+
+
+    </ion-row>
+  </ion-grid>
+
+ 
+
+</ion-content>
+<ion-footer>
+  <ion-button expand="full" (click)="goSubmit()" [disabled]="!name || !date || !location || !description || !phoneNumber || !displayName || !url">Create</ion-button>
+</ion-footer>
+
+

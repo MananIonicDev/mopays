@@ -1,0 +1,278 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{items.name}}</ion-title> 
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <!-- Parallax Big Image -->
+  <div class="header-image background-size"
+  [ngStyle]="{'background-image': 'url(' + items.image + ')'}">
+    <ion-item lines="none" class="transparent ion-no-padding">
+      <ion-label>
+        <!-- Category -->
+        <span class="ion-text-wrap text-size-md text-color-secondary font-regular">
+          {{items.name}}</span>
+        <!-- Parallax-title -->
+        <h6 class="ion-text-wrap text-color-secondary font-bold ion-text-wrap">
+          {{items.memberLength}} members</h6>
+      </ion-label>
+      <!-- Share Button --->
+      <!--<ion-fab-button class="ion-no-margin" slot="end" (click)="presentActionSheet()">
+        <ion-icon class="icon-font-sm icon-round icon-color-accent"
+        name="more"></ion-icon>
+      </ion-fab-button>-->
+    </ion-item>
+  </div>
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col size="12" class="ion-padding">
+        <div scrollX="true">
+          <ion-chip class="scrollX" (click)="goGroupInfo()">
+            <ion-icon name="list" color="dark"></ion-icon>
+            <ion-label color="dark">Group info</ion-label>
+          </ion-chip>
+          <!--<ion-chip class="scrollX" (click)="goMembers()">
+            <ion-icon name="people"  color="dark"></ion-icon>
+            <ion-label color="dark">Members</ion-label>
+          </ion-chip>-->
+
+          <section *ngFor="let follow of follows">
+
+          <ion-chip class="scrollX" (click)="createPost()" *ngIf="follow.following === true">
+            <ion-icon name="create" color="dark"></ion-icon>
+            <ion-label color="dark">Post</ion-label>
+          </ion-chip>
+            <ion-chip class="scrollX" (click)="groupJoinAlert()" *ngIf="follow.following === false && items.userId != currentuserId">
+              <ion-icon name="enter-outline" color="dark"></ion-icon>
+              <ion-label color="dark">Join</ion-label>
+            </ion-chip>
+            <ion-chip class="scrollX" (click)="presentConfirmLeave()" *ngIf="follow.following === true && items.userId != currentuserId">
+              <ion-icon name="exit-outline" color="dark"></ion-icon>
+              <ion-label color="dark">Exit</ion-label>
+            </ion-chip>
+          
+          <ion-chip class="scrollX" (click)="editGroup()" *ngIf="follow.following === true && items.userId === currentuserId">
+            <ion-icon name="alert-circle" color="dark"></ion-icon>
+            <ion-label color="dark">Edit Group</ion-label>
+          </ion-chip>
+
+          </section>
+
+        </div>
+      </ion-col>
+      
+      <ion-col size="12">
+        <ion-card class="post-list-card" *ngFor="let item of feeditems?.slice().reverse()">
+          <ion-item lines="none">
+            <ion-avatar slot="start">
+              <img [src]="item.userPhoto" (click)="goProfile(item.userId)">
+            </ion-avatar>
+            <ion-label class="custom-font" (click)="goProfile(item.userId)">
+              {{item.userName}}
+              
+              <p class="custom-font">{{item.timeStamp | DateFormat | lowercase}}</p>
+            </ion-label>
+            <ion-buttons slot="end" *ngIf="item.userId != currentuserId" (click)="presentActionSheetNonUser(item.postId, item, item.description)">
+              <ion-button color="medium">
+                <ion-icon slot="icon-only" md="ellipsis-vertical-outline" ios="ellipsis-horizontal-outline"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+            <ion-buttons slot="end" *ngIf="item.userId == currentuserId" (click)="presentActionSheetUser(item.postId, item, item.description)">
+              <ion-button color="medium">
+                <ion-icon slot="icon-only" md="ellipsis-vertical-outline" ios="ellipsis-horizontal-outline"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </ion-item>
+    
+          <ion-card-content class="post-list-content">
+    
+            <p class="ion-no-margin-top custom-font
+                ion-padding-start ion-padding-end">{{item.description}}</p>
+                <br>
+         
+          <ion-slides id="slider" pager="true" *ngIf="item.images">
+            <ion-slide *ngFor="let img of item.images">
+              <ion-img src="{{img.src}}"></ion-img>
+            </ion-slide>
+          </ion-slides>
+    
+          </ion-card-content>
+    
+          <ion-item lines="none" class="ion-no-padding" style="margin-left: 10px;">
+            <ion-buttons slot="start">
+              <ion-button color="medium" *ngIf="item.haveILiked === false" (click)="likePost(item, item.postId)">
+                <ion-icon slot="start" name="heart-outline" color="medium"></ion-icon>
+                <small>{{item.score}}</small>
+              </ion-button>
+              <ion-button color="medium" *ngIf="item.haveILiked === true" (click)="unlikePost(item, item.postId)">
+                <ion-icon slot="start" name="heart" color="danger"></ion-icon>
+                <small>{{item.score}}</small>
+              </ion-button>
+              <ion-button color="medium" (click)="goCommy(item.postId, item.userId, item.commentLength)">
+                <ion-icon slot="start" name="chatbox-outline" color="medium"></ion-icon>
+                <small>{{item.commentLength}}</small>
+              </ion-button>
+              <ion-button color="medium" (click)="shareSheetShare(item.description)" *ngIf="item.description != null && !item.images">
+                <ion-icon slot="start" name="return-up-forward-outline" color="medium"></ion-icon>
+                <small></small>
+              </ion-button>
+              <ion-button color="medium" (click)="shareSheetShareImage(item.images[0].src)" *ngIf="item.description == null && item.images">
+                <ion-icon slot="start" name="return-up-forward-outline" color="medium"></ion-icon>
+                <small></small>
+              </ion-button>
+              <ion-button color="medium" (click)="shareSheetShareImageText(item.images[0].src, item.description)" *ngIf="item.description != null && item.images">
+                <ion-icon slot="start" name="return-up-forward-outline" color="medium"></ion-icon>
+                <small></small>
+              </ion-button>
+            </ion-buttons>
+    
+            <ion-buttons slot="end">
+              <ion-button color="medium">
+                <ion-icon size="small" slot="start" name="eye-outline"></ion-icon>
+             
+              </ion-button>
+            </ion-buttons>
+          </ion-item>
+        </ion-card>
+     
+      </ion-col>
+    </ion-row>  
+  </ion-grid>
+</ion-content>
+
+
+
+
+<!--<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{items.name}}</ion-title> 
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <div scrollX="true">
+      <ion-chip class="scrollX" (click)="goGroupInfo()">
+        <ion-icon name="list" color="light"></ion-icon>
+        <ion-label color="light">Group info</ion-label>
+      </ion-chip>
+      <ion-chip class="scrollX" (click)="goMembers()">
+        <ion-icon name="people" color="light"></ion-icon>
+        <ion-label color="light">Members</ion-label>
+      </ion-chip>
+      <section *ngFor="let follow of follows">
+      <ion-chip class="scrollX" (click)="createPost()" *ngIf="follow.following === true">
+        <ion-icon name="create" color="light"></ion-icon>
+        <ion-label color="light">Post</ion-label>
+      </ion-chip>
+        <ion-chip class="scrollX" (click)="groupJoinAlert()" *ngIf="follow.following === false && items.userId != currentuserId">
+          <ion-icon name="enter-outline" color="light"></ion-icon>
+          <ion-label color="light">Join</ion-label>
+        </ion-chip>
+        <ion-chip class="scrollX" (click)="presentConfirmLeave()" *ngIf="follow.following === true && items.userId != currentuserId">
+          <ion-icon name="exit-outline" color="light"></ion-icon>
+          <ion-label color="light">Exit</ion-label>
+        </ion-chip>
+      </section>
+      <ion-chip class="scrollX" (click)="editGroup()" *ngIf="items.userId === currentuserId">
+        <ion-icon name="alert-circle" color="light"></ion-icon>
+        <ion-label color="light">Edit Group</ion-label>
+      </ion-chip>
+      
+     
+    </div>
+  </ion-toolbar>
+
+  
+
+  
+</ion-header> 
+ 
+<ion-content fullscreen="true">
+  <div class="header-image" [style.backgroundImage]="'url(' + items.image + ')'">
+      
+  </div>
+  <div class="essentials">
+    <ion-card class="post-list-card" *ngFor="let item of feeditems?.slice().reverse()">
+      <ion-item lines="none">
+        <ion-avatar slot="start">
+          <img [src]="item.userPhoto" (click)="goProfile(item.userId)">
+        </ion-avatar>
+        <ion-label class="custom-font" (click)="goProfile(item.userId)">
+          {{item.userName}}
+          
+          <p class="custom-font">{{item.timeStamp | DateFormat | lowercase}}</p>
+        </ion-label>
+        <ion-buttons slot="end" *ngIf="item.userId != currentuserId" (click)="presentActionSheetNonUser(item.postId, item, item.description)">
+          <ion-button color="medium">
+            <ion-icon slot="icon-only" md="ellipsis-vertical-outline" ios="ellipsis-horizontal-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <ion-buttons slot="end" *ngIf="item.userId == currentuserId" (click)="presentActionSheetUser(item.postId, item, item.description)">
+          <ion-button color="medium">
+            <ion-icon slot="icon-only" md="ellipsis-vertical-outline" ios="ellipsis-horizontal-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+
+      <ion-card-content class="post-list-content">
+
+        <p class="ion-no-margin-top custom-font
+            ion-padding-start ion-padding-end">{{item.description}}</p>
+            <br>
+     
+      <ion-slides id="slider" pager="true" *ngIf="item.images">
+        <ion-slide *ngFor="let img of item.images">
+          <ion-img src="{{img.src}}"></ion-img>
+        </ion-slide>
+      </ion-slides>
+
+      </ion-card-content>
+
+      <ion-item lines="none" class="ion-no-padding" style="margin-left: 10px;">
+        <ion-buttons slot="start">
+          <ion-button color="medium" *ngIf="item.haveILiked === false" (click)="likePost(item, item.postId)">
+            <ion-icon slot="start" name="heart-outline" color="medium"></ion-icon>
+            <small>{{item.score}}</small>
+          </ion-button>
+          <ion-button color="medium" *ngIf="item.haveILiked === true" (click)="unlikePost(item, item.postId)">
+            <ion-icon slot="start" name="heart" color="danger"></ion-icon>
+            <small>{{item.score}}</small>
+          </ion-button>
+          <ion-button color="medium" (click)="goCommy(item.postId, item.userId, item.commentLength)">
+            <ion-icon slot="start" name="chatbox-outline" color="medium"></ion-icon>
+            <small>{{item.commentLength}}</small>
+          </ion-button>
+          <ion-button color="medium" (click)="shareSheetShare(item.description)" *ngIf="item.description != null && !item.images">
+            <ion-icon slot="start" name="return-up-forward-outline" color="medium"></ion-icon>
+            <small></small>
+          </ion-button>
+          <ion-button color="medium" (click)="shareSheetShareImage(item.images[0].src)" *ngIf="item.description == null && item.images">
+            <ion-icon slot="start" name="return-up-forward-outline" color="medium"></ion-icon>
+            <small></small>
+          </ion-button>
+          <ion-button color="medium" (click)="shareSheetShareImageText(item.images[0].src, item.description)" *ngIf="item.description != null && item.images">
+            <ion-icon slot="start" name="return-up-forward-outline" color="medium"></ion-icon>
+            <small></small>
+          </ion-button>
+        </ion-buttons>
+
+        <ion-buttons slot="end">
+          <ion-button color="medium">
+            <ion-icon size="small" slot="start" name="eye-outline"></ion-icon>
+         
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+    </ion-card>
+ 
+
+  </div>
+
+  
+  </ion-content>-->
+  

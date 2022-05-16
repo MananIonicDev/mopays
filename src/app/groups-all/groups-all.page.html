@@ -1,0 +1,28 @@
+
+
+<ion-content>
+<ion-grid>
+  <ion-row>
+    <ion-col size="6"  class="topfeatures image-carousel"  *ngFor="let item of favourItems" (click)="goBusiness(item.groupId)">
+      <ion-card class="image-card ion-padding-bottom">
+        <img src="{{item.image}}" alt="" style="height:150px; width: 100%">
+        <ion-card-content>
+          <ion-card-title class="ion-padding-bottom name_title" >
+            {{item.name}}
+          </ion-card-title>
+          <ion-card-subtitle class="ion-padding-bottom name_title" >
+            {{item.memberLength}} members
+          </ion-card-subtitle>
+          <!--<ion-button *ngIf="item.userId === currentuserId" (click)="editGroup(item.groupId)">Edit</ion-button>
+          <ion-button *ngIf="item.userId != currentuserId" (click)="item.haveIJoined === false ? groupJoinAlert(item.groupId) : presentConfirmLeave(item.groupId)" class="item.haveIJoined === false ? noteJoined : Joined">{{textput}}</ion-button>
+          <ion-col><ion-button (click)="goBusiness(item.groupId)" class="view">View</ion-button></ion-col>-->
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    </ion-row>
+</ion-grid>
+</ion-content>
+
+
+
+

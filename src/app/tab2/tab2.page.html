@@ -1,0 +1,150 @@
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      FEEDS
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="goFeedCategory()">
+        <ion-icon class="noteicon" name="filter" style="color: white;"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar> 
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-card class="post-list-card" *ngFor="let item of feeditems?.slice().reverse()">
+      <ion-item lines="none">
+        <ion-avatar slot="start" class="story-avatar" [ngClass]="{'seen': false}">
+          <img [src]="item.Photo" (click)="viewProfiles(item.UserId)" *ngIf="!item.anonymousUser">
+          <img src="assets/imgs/profile.jpg" (click)="anonymousProfile()" *ngIf="item.anonymousUser">
+        </ion-avatar>
+        <ion-label class="custom-font" (click)="viewProfiles(item.UserId)" *ngIf="!item.anonymousUser">
+          {{item.Name}} <img *ngIf="item.Verified" src="assets/checked.png" style="width: 15px; height: 15px; display: inline-block;"> 
+          <!--<p>{{item.timeStamp | DateFormat | lowercase}}</p>-->
+          <p class="custom-font">{{item.Date | DateFormat | lowercase}}</p>
+        </ion-label>
+        <ion-label class="custom-font" (click)="anonymousProfile()" *ngIf="item.anonymousUser">
+          {{item.Name}}, {{item.age}}, {{ item.guestLocation }}
+          <!--<p>{{item.timeStamp | DateFormat | lowercase}}</p>-->
+          <p class="custom-font">{{item.Date | DateFormat | lowercase}}</p>
+        </ion-label>
+        <ion-buttons slot="end" *ngIf="item.UserId != currentuserId" (click)="presentActionSheetNonUser(item.key, item, item.description)">
+          <ion-button color="medium">
+            <ion-icon slot="icon-only" md="ellipsis-vertical-outline" ios="ellipsis-horizontal-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <ion-buttons slot="end" *ngIf="item.UserId == currentuserId" (click)="presentActionSheetUser(item.key, item, item.description)">
+          <ion-button color="medium">
+            <ion-icon slot="icon-only" md="ellipsis-vertical-outline" ios="ellipsis-horizontal-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+
+      <ion-card-content class="post-list-content">
+
+        <p class="ion-no-margin-top custom-font
+            ion-padding-start ion-padding-end">{{item.description}}</p>
+            <p class="ion-no-margin-top custom-font 
+            ion-padding-start ion-padding-end" *ngIf="item.location">{{item.location}}</p>
+            <br>
+
+      <div *ngIf="item.video">
+        <video controls>
+          <source src="{{item.video}}#t=0.1" type="video/mp4" />
+       </video>
+      </div>
+
+      <div *ngIf="item.youtube" style="margin: 0px; width: 100%;" class="iframe-container">
+        <div id="{{item.youtube}}"></div>
+      </div>
+
+      <div *ngIf="item.location">
+        <agm-map [latitude]="item.latitude" [longitude]="item.longitude" [zoom]="zoom">
+          <agm-marker [latitude]="item.latitude" [longitude]="item.longitude" [markerDraggable]="false"></agm-marker>
+        </agm-map>
+      </div>
+     
+      <ion-slides id="slider" pager="true" *ngIf="item.images" [options]="slideOptions">
+        <ion-slide *ngFor="let img of item.images" (click)="zoomImages(img.src, item.key)">
+          <ion-img src="{{img.src}}"></ion-img>
+        </ion-slide>
+      </ion-slides>
+
+      </ion-card-content>
+
+      <ion-item lines="none" class="ion-no-padding" style="margin-left: 10px;">
+        <ion-buttons slot="start">
+          <ion-button color="medium" *ngIf="item.haveILiked === false" [disabled]="item.anonymousUser" (click)="likePost(item, item.key)">
+            <ion-icon slot="start" name="heart-outline" color="medium"></ion-icon>
+            <small>Likes - {{item.Score}}</small>
+          </ion-button>
+          <ion-button color="medium" *ngIf="item.haveILiked === true" [disabled]="item.anonymousUser" (click)="unlikePost(item, item.key)">
+            <ion-icon slot="start" name="heart" color="danger"></ion-icon>
+            <small>Likes - {{item.Score}}</small>
+          </ion-button>
+          <ion-button color="medium" (click)="goCommy(item.key, item.UserId, item.commentLength)">
+            <ion-icon slot="start" name="chatbox-outline" color="medium"></ion-icon>
+            <small>Comments - {{item.commentLength}}</small>
+          </ion-button>
+          <ion-button color="medium" (click)="shareSheetShare(item.description)" *ngIf="item.description != null && !item.images">
+            <ion-icon slot="start" name="arrow-redo-circle-outline" color="medium"></ion-icon>
+            <small>Share</small>
+          </ion-button>
+          <ion-button color="medium" (click)="shareSheetShareImage(item.images[0].src)" *ngIf="item.description == null && item.images">
+            <ion-icon slot="start" name="arrow-redo-circle-outline" color="medium"></ion-icon>
+            <small>Share</small>
+          </ion-button>
+          <ion-button color="medium" (click)="shareSheetShareImageText(item.images[0].src, item.description)" *ngIf="item.description != null && item.images">
+            <ion-icon slot="start" name="arrow-redo-circle-outline" color="medium"></ion-icon>
+            <small>Share</small>
+          </ion-button>
+        </ion-buttons>
+
+        <!--<ion-buttons slot="end">
+          <ion-button color="medium">
+            <ion-icon size="small" slot="start" name="eye-outline"></ion-icon>
+       
+          </ion-button>
+        </ion-buttons>-->
+      </ion-item>
+    </ion-card>
+
+    <!--<ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>-->
+ 
+
+   <ion-list>
+    <ion-item *ngFor = "let i of dummyBook">
+      <ion-avatar slot="start">
+        <ion-skeleton-text animated style="width: 50px; height: 50px;" ></ion-skeleton-text>
+      </ion-avatar>
+      <ion-label>
+        <ion-skeleton-text animated style="width: 40%; height: 8px;" ></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 20%; height: 4px;" ></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+    </ion-list>
+  
+  
+    
+  
+    
+  
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" >
+      <ion-fab-button class="sellbutton" (click)="showModal()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    
+</ion-content>
+
+
+
+
+
+
+

@@ -1,0 +1,22 @@
+<ion-content>
+  <h5 style="padding: 20px">People interested in</h5>
+  <ion-list>
+    <ion-radio-group [(ngModel)]="interest">
+      <ion-item *ngFor="let item of favourItems" class="list cart-item itemback">
+        <ion-label>
+          <h3><b>{{item.name}}</b></h3>
+        </ion-label>
+        <ion-radio [value]="item.favorId" slot="start" mode="md"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+  <ion-list>
+    <ion-item *ngFor="let item of dummyArray">
+      <ion-label>
+        <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="block" (click)="chooseItem()">Apply Filter</ion-button>
+</ion-content>

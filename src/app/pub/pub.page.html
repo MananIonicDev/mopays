@@ -1,0 +1,75 @@
+
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      PUB
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<super-tabs
+  [activeTabIndex]="0"
+  [config]="{ avoidElements: true, maxDragAngle: 30 }"
+>
+  <super-tabs-toolbar slot="top" scrollable class="super-tabs-toolbar-custom">
+
+    <super-tab-button>
+      <ion-label style="color: white;">All PUB</ion-label>
+    </super-tab-button>
+
+    <super-tab-button *ngFor="let item of stories">
+      <ion-label style="color: white;">{{ item.name }}</ion-label>
+    </super-tab-button>
+  
+   
+  </super-tabs-toolbar> 
+
+  <super-tabs-container>
+
+    <super-tab>
+      <ion-content>
+        <ion-grid class="ion-padding">
+          <ion-row>
+            <ion-col *ngFor="let item of pubList" size="6" (click)="goDetails(item.key)">
+              <ion-card class="card-custom">
+                <div *ngIf="item.images" class="card-thumbnail" [style.backgroundImage]="'url(' + item.images[0].src + ')'">
+                  <!--<ion-avatar class="avatar-md has-status" slot="start">
+                    <img src="assets/img/avatars/{{i%12 + 1}}.jpg" alt="">
+                    <div class="avatar-status">
+                      <div class="online-status active"></div>
+                    </div>
+                  </ion-avatar>-->
+        
+                  <div class="card-caption">
+                    {{item.name}}
+                  </div>
+                </div>
+                <div *ngIf="item.image" class="card-thumbnail" [style.backgroundImage]="'url(' + item.image + ')'">
+                  <!--<ion-avatar class="avatar-md has-status" slot="start">
+                    <img src="assets/img/avatars/{{i%12 + 1}}.jpg" alt="">
+                    <div class="avatar-status">
+                      <div class="online-status active"></div>
+                    </div>
+                  </ion-avatar>-->
+        
+                  <div class="card-caption">
+                    {{item.name}}
+                  </div>
+                </div>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+          </ion-grid>
+      </ion-content>
+    </super-tab>
+
+    <super-tab *ngFor="let item of stories">
+      <ion-content>
+        <ion-nav [root]="catPage" [rootParams]="{ id: item.key}"></ion-nav>
+      </ion-content>
+    </super-tab> 
+  </super-tabs-container>
+</super-tabs>

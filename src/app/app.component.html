@@ -1,0 +1,73 @@
+<ion-app>
+  <ion-menu menuId="main-menu" contentId="main">
+    <ion-content>
+      <div class="menu-header-bg"></div>
+      <div class="header-content">
+        <img src="{{photoURL}}" *ngIf="currentUserId && photoURL"/>
+        <img src="{{pic}}" *ngIf="!currentUserId && !photoURL"/>
+        <ion-label>
+          <h2 *ngIf="!currentUserId">Login/Register</h2>
+          <h2 *ngIf="currentUserId && displayName">{{displayName}}</h2>
+          <p *ngIf="currentUserId && points">{{points}} Points</p>
+    
+        </ion-label>
+      </div>
+      
+
+      <ion-list lines="none" class="menu-items">
+        <ion-menu-toggle translate auto-hide="false">
+        <ion-item class="active" (click)="openHome()">
+          <ion-icon name="home-outline"></ion-icon> Home
+        </ion-item>
+        <ion-item (click)="openProfile()" *ngIf="currentUserId">
+          <ion-icon name="person-outline"></ion-icon> Profile
+        </ion-item>
+        <!--<ion-item (click)="openChat()" *ngIf="currentUserId">
+          <ion-icon name="chatbubbles-outline"></ion-icon> Messages
+        </ion-item>-->
+        <ion-item (click)="aboutUs()">
+          <ion-icon name="person-outline"></ion-icon> About us
+        </ion-item>
+        <ion-item (click)="shareSheetShare()">
+          <ion-icon name="share-social-outline"></ion-icon>Share App
+        </ion-item>
+        <ion-item (click)="showRatePrompt()">
+          <ion-icon name="star-outline"></ion-icon> Rate App
+        </ion-item>
+        <!--<ion-item (click)="sendEmailBug()">-->
+        <ion-item (click)="sendEmailBug()">
+          <ion-icon name="bug-outline"></ion-icon>
+          Report a Bug
+        </ion-item>
+        <ion-item (click)="sendEmailFeedBack()">
+          <ion-icon name="mail-outline"></ion-icon> Feedback
+        </ion-item>
+        <ion-item (click)="sendBrand()">
+          <ion-icon name="people-outline"></ion-icon> Brand Partnerships
+        </ion-item>
+        <ion-item (click)="sendPrivacyPolicy()">
+          <ion-icon name="shield-checkmark-outline"></ion-icon> Privacy Policy
+        </ion-item>
+        <ion-item (click)="Terms()">
+          <ion-icon name="list-outline"></ion-icon> Terms and Conditions
+        </ion-item>
+        <ion-item (click)="openSettings()" *ngIf="currentUserId">
+          <ion-icon name="settings-outline"></ion-icon> Settings
+        </ion-item>
+        <ion-item (click)="logOut()" *ngIf="currentUserId">
+          <ion-icon name="log-out-outline"></ion-icon> Logout
+        </ion-item>
+        <ion-item (click)="goLogin()" *ngIf="!currentUserId">
+          <ion-icon name="log-in-outline"></ion-icon> Login
+        </ion-item>
+        <ion-item>
+          <ion-icon name="logo-android"></ion-icon> Mopays V2.0
+        </ion-item>
+      </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main"></ion-router-outlet>
+</ion-app>
+
+

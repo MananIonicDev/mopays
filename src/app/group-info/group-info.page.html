@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{items.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<img *ngIf="items.image" src="{{items.image}}" width="100%" height="auto"/>
+
+<ion-list class="ion-no-margin">
+  <ion-item>
+    <ion-icon name="list" slot="start" class="docIcon" style="color: #e4405f"></ion-icon>
+    {{items.name}}
+  </ion-item>
+  
+  <ion-item>
+    <ion-icon name="calendar" slot="start" class="docIcon" style="color: #038a1a"></ion-icon>
+    Created on: {{items.timeStamp | date}}
+  </ion-item>
+
+  <ion-item>
+    <ion-icon name="people-circle" slot="start" class="docIcon" style="color: #8a0303"></ion-icon>
+    {{items.memberLength}} Members
+  </ion-item>
+ 
+
+</ion-list>
+<ion-item-divider color="medium">Description</ion-item-divider>
+
+<ion-item>
+  <p text-wrap class="ion-text-wrap">{{items.description}}</p>
+</ion-item>
+
+<ion-item-divider color="medium">Rules & Regulation</ion-item-divider>
+
+<ion-item>
+  <p text-wrap class="ion-text-wrap">{{items.rules}}</p>
+</ion-item>
+
+
+<ion-item-divider color="medium">Members</ion-item-divider>
+
+<div class="ion-padding" size="12">
+  <ion-searchbar placeholder="Search member" [(ngModel)]="term"></ion-searchbar>
+</div>
+
+  <ion-list>
+      <ion-item class="transparent box-shadow border-radius ion-margin-top
+      margin-half-start margin-half-end" lines="none"
+      *ngFor="let member of myGroupMembers | filter:term" (click)="goProfile(member.uid)"> 
+        <!--Avatar-->
+        <ion-avatar slot="start" class="story-avatar" [ngClass]="{'seen': false}">
+          <img [src]="member.photoURL">
+        </ion-avatar>
+        <ion-label>
+          <!--Title-->
+          <h2 class="text-size-xs  font-bold">
+            {{member.displayName}}</h2>
+            <p *ngIf="member.status == 'online'" style="color: green; font-weight: bold;">Online</p>
+            <p *ngIf="member.status == 'offline'" style="color: red; font-weight: bold;">Offline</p>
+            <p *ngIf="member.status == 'away'" style="color: orange; font-weight: bold;">Away</p>
+        </ion-label>
+        <ion-button fill="outline" *ngIf="member.uid === items.userId">Admin</ion-button>
+      </ion-item>
+  </ion-list>
+
+</ion-content>

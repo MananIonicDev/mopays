@@ -1,0 +1,103 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start" style="padding-right: 10px;">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Top Apps</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar placeholder="Search" (ionInput)="searchName($event)"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+
+      <ion-col class="ion-no-padding" size="12">
+        <ion-slides class="banner" pager="true" [options]="slideOpts">
+          <ion-slide *ngFor="let step of adverts" (click)="goAdsDetails(step.id)" class="background-size"
+            [ngStyle]="{ 'background': 'url(' + step.image + ')'}">
+          </ion-slide>
+        </ion-slides>
+      </ion-col>
+
+      <ion-col size="12">
+
+        <div class="top-features">
+          <ion-item class="transparent ion-no-padding" lines="none">
+            <!-- Similar List -->
+            <h6 class="font-bold ion-text-wrap
+            ion-padding-start ion-no-margin custom-font" slot="start" style="color: #00a8e1;">
+              App Categories</h6>
+            <span class="text-size-sm text-color-accent font-regular custom-font" slot="end" (click)="initItems()">View
+              All
+            </span>
+          </ion-item>
+
+          <ion-grid class="ion-no-padding">
+            <ion-row>
+              <ion-col size="12">
+                <ion-slides [options]="optionsess">
+                  <ion-slide *ngFor="let item of CategoriesList" (click)="goCategory(item.key)">
+                    <ion-card class="image-card">
+                      <img src="{{item.image}}" alt="" style="height:90px; width: 100px">
+                      <ion-card-content>
+                        <ion-card-subtitle class="name_title">
+                          {{item.name}}
+                        </ion-card-subtitle>
+                      </ion-card-content>
+                    </ion-card>
+                  </ion-slide>
+                </ion-slides>
+                <ion-item lines="full" class=" box-shadow border-radius searchBox" *ngIf="CategoriesList.length === 0">
+                  <div class="ion-no-padding slider">
+                    <ion-card class="no-border-radius no-box-shadow" *ngFor="let item of dummy">
+                      <ion-skeleton-text animated style="width: 200px; height: 90px"></ion-skeleton-text>
+                    </ion-card>
+                  </div>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+
+        <!-- <ion-item lines="full" class=" box-shadow border-radius searchBox" *ngIf="CategoriesList.length > 0">
+          <ion-slides [options]="optionsess" class="ion-no-padding slider">
+            <ion-slide *ngFor="let item of CategoriesList" (click)="goCategory(item.key)">
+              <ion-card class="no-border-radius no-box-shadow">
+                <img src="{{item.image}}" class="border-radius" height="90px" width="100px" />
+                <h2 class="text-size-xs text-color-accent font-bold ion-text-wrap" style="margin-bottom: 10px;">
+                  {{item.name}}</h2>
+              </ion-card>
+            </ion-slide>
+          </ion-slides>
+        </ion-item> -->
+      </ion-col>
+
+      <ion-col size="6" class="topfeatures image-carousel" *ngFor="let bill of billingList" (click)="goBill(bill.link)">
+        <ion-card class="image-card">
+          <img src="{{bill.image}}" alt="" style="height:120px; width: 100%">
+          <ion-card-content>
+            <ion-card-subtitle class="ion-padding-bottom name_title">
+              {{bill.name}}
+            </ion-card-subtitle>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6" size-md="4" class="topfeatures image-carousel" *ngFor="let item of dummy">
+        <ion-card class="image-card">
+          <ion-skeleton-text animated style="width: 100%; height: 120px;"></ion-skeleton-text>
+          <ion-card-content>
+            <ion-card-subtitle class="ion-padding-bottom name_title">
+              <ion-skeleton-text animated style="width: 50px;"></ion-skeleton-text>
+            </ion-card-subtitle>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

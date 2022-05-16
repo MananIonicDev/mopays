@@ -1,0 +1,225 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{items.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- ACTION SHEET -- COMPONENT 1-->
+<ion-content [scrollEvents]="true" class="explore-card">
+  <!--<ion-content parallax-header (ionScroll)="logScrolling($event)" [scrollEvents]="true" class="explore-card">-->
+  <!-- Parallax Big Image -->
+  <!--<div class="header-image background-size" [ngStyle]="{'background': 'url(' + items.image + ')'}">
+    
+    </div>-->
+  <ion-slides pager="true" [options]="slideOpts">
+    <ion-slide *ngFor="let item of images" class="background-size" [ngStyle]="{ 'background': 'url(' + item.src + ')'}"
+      (click)="zoomImages(item.src)">
+    </ion-slide>
+  </ion-slides>
+
+  <!--Content-->
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col size="12" class="explore-card">
+        <!-- Cord -->
+        <ion-card class="no-box-shadow ion-no-margin explore-card">
+          <!-- Cord header -->
+          <ion-card-header>
+            <!-- Cord header title -->
+            <h3 class="text-size-xs text-color-accent font-bold">
+              {{items.open}} - {{items.close}}</h3>
+            <h2 class="text-size-md text-color-accent font-bold ion-padding-bottom">
+              {{items.name}}</h2>
+
+            <ion-label style="font-size: 16px; color: #000;">Give your views ...</ion-label>
+            <ion-item class="ion-no-padding explore-card" lines="none">
+              <ion-label>
+                
+                <div class="ratting" (click)="goComment(items.userId)">
+                  <ion-icon [name]="items.totalRatting >= 1 ? 'star-outline':'star'"
+                    [color]="items.totalRatting >= 1 ? 'warning':'medium'">
+                  </ion-icon>
+                  <ion-icon [name]="items.totalRatting >= 2 ? 'star-outline':'star'"
+                    [color]="items.totalRatting >= 2 ? 'warning':'medium'">
+                  </ion-icon>
+                  <ion-icon [name]="items.totalRatting >= 3 ? 'star-outline':'star'"
+                    [color]="items.totalRatting >= 3 ? 'warning':'medium'">
+                  </ion-icon>
+                  <ion-icon [name]="items.totalRatting >= 4 ? 'star-outline':'star'"
+                    [color]="items.totalRatting >= 4 ? 'warning':'medium'">
+                  </ion-icon>
+                  <ion-icon [name]="items.totalRatting >= 5 ? 'star-outline':'star'"
+                    [color]="items.totalRatting >= 5 ? 'warning':'medium'">
+                  </ion-icon>
+                  ({{items.ratting}} Ratings)
+                </div>
+                <ion-label style="font-size: 14px; color: gray; margin-top: 5px;">Your feedback can help people decide</ion-label>
+                <br>
+                <h3 class="text-size-xs text-color-accent font-bold" (click)="callNo(items.phoneNumber)">
+                  <ion-icon name="call" style="color: blue;"></ion-icon> {{items.phoneNumber}}
+                </h3>
+                <h3 class="text-size-xs text-color-accent font-bold ion-text-wrap" text-wrap>
+                  <ion-icon name="location" style="color: red;"></ion-icon> {{items.location}}
+                </h3>
+                <ion-buttons>
+                  <ion-button color="dark" fill="clear" *ngIf="items.website" (click)="goLink(items.website)">
+                    <img style="width: 20px; height: 20px;" src="assets/social/internet.png"/>
+                  </ion-button>
+                  <ion-button color="dark" fill="clear" *ngIf="items.facebook" (click)="goLink(items.facebook)">
+                    <img style="width: 20px; height: 20px;" src="assets/social/facebook.png"/>
+                  </ion-button>
+                  <ion-button color="dark" fill="clear" (click)="shareSheetShareImageText(items.images[0].src, items.description)">
+                    <ion-icon slot="start" name="arrow-redo-circle-outline" style="zoom: 1.0;" color="dark"></ion-icon>
+                  </ion-button>
+              </ion-buttons>
+                <!-- <ion-row style="text-align: center;">
+                  <ion-col *ngIf="items.website" (click)="goLink(items.website)">
+                    <br>
+                    <img style="width: 20px; height: 20px;" src="assets/social/internet.png"/>
+                  </ion-col>
+                  <ion-col *ngIf="items.facebook" (click)="goLink(items.facebook)">
+                    <br>
+                    <img style="width: 20px; height: 20px;" src="assets/social/facebook.png"/>
+                  </ion-col>
+                </ion-row>  -->
+                <br>
+                <agm-map [latitude]="items.latitude" [longitude]="items.longitude">
+                  <agm-marker [latitude]="items.latitude" [longitude]="items.longitude"></agm-marker>
+                </agm-map>
+                <ion-item lines="full" (click)="launchNav(items.latitude, items.longitude)">
+                  <ion-icon name="compass-outline" slot="start" color="danger"></ion-icon>
+                  <ion-label class="ion-text-wrap">
+                    Get Direction
+                  </ion-label>
+                  <ion-buttons slot="end">
+                    <ion-button color="dark" fill="clear" (click)="report(items.name)">
+                      <ion-icon slot="start" name="alert-circle-outline" color="dark"></ion-icon>
+                      <ion-label>Report</ion-label>
+                    </ion-button>
+                    <ion-button color="dark" fill="clear" (click)="claim(items.name)">
+                      <ion-icon slot="start" name="information-circle-outline" color="dark"></ion-icon>
+                      <ion-label>Claim</ion-label>
+                    </ion-button>
+                </ion-buttons>
+                </ion-item>
+                <!--<p class="text-size-xs text-color-accent font-regular ion-text-wrap">
+                  {{items.description}}</p>-->
+              </ion-label>
+              
+              <!--<ion-label class="info-icon-section">
+               
+                </ion-label>-->
+
+            </ion-item>
+
+            <!-- <ion-item lines="none" *ngIf="items.website">
+              <ion-avatar class="border-radius" style="margin-top: 0px;" *ngIf="items.website" (click)="goLink(items.website)">
+                <img style="width: 30px; height: 30px;" src="assets/social/internet.png"/>
+              </ion-avatar>
+            </ion-item> -->
+
+          </ion-card-header>
+          <!-- Card content -->
+          <ion-card-content>
+
+            <h3 class="text-size-sm  font-regular ion-padding-top">{{items.description}}</h3>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <!-- Slider Images-->
+
+
+      <ion-col *ngIf="itemsProduct.length > 0" class="ion-no-padding-start ion-no-padding-end ion-padding-bottom explore-card" size="12">
+        <h2 class="text-size-xs text-color-follow font-bold ion-padding-start
+          ion-no-margin ion-float-start">Gallery</h2>
+        <!--<h2 class="text-size-xs text-color-accent font-regular ion-padding-end
+          ion-no-margin ion-float-end" (click)="goProduct()">View All</h2>-->
+      </ion-col>
+
+      <ion-col class="ion-padding slider" size="12">
+        <!-- Card with image -->
+        <ion-card class="no-border-radius no-box-shadow" *ngFor="let item of itemsProduct">
+          <!-- Card with image header -->
+          <ion-card-header class="ion-no-padding">
+            <!-- Card image -->
+            <ion-img class="border-radius" [src]="item.image" (click)="zoomImage(item.image)"></ion-img>
+          </ion-card-header>
+          <!-- Card with image content -->
+          <ion-card-content class="ion-no-padding content-style">
+            <!-- Card with image content subtitle -->
+            <!-- Card with image content title -->
+            <h2 class="text-size-xs text-color-accent font-bold ion-text-wrap"
+              style="padding-left: 15px; padding-bottom: 10px;">
+              {{item.name}}</h2>
+            <!-- Card with image content price -->
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+
+
+
+      <div *ngIf="itemsProduct.length > 0" class="line_div"></div>
+
+      <ion-card *ngIf="items.youtube" style="margin: 0px; width: 100%;" class="iframe-container">
+        <ion-card-content style="padding: 0px;">
+          <div id="{{items.youtube}}"></div>
+        </ion-card-content>
+      </ion-card>
+
+      <div class="line_div"></div>
+
+
+      <ion-col class="ion-padding-top" size="12">
+        <h2 class="text-size-xs text-color-accent font-bold ion-padding-start
+           ion-padding-top ion-no-margin ion-float-start">{{itemsComment.length}} Comments</h2>
+        <h2 class="text-size-xs text-color-accent font-regular ion-padding-end
+           ion-no-margin ion-float-end ion-padding-top"></h2>
+      </ion-col>
+
+      <ion-col size="12" class="ion-padding-end ion-padding-start reviews">
+        <ion-card class="no-border-radius no-box-shadow ion-no-margin" *ngFor="let item of itemsComment">
+          <ion-item class="transparent ion-no-padding" lines="none">
+            <ion-avatar slot="start">
+              <img [src]="item.photoURL" (click)="viewProfiles(item.userId)">
+            </ion-avatar>
+            <ion-label>
+              <h3 class="text-size-xs font-bold text-color-accent" (click)="viewProfiles(item.userId)">
+                {{item.displayName}} <img *ngIf="item.Verified" src="assets/checked.png" style="width: 15px; height: 15px; display: inline-block;">
+              </h3> 
+              <h3 class="text-size-sm font-regular text-color-accent">{{item.time | DateFormat | lowercase}}</h3>
+              <div class="rating">{{item.rate}}<ion-icon name="star"></ion-icon>
+              </div>
+              <h3 class="text-size-xs font-regular text-color-accent ion-text-wrap
+                 ion-padding-top">{{item.description}}
+              </h3>
+            </ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+
+
+
+
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-grid *ngIf="items.userId === currentUserId">
+    <ion-row>
+      <ion-col size="6">
+        <ion-button expand="block" (click)="addProduct()">Add Product</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button expand="block" (click)="editBusiness()">Edit Business</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-button expand="full" *ngIf="items.bookingLink" (click)="goLink(items.bookingLink)">Book Now</ion-button>
+
+</ion-footer>

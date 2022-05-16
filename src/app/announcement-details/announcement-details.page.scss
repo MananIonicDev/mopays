@@ -1,0 +1,54 @@
+.custom-font {
+    font-family: 'Josefin Sans', sans-serif;
+  }
+
+  ion-content {
+    --background: rgb(248, 246, 246);
+    
+  }
+
+  .sellbutton{
+    --ion-item-background: #00a8e1;
+    --background: #00a8e1;
+    --ion-item-color: #fff;
+  }
+  
+  video {
+    width: 100%;
+    height: auto;
+    margin-top: 0 !important;
+  }
+
+  agm-map {
+    height: 300px !important;
+    width: 100%;  /* This is really important*/
+  }
+
+  // Post card list
+.post-list-card {
+  margin-top: var(--ion-margin, 10px);
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px 0px rgba(57, 71, 82, 0.12);
+
+  &:last-child {
+      margin-bottom: var(--ion-margin, 32px);
+  }
+
+  ion-item {
+      --inner-padding-end: 0px;
+  }
+
+  .post-list-content {
+      padding-top: 0;
+      padding-bottom: 0;
+  }
+
+  .action-item {
+      .action-button {
+          margin-right: var(--ion-margin, 16px) !important;
+      }
+  }
+}

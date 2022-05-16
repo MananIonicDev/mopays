@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start" *ngIf="post">
+      <ion-back-button color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title>News Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="background-size header-image" *ngIf="post"
+  [ngStyle]="{'background': 'url(' + post.media_url + ')'}"> <!--data.media_url-->
+    <ion-item lines="none" class="transparent ion-no-padding">
+      <div class="ion-float-right social ion-margin-top">
+       
+    </div>
+    </ion-item>
+  </div>
+  
+  <ion-grid class="ion-no-padding" *ngIf="post">
+    <ion-row>
+      <ion-col size="12" class="ion-padding">
+        <h6 class="text-size-xq text-color-dark font-bold ion-text-wrap" [innerHTML]="post.title.rendered"></h6>
+          <p>{{post?.date}}</p>
+          <br>
+          <div class="line-area"></div>
+          <br><br>
+          <p class="text-size-xs text-color-accent font-regular" [innerHTML]="post.content.rendered"></p>
+      </ion-col>
+
+      <ion-col class="ion-padding-top" size="12">
+        <h2 class="text-size-xs text-color-accent font-bold ion-padding-start
+        ion-padding-top ion-no-margin ion-float-start">{{newsComment.length}} Comments</h2>
+      </ion-col>
+
+      <ion-col size="12" class="ion-padding-end ion-padding-start reviews">
+        <ion-card class="no-border-radius no-box-shadow ion-no-margin" *ngFor="let item of newsComment">
+          <ion-item class="transparent ion-no-padding" lines="none">
+            <ion-avatar slot="start">
+              <img [src]="item.photoURL">
+            </ion-avatar>
+            <ion-label>
+              <h3 class="text-size-xs font-bold text-color-accent">{{item.displayName}}</h3>
+              <h3 class="text-size-sm font-regular text-color-accent">{{item.date | date}}</h3>
+              <h3 class="text-size-xs font-regular text-color-accent ion-text-wrap
+              ion-padding-top">{{item.message}}
+              </h3>
+            </ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="primary" (click)="shareSheetShare()">
+      <ion-icon name="share-social"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+ 
+
+  
+
+</ion-content>
+<ion-footer translucent>
+  <ion-button *ngIf="!currentUserId" fill="outine" expand="full" (click)="goLogin()">Login to Comment</ion-button>
+   <ion-row class="input-position" *ngIf="currentUserId">
+    <ion-col size="10">
+      <ion-input class="input restrict" type="text" placeholder="Write Comment" [(ngModel)]="message" padding-start>
+      </ion-input>
+    </ion-col>
+  
+    <ion-col size="2" no-padding align-self-center>
+      <ion-button no-margin fill="clear" (click)="sendComment()" [disabled]="!message">
+        <ion-icon class="send-icon" color="primary" name="send"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>
+

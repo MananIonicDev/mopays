@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+ 
+  <ion-fab vertical="top" horizontal="end" slot="fixed" (click)="closeModal()" edge>
+    <ion-fab-button>
+      <ion-icon name="close"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col size="12">
+        <!-- Map -->
+        <div #map id="map"></div>
+      </ion-col>
+      <!-- Slider-->
+      <ion-col class="slider" size="12">
+        
+            <ion-card class="border-radius box-shadow" *ngFor="let item of placesList" (click)="launchNav(item.vicinity)">
+              <!-- Cord header with background image -->
+              <ion-card-header class="ion-no-padding background-size"
+              [ngStyle]="{'background-image': 'url(' + item.photo + ')'}">
+              </ion-card-header>
+              <!-- Card content -->
+              <ion-card-content class="padding-half-start padding-half-end ion-margin-top">
+                <h2 class="text-size-xs text-color-accent font-bold ion-text-wrap">
+                  {{item.name}}</h2>
+                <h3 class="ion-text-wrap text-size-sm text-color-primary font-bold">
+                  {{item.vicinity}}</h3>
+                <h2 class="text-size-sm text-color-primary font-bold ion-text-wrap">{{item.distance}}m Away</h2>
+              </ion-card-content>
+            </ion-card>
+         
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+
+  
+  
+</ion-content>
+

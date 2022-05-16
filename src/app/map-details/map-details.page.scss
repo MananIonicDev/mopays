@@ -1,0 +1,58 @@
+/* Style component 3
+=============================*/
+
+#map,
+ion-grid,
+ion-row {
+  position: relative;
+  padding: 0;
+  height: 100%;
+}
+
+#wrapper { 
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+.slider {
+  position: absolute;
+  bottom: 10px;
+  overflow-x: scroll;
+  display: -webkit-inline-box;
+  display: flex;
+  flex-direction: row;
+
+  ion-card {
+    background: var(--cs-background-primary) !important;
+    display: inline-flex;
+    margin: 0 8px;
+    position: relative;
+    width: 300px;
+    flex: none;
+
+    ion-card-header {
+      width: 50%;
+    }
+
+    .background-size {
+      height: 100%;
+    }
+
+    ion-card-content {
+      width: 50%;
+      align-self: center;
+    }
+  }
+}
+
+ion-fab-button {
+  --box-shadow: none;
+  --color: #ffffff !important;
+  color: white !important;
+  //background: #00a8e1;
+  --background: #00a8e1;
+      
+}
+
+

@@ -1,0 +1,100 @@
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Events</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="primary" class="ion-no-padding">
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col class="ion-no-padding">
+          <ion-searchbar placeholder="Search" [(ngModel)]="searchitem" (ionInput)="searchName($event)"></ion-searchbar>
+        </ion-col>
+        <ion-col class="ion-no-padding">
+          <ion-searchbar search-icon="location" placeholder="Where" (ionInput)="searchLocation($event)"></ion-searchbar>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-grid class="ion-no-padding">
+  <ion-row>
+    <ion-col size="12">
+        <ion-list lines="none">
+          <ion-slides pager="true" [options]="slideOpts">
+            <ion-slide *ngFor="let step of adverts" (click)="goAdsDetails(step.url)" 
+                  class="background-size"
+                      [ngStyle]="{ 'background': 'url(' + step.image + ')'}">
+            </ion-slide>
+          </ion-slides>
+    
+
+      <ion-col size="12" size-md="6" *ngFor="let item of eventList">
+     
+        <ion-card class="border-radius box-shadow margin-half"
+        (click)="onItemEvent(item.key)">
+        
+          <ion-card-header class="ion-no-padding background-size"
+          [ngStyle]="{'background': 'url(' + item.image + ')'}">
+          </ion-card-header>
+         
+          <ion-card-content>
+            <h1 class="ion-text-wrap text-size-xs text-color-accent font-bold ion-padding-top">
+              {{item.name}}</h1>
+            
+            <h3 class="text-size-sm text-color-danger font-bold ion-text-wrap" style="color: red;">
+              {{item.date | date}}</h3>
+            
+            <div class="clearfix"></div>
+            <h3 class="text-size-sm text-color-primary font-bold ion-text-wrap"><ion-icon name="location"></ion-icon>
+              {{item.venue}}</h3>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      </ion-list>
+    </ion-col>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+    
+  </ion-row>
+</ion-grid>
+
+
+
+<div>
+  <div *ngFor="let item of dummyEvent">
+    <ion-list>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</div>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button class="sellbutton" (click)="goAddEvent()">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+</ion-content>

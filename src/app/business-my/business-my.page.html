@@ -1,0 +1,111 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>My Business</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="presentConfirm()">
+        <ion-icon name="trash" color="light"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<!--- Theme Parallax Component 3 -->
+<ion-content scrollEvents="true">
+  <!-- Parallax Big Image -->
+
+  <ion-slides pager="true" [options]="slideOpts">
+            <ion-slide *ngFor="let item of images" 
+                  class="background-size"
+                      [ngStyle]="{ 'background': 'url(' + item.src + ')'}">
+            </ion-slide>
+      </ion-slides>
+
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col size="12">
+        <!-- Card review-->
+        <ion-card class="ion-no-margin no-box-shadow no-border-radius ion-padding-end ion-padding-start">
+          <!-- Card review header -->
+          <ion-card-header class="ion-no-padding">
+            <!-- Card review header title -->
+            <h2 class="text-size-xs text-color-accent font-bold ion-no-margin-bottom ion-text-wrap">
+              {{items.name}}</h2>
+            <ion-item class="transparent ion-no-padding" lines="none">
+              <!-- Avatar -->
+              <!--<ion-avatar slot="start">
+                <img [src]="data.avatar">
+              </ion-avatar>-->
+              <ion-label>
+                <!-- Avatar title -->
+                <h2 class="text-size-xs text-color-accent font-bold">
+                  {{items.location}}</h2>
+                <!-- Avatar subtitle -->
+                <h3 class="text-size-sm text-color-primary font-regular">
+                  {{items.phoneNumber}}</h3>
+              </ion-label>
+            </ion-item>
+          </ion-card-header>
+          <!-- Card review content -->
+          <ion-card-content class="ion-no-padding">
+            <!-- Card review content description -->
+            <h2 class="text-size-xs text-color-accent font-regular">
+              {{items.description}}</h2>
+          </ion-card-content>
+        </ion-card>
+        <ion-item class="transparent ion-no-padding" lines="none">
+          <!-- Similar List -->
+          <h2 class="text-size-xs text-color-accent font-bold ion-text-wrap
+          ion-padding-start ion-no-margin" slot="start">
+          My Products</h2>
+          <!-- See All -->
+          <span class="text-size-sm text-color-accent font-regular" slot="end">
+            </span>
+          <!-- Icon -->
+          <!--<ion-icon class="icon-color-accent icon-font-sm ion-padding-end"
+          [name]="data.icon" slot="end"></ion-icon>-->
+        </ion-item>
+      </ion-col>
+      <ion-col class="ion-padding slider" size="12">
+        <!-- Card with image -->
+        <ion-card class="no-border-radius no-box-shadow"
+        *ngFor="let item of itemsProduct" (click)="presentActionSheet(item.id, item)">
+        <!-- Card with image header -->
+          <ion-card-header class="ion-no-padding">
+            <!-- Card image -->
+            <ion-img class="border-radius" [src]="item.image"></ion-img>
+          </ion-card-header>
+          <!-- Card with image content -->
+          <ion-card-content class="ion-no-padding">
+            <!-- Card with image content subtitle -->
+            <h3 class="ion-text-wrap text-size-sm text-color-accent font-bold ion-padding-top">
+              {{item.price}}</h3>
+              <!-- Card with image content title -->
+            <h2 class="text-size-xs text-color-accent font-bold ion-text-wrap">
+              {{item.name}}</h2>
+              <!-- Card with image content price -->
+            <h2 class="text-size-sm text-color-primary font-bold ion-text-wrap">
+              Available</h2>
+              <!-- Card with image content available -->
+            <!--<h2 class="text-size-sm text-color-primary font-bold ion-text-wrap">
+              {{item.available}}</h2>-->
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-button expand="block" (click)="addProduct()">Add Product</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button expand="block" (click)="editBusiness()">Edit Business</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

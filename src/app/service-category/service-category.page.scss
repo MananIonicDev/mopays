@@ -1,0 +1,38 @@
+/*  Style Alert Layout 1
+===========================================*/
+
+ion-slide {
+  height: 50px;
+  position: relative;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+ion-card {
+    background: var(--cs-background-primary) !important;
+    display: inline-flex;
+    position: relative;
+    width: calc(100% - 16px);
+    flex: none;
+  
+    ion-card-header {
+      width: 50%;
+      height: auto !important;
+      min-height: 150px;
+    }
+  
+    .background-size {
+      height: 100%;
+    }
+  
+    ion-card-content {
+      width: 50%;
+      align-self: center;
+    }
+
+    .ratting{
+      font-size: 1rem;
+    }
+  }
+  

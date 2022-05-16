@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      FEATURES
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+<ion-grid class="ion-no-padding">
+  <ion-row>
+
+    <ion-col size="12">
+
+      <ion-list>
+        <ul class="ion-no-margin ion-no-padding collapsible image-carousel">
+          <li *ngFor="let item of featuresList" class="margin-half border-radius explorelist image-carousel" (click)="goPage(item.url)">
+ 
+            <div class="collapsible-header background-size border-radius box-shadow explorelist"
+            [ngStyle]="{background: 'linear-gradient(-225deg, rgba(0,0,0,0.4) 90%, rgba(0,36,61,0.4) 80%), url('+ item.backgroundImage +')', 'background-size': 'cover'}">
+              <ion-item lines="none" class="transparent">
+                <ion-label lines="none" class="ion-text-center">
+            
+                  <h2 class="text-size-md font-bold text-color-secondary ion-text-wrap custom-font">
+                    {{item.name}}</h2>
+                </ion-label>
+              </ion-item>
+            
+            </div> 
+           
+          </li>
+        </ul>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+</ion-content>

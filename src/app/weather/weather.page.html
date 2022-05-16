@@ -1,0 +1,205 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Weather</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="primary" class="ion-no-padding">
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col class="ion-no-padding">
+          <ion-searchbar search-icon="location" placeholder="Type Region here" [(ngModel)]="city"></ion-searchbar>
+        </ion-col>
+        <ion-col size="2">
+          <ion-button fill="clear" (click)="goSearch()" [disabled]="city === ''">
+            <ion-icon name="search-outline" style="color: white;"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="home">
+  <ion-grid *ngIf="weather">
+    <ion-row>
+      <ion-col class="background-size"
+      [ngStyle]="{background: 'linear-gradient(-225deg, rgba(0,0,0,0.4) 90%, rgba(0,36,61,0.4) 80%), url('+ banner +')', 'background-size': 'cover'}">
+        <!--<h2 class="location" style="color: white;">{{weather.name}}, {{weather.sys.country}}</h2>-->
+        <h4 class="location ion-text-wrap" style="color: white;" text-wrap>{{this.anyAdress}}</h4>
+        <div class="icon"><img src={{imgWeather}}/></div>
+        <h4 class="desc" style="color: white;">{{weather.weather[0].description | uppercase}}</h4>
+        <h1 class="temp" style="color: white;">{{weather.main.temp}} &deg;C</h1>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item>
+            <ion-icon slot="start" src="assets/weather/pressure.svg"></ion-icon>
+            <ion-label>
+              <ion-text>Pressure</ion-text>
+              <div style="float: right;">
+                <strong>{{weather.main.pressure/1.33322387415 |number : '1.2-2'}} mmHg</strong>
+              </div>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon slot="start" src="assets/weather/humidity.svg"></ion-icon>
+            <ion-label>
+              <ion-text>Humidity</ion-text>
+              <div style="float: right;">
+                <strong>{{weather.main.humidity}} %</strong>
+              </div>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon slot="start" src="assets/weather/sunrise.svg"></ion-icon>
+            <ion-label>
+              <ion-text>Sunrise</ion-text>
+              <div style="float: right;">
+                <strong>{{weather.sys.sunrise* 1000 | date: "h:mm a"}}</strong>
+              </div>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon slot="start" src="assets/weather/sunset.svg"></ion-icon>
+            <ion-label>
+              <ion-text>Sunset</ion-text>
+              <div style="float: right;">
+                <strong>{{weather.sys.sunset* 1000 | date: "h:mm a"}}</strong>
+              </div>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon slot="start" src="assets/weather/wind.svg"></ion-icon>
+            <ion-label>
+              <ion-text>Wind Speed</ion-text>
+              <div style="float: right;">
+                <strong>{{weather.wind.speed}} m/s</strong>
+              </div>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div *ngIf="WeatherForecastNextWeek" class="ion-text-center">7 Days Forecast</div>
+
+  <div [title]="titleNextWeek" *ngIf="WeatherForecastNextWeek">
+    <div [title]="dayForecast.dt * 1000 | date" *ngFor="let dayForecast of WeatherForecastNextWeek">
+      <ion-grid>
+        <ion-row> 
+          <ion-col>
+            <ion-list>
+              <h6 style="padding-left: 10px;">{{dayForecast.dt * 1000 | date}}</h6>
+              
+              <ion-item>
+                <ion-icon slot="start" src="assets/weather/cloud.svg"></ion-icon>
+                <ion-label>
+                  <ion-text>Weather</ion-text>
+                  <div style="float: right;">
+                    <strong>{{dayForecast.weather[0].description}}</strong>
+                  </div>
+                </ion-label>
+              </ion-item>
+
+              <ion-item>
+                <ion-icon slot="start" src="assets/weather/temp.svg"></ion-icon>
+                <ion-label>
+                  <ion-text>Temperature</ion-text>
+                  <div style="float: right;">
+                    <strong>{{dayForecast.temp.day | number:'1.0-1'}} &deg;C</strong>
+                  </div>
+                </ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-icon slot="start" src="assets/weather/temp.svg"></ion-icon>
+                <ion-label>
+                  <ion-text>Temp. Max</ion-text>
+                  <div style="float: right;">
+                    <strong>{{dayForecast.temp.max | number:'1.0-1'}} &deg;C</strong>
+                  </div>
+                </ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-icon slot="start" src="assets/weather/temp.svg"></ion-icon>
+                <ion-label>
+                  <ion-text>Temp. Min</ion-text>
+                  <div style="float: right;">
+                    <strong>{{dayForecast.temp.min | number:'1.0-1'}} &deg;C</strong>
+                  </div>
+                </ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-icon slot="start" src="assets/weather/temp.svg"></ion-icon>
+                <ion-label>
+                  <ion-text>Temp. Morn</ion-text>
+                  <div style="float: right;">
+                    <strong>{{dayForecast.temp.morn | number:'1.0-1'}} &deg;C</strong>
+                  </div>
+                </ion-label>
+              </ion-item>
+
+              <ion-item>
+                <ion-icon slot="start" src="assets/weather/temp.svg"></ion-icon>
+                <ion-label>
+                  <ion-text>Temp. Eve.</ion-text>
+                  <div style="float: right;">
+                    <strong>{{dayForecast.temp.eve | number:'1.0-1'}} &deg;C</strong>
+                  </div>
+                </ion-label>
+              </ion-item>
+
+              <ion-item>
+                <ion-icon slot="start" src="assets/weather/temp.svg"></ion-icon>
+                <ion-label>
+                  <ion-text>Temp. Night</ion-text>
+                  <div style="float: right;">
+                    <strong>{{dayForecast.temp.night | number:'1.0-1'}} &deg;C</strong>
+                  </div>
+                </ion-label>
+              </ion-item>
+
+              <ion-item>
+                <ion-icon slot="start" src="assets/weather/pressure.svg"></ion-icon>
+                <ion-label>
+                  <ion-text>Pressure</ion-text>
+                  <div style="float: right;">
+                    <strong>{{dayForecast.pressure/1.33322387415 |number : '1.2-2'}} mmHg</strong>
+                  </div>
+                </ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-icon slot="start" src="assets/weather/humidity.svg"></ion-icon>
+                <ion-label>
+                  <ion-text>Humidity</ion-text>
+                  <div style="float: right;">
+                    <strong>{{dayForecast.humidity}} %</strong>
+                  </div>
+                </ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-icon slot="start" src="assets/weather/wind.svg"></ion-icon>
+                <ion-label>
+                  <ion-text>Wind Speed</ion-text>
+                  <div style="float: right;">
+                    <strong>{{dayForecast.speed}} m/s</strong>
+                  </div>
+                </ion-label>
+              </ion-item>
+
+            </ion-list>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+
+  
+</ion-content>
+
+

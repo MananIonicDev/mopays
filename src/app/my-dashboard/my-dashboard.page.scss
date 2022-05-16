@@ -1,0 +1,50 @@
+.scratch-card-bottom{
+    margin-top:20px;
+    .card-bottom-text{
+        font-size:0.8em;
+    }
+}
+
+
+ion-content {
+    --background: #ccc url("../../assets/dash.jpg") no-repeat center center / cover;
+}
+
+.delete-area {
+    border: 2px dashed green;
+    margin: 10px;
+    height: 100px;
+}
+
+
+.background-size {
+    height: 150px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    overflow: hidden;
+
+    &:before {
+      //content: "";
+      position: absolute;
+      background-color: var(--cs-gradient-primary);
+      top:0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+    }
+
+    .icon-open {
+        background: #FFF;
+        height: 20px;
+        width: 50px;
+        position: absolute;
+        color: #000;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        bottom: 0;
+        left: 50%;
+        margin-left: -25px;
+      }
+    }

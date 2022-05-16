@@ -1,0 +1,199 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Dashboard
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-text-center ion-padding delete-area">
+    <div style="font-size: 40px;"><b>{{points}} Points</b></div>
+  </div>
+
+  <div>
+    <ion-row>
+      <ion-col size="6"  class="topfeatures image-carousel">
+        <ion-card class="image-card">
+          <div class="collapsible-header background-size border-radius box-shadow explorelist"
+  [ngStyle]="beginer === true ? {background: 'url('+ beginnerImage +')', 'background-size': 'cover'} : {background: 'linear-gradient(-225deg, rgba(0,0,0,0.2) 90%, rgba(0,36,61,0.2) 80%), url('+ beginnerImage +')', 'background-size': 'cover'}">
+    <ion-item lines="none" class="transparent">
+      <ion-label lines="none" class="ion-text-center">
+        <h1 class="text-size-md font-bold text-color-secondary ion-text-wrap custom-font">
+          100</h1>
+        <h2 class="text-size-md font-bold text-color-secondary ion-text-wrap custom-font">
+         Beginner</h2>
+      </ion-label>
+    </ion-item>
+  
+  </div>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6"  class="topfeatures image-carousel">
+        <ion-card class="image-card">
+          <div class="collapsible-header background-size border-radius box-shadow explorelist"
+  [ngStyle]="bachelor === true ? {background: 'url('+ beginnerImage +')', 'background-size': 'cover'} : {background: 'linear-gradient(-225deg, rgba(0,0,0,0.8) 90%, rgba(0,36,61,0.8) 80%), url('+ beginnerImage +')', 'background-size': 'cover'}">
+    <ion-item lines="none" class="transparent">
+      <ion-label lines="none" class="ion-text-center">
+        <h1 class="text-size-md font-bold text-color-secondary ion-text-wrap custom-font">
+          2000</h1>
+        <h2 class="text-size-md font-bold text-color-secondary ion-text-wrap custom-font">
+         Bachelor</h2>
+      </ion-label>
+    </ion-item>
+  
+  </div>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6"  class="topfeatures image-carousel">
+        <ion-card class="image-card">
+          <div class="collapsible-header background-size border-radius box-shadow explorelist"
+  [ngStyle]="dragon === true ? {background: 'url('+ beginnerImage +')', 'background-size': 'cover'} : {background: 'linear-gradient(-225deg, rgba(0,0,0,0.8) 90%, rgba(0,36,61,0.8) 80%), url('+ beginnerImage +')', 'background-size': 'cover'}">
+    <ion-item lines="none" class="transparent">
+      <ion-label lines="none" class="ion-text-center">
+        <h1 class="text-size-md font-bold text-color-secondary ion-text-wrap custom-font">
+          5000</h1>
+        <h2 class="text-size-md font-bold text-color-secondary ion-text-wrap custom-font">
+         Dragon</h2>
+      </ion-label>
+    </ion-item>
+  
+  </div>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6"  class="topfeatures image-carousel">
+        <ion-card class="image-card">
+          <div class="collapsible-header background-size border-radius box-shadow explorelist"
+  [ngStyle]="lion === true ? {background: 'url('+ beginnerImage +')', 'background-size': 'cover'} : {background: 'linear-gradient(-225deg, rgba(0,0,0,0.8) 90%, rgba(0,36,61,0.8) 80%), url('+ beginnerImage +')', 'background-size': 'cover'}">
+    <ion-item lines="none" class="transparent">
+      <ion-label lines="none" class="ion-text-center">
+        <h1 class="text-size-md font-bold text-color-secondary ion-text-wrap custom-font">
+          8000</h1>
+        <h2 class="text-size-md font-bold text-color-secondary ion-text-wrap custom-font">
+         Lion</h2>
+      </ion-label>
+    </ion-item>
+  
+  </div>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6"  class="topfeatures image-carousel">
+        <ion-card class="image-card">
+          <div class="collapsible-header background-size border-radius box-shadow explorelist"
+  [ngStyle]="master === true ? {background: 'url('+ beginnerImage +')', 'background-size': 'cover'} : {background: 'linear-gradient(-225deg, rgba(0,0,0,0.8) 90%, rgba(0,36,61,0.8) 80%), url('+ beginnerImage +')', 'background-size': 'cover'}">
+    <ion-item lines="none" class="transparent">
+      <ion-label lines="none" class="ion-text-center">
+        <h1 class="text-size-md font-bold text-color-secondary ion-text-wrap custom-font">
+          10000</h1>
+        <h2 class="text-size-md font-bold text-color-secondary ion-text-wrap custom-font">
+         Master</h2>
+      </ion-label>
+    </ion-item>
+  
+  </div>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6"  class="topfeatures image-carousel">
+        <ion-card class="image-card">
+          <div class="collapsible-header background-size border-radius box-shadow explorelist"
+  [ngStyle]="king === true ? {background: 'url('+ beginnerImage +')', 'background-size': 'cover'} : {background: 'linear-gradient(-225deg, rgba(0,0,0,0.8) 90%, rgba(0,36,61,0.8) 80%), url('+ beginnerImage +')', 'background-size': 'cover'}">
+    <ion-item lines="none" class="transparent">
+      <ion-label lines="none" class="ion-text-center">
+        <h1 class="text-size-md font-bold text-color-secondary ion-text-wrap custom-font">
+          15000</h1>
+        <h2 class="text-size-md font-bold text-color-secondary ion-text-wrap custom-font">
+         King</h2>
+      </ion-label>
+    </ion-item>
+  
+  </div>
+        </ion-card>
+      </ion-col>
+      </ion-row>
+  </div>
+
+  <ion-item-divider style="background-color: #ccc;" *ngIf="beginer === true">
+    <ion-label>
+      Beginner Cards
+    </ion-label>
+   </ion-item-divider>
+  
+    <div class="ion-text-center">
+      <div class="sc__wrapper">
+        <div id="js--sc--container"></div>
+      </div>
+    </div>
+
+ <ion-item-divider style="background-color: #ccc;" *ngIf="bachelor === true">
+  <ion-label>
+    Bachelor Cards
+  </ion-label>
+ </ion-item-divider>
+
+  <div class="ion-text-center">
+    <div class="sc__wrapper">
+      <div id="ja--sc--container"></div>
+    </div>
+  </div>
+
+  <ion-item-divider style="background-color: #ccc;" *ngIf="dragon== true">
+    <ion-label>
+      Dragon Cards
+    </ion-label>
+   </ion-item-divider>
+   
+    <div class="ion-text-center">
+      <div class="sc__wrapper">
+        <div id="jb--sc--container"></div>
+      </div>
+    </div>
+
+
+    <ion-item-divider style="background-color: #ccc;" *ngIf="lion === true">
+      <ion-label>
+        Lion Cards
+      </ion-label>
+     </ion-item-divider>
+     
+      <div class="ion-text-center">
+        <div class="sc__wrapper">
+          <div id="jc--sc--container"></div>
+        </div>
+      </div>
+
+      <ion-item-divider style="background-color: #ccc;" *ngIf="master === true">
+        <ion-label>
+          Mater Cards
+        </ion-label>
+       </ion-item-divider>
+       
+        <div class="ion-text-center">
+          <div class="sc__wrapper">
+            <div id="jd--sc--container"></div>
+          </div>
+        </div>
+
+        <ion-item-divider style="background-color: #ccc;" *ngIf="king === true">
+          <ion-label>
+            King Cards
+          </ion-label>
+         </ion-item-divider>
+         
+          <div class="ion-text-center">
+            <div class="sc__wrapper">
+              <div id="je--sc--container"></div>
+            </div>
+          </div>
+  
+    
+  
+  
+</ion-content>

@@ -1,0 +1,17 @@
+#EXTM3U
+#EXT-X-MEDIA-SEQUENCE:143521
+#EXT-X-ALLOW-CACHE:NO
+#EXT-X-VERSION:2
+#EXT-X-TARGETDURATION:8
+#EXTINF:8,
+../../../../hls-live/streams/koolfm/events/_definst_/liveevent/livestreamNum143521.ts
+#EXTINF:8,
+../../../../hls-live/streams/koolfm/events/_definst_/liveevent/livestreamNum143522.ts
+#EXTINF:8,
+../../../../hls-live/streams/koolfm/events/_definst_/liveevent/livestreamNum143523.ts
+#EXTINF:8,
+../../../../hls-live/streams/koolfm/events/_definst_/liveevent/livestreamNum143524.ts
+#EXTINF:8,
+../../../../hls-live/streams/koolfm/events/_definst_/liveevent/livestreamNum143525.ts
+#EXTINF:8,
+../../../../hls-live/streams/koolfm/events/_definst_/liveevent/livestreamNum143526.ts

@@ -1,0 +1,220 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start" style="padding-right: 10px;">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Business</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="primary" class="ion-no-padding">
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col class="ion-no-padding">
+          <ion-searchbar placeholder="Search" [(ngModel)]="searchitem" (ionInput)="searchName($event)"></ion-searchbar>
+        </ion-col>
+        <ion-col class="ion-no-padding">
+          <ion-searchbar search-icon="location" placeholder="Where" (ionInput)="searchLocation($event)"></ion-searchbar>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="divs" [fullscreen]="true">
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col class="ion-no-padding" size="12">
+        <!-- List -->
+        <ion-list>
+
+
+          <ion-slides pager="true" [options]="slideOpts">
+            <ion-slide *ngFor="let step of advertList" (click)="goAdsDetails(step.url)" class="background-size"
+              [ngStyle]="{ 'background': 'url(' + step.image + ')'}">
+            </ion-slide>
+          </ion-slides>
+
+          <div *ngIf="advertList?.length === 0">
+            <ion-skeleton-text animated style="width: 100%; height: 70px"></ion-skeleton-text>
+          </div>
+
+
+          <!-- Content -->
+
+          <ion-item lines="full" class=" box-shadow border-radius searchBox" *ngIf="bookingCatList?.length > 0">
+            <div class="ion-no-padding slider">
+              <ion-card class="no-border-radius no-box-shadow" *ngFor="let item of bookingCatList"
+                (click)="goBookingCat(item.key, item.name)">
+                <img src="{{item.image}}" class="border-radius" height="90px" width="200px" />
+                <h2 class="text-size-xs text-color-accent font-bold ion-text-wrap" style="margin-bottom: 10px;">
+                  {{item.name}}</h2>
+              </ion-card>
+            </div>
+          </ion-item>
+
+          <!--<ion-item lines="full" class=" box-shadow border-radius searchBox">
+              <div class="ion-no-padding slider">
+                <ion-card class="no-border-radius no-box-shadow" *ngFor="let item of dummyBookCat">
+                  <ion-skeleton-text animated style="width: 200px; height: 90px"></ion-skeleton-text>
+                </ion-card>
+              </div>
+            </ion-item>-->
+
+          <ion-item *ngIf="shopCreated == 'active'">
+            <ion-grid class="ion-no-padding">
+              <ion-row>
+                <ion-col size="12">
+                  <ion-button expand="full" (click)="goMyBooking()">Manage your Business</ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+
+
+
+          <ion-item class="transparent ion-no-padding" lines="none">
+            <!-- Similar List -->
+            <h6 class="font-bold ion-text-wrap custom-font
+              ion-padding-start ion-no-margin" slot="start">
+              Latest Listings
+            </h6>
+            <ion-buttons slot="end" (click)="changeOrder()">
+              <ion-button color="medium">
+                <ion-icon slot="icon-only" md="filter" ios="filter"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </ion-item>
+
+          <div>
+            <div *ngFor="let item of dummyBook">
+              <ion-list>
+                <ion-item>
+                  <ion-thumbnail slot="start">
+                    <ion-skeleton-text animated></ion-skeleton-text>
+                  </ion-thumbnail>
+                  <ion-label>
+                    <h3>
+                      <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                    </h3>
+                    <p>
+                      <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                    </p>
+                    <p>
+                      <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                    </p>
+                  </ion-label>
+                </ion-item>
+              </ion-list>
+            </div>
+          </div>
+
+          <div *ngIf="listOrder === 'reverse'">
+            <ion-item lines="full" class="box-shadow border-radius listBox" *ngFor="let item of bookingList.reverse().slice()"
+              (click)="goDetails(item.key)">
+              <!-- Avatar -->
+              <ion-thumbnail class="border-radius" slot="start" *ngIf="item.smallImg">
+                <img [src]="item.smallImg">
+              </ion-thumbnail>
+              <ion-thumbnail class="border-radius" slot="start" *ngIf="!item.smallImg">
+                <img src="assets/upload.jpg">
+              </ion-thumbnail>
+              <ion-label class="ion-padding-end">
+                <!-- Avatar title -->
+                <h2 class="ion-text-wrap text-size-xs text-color-accent font-bold">
+                  {{item.name}}</h2>
+                <!-- category -->
+
+                <!-- New price -->
+                <div class="text-size-xs text-color-accent font-bold">
+                  {{item.open}} - {{item.close}}
+                </div>
+                <!-- Seller name -->
+                <h3 class="text-size-sm text-color-primary font-regular ion-text-wrap margin-half-top">
+                  <ion-icon name="location"></ion-icon>{{item.location}}
+                </h3>
+                <div class="ratting">
+                  <ion-icon [name]="item.totalRatting >= 1 ? 'star-outline':'star'"
+                    [color]="item.totalRatting >= 1 ? 'warning':'medium'">
+                  </ion-icon>
+                  <ion-icon [name]="item.totalRatting >= 2 ? 'star-outline':'star'"
+                    [color]="item.totalRatting >= 2 ? 'warning':'medium'">
+                  </ion-icon>
+                  <ion-icon [name]="item.totalRatting >= 3 ? 'star-outline':'star'"
+                    [color]="item.totalRatting >= 3 ? 'warning':'medium'">
+                  </ion-icon>
+                  <ion-icon [name]="item.totalRatting >= 4 ? 'star-outline':'star'"
+                    [color]="item.totalRatting >= 4 ? 'warning':'medium'">
+                  </ion-icon>
+                  <ion-icon [name]="item.totalRatting >= 5 ? 'star-outline':'star'"
+                    [color]="item.totalRatting >= 5 ? 'warning':'medium'">
+                  </ion-icon>
+                  ({{item.ratting}})
+                </div>
+              </ion-label>
+
+            </ion-item>
+          </div>
+
+          <div *ngIf="listOrder === 'oldest'">
+            <ion-item lines="full" class="box-shadow border-radius listBox" *ngFor="let item of bookingList"
+              (click)="goDetails(item.key)">
+              <!-- Avatar -->
+              <ion-thumbnail class="border-radius" slot="start" *ngIf="item.smallImg">
+                <img [src]="item.smallImg">
+              </ion-thumbnail>
+              <ion-thumbnail class="border-radius" slot="start" *ngIf="!item.smallImg">
+                <img src="assets/upload.jpg">
+              </ion-thumbnail>
+              <ion-label class="ion-padding-end">
+                <!-- Avatar title -->
+                <h2 class="ion-text-wrap text-size-xs text-color-accent font-bold">
+                  {{item.name}}</h2>
+                <!-- category -->
+
+                <!-- New price -->
+                <div class="text-size-xs text-color-accent font-bold">
+                  {{item.open}} - {{item.close}}
+                </div>
+                <!-- Seller name -->
+                <h3 class="text-size-sm text-color-primary font-regular ion-text-wrap margin-half-top">
+                  <ion-icon name="location"></ion-icon>{{item.location}}
+                </h3>
+                <div class="ratting">
+                  <ion-icon [name]="item.totalRatting >= 1 ? 'star-outline':'star'"
+                    [color]="item.totalRatting >= 1 ? 'warning':'medium'">
+                  </ion-icon>
+                  <ion-icon [name]="item.totalRatting >= 2 ? 'star-outline':'star'"
+                    [color]="item.totalRatting >= 2 ? 'warning':'medium'">
+                  </ion-icon>
+                  <ion-icon [name]="item.totalRatting >= 3 ? 'star-outline':'star'"
+                    [color]="item.totalRatting >= 3 ? 'warning':'medium'">
+                  </ion-icon>
+                  <ion-icon [name]="item.totalRatting >= 4 ? 'star-outline':'star'"
+                    [color]="item.totalRatting >= 4 ? 'warning':'medium'">
+                  </ion-icon>
+                  <ion-icon [name]="item.totalRatting >= 5 ? 'star-outline':'star'"
+                    [color]="item.totalRatting >= 5 ? 'warning':'medium'">
+                  </ion-icon>
+                  ({{item.ratting}})
+                </div>
+              </ion-label>
+
+            </ion-item>
+          </div>
+          <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">
+            <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+            </ion-infinite-scroll-content>
+          </ion-infinite-scroll>
+
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="!shopCreated">
+    <ion-fab-button class="sellbutton" (click)="goBooking()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+</ion-content>

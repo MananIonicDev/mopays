@@ -1,0 +1,94 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{name}}</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar [(ngModel)]="term" animated="true"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+<!-- ALERT --COMPONENT 1 -->
+<ion-grid class="padding-half ion-no-padding">
+  <ion-row>
+    <ion-col class="ion-no-padding" size="12">
+      <ion-slides pager="true" [options]="slideOpts">
+        <ion-slide *ngFor="let step of advertList" (click)="goAdsDetails(step.url)" 
+              class="background-size"
+                  [ngStyle]="{ 'background': 'url(' + step.image + ')'}">
+        </ion-slide>
+      </ion-slides>
+    </ion-col>
+
+    <ion-col class="ion-no-padding" size="12" size-md="6">
+      <div>
+        <div *ngFor="let item of dummyBook">
+          <ion-list>
+            <ion-item>
+              <ion-thumbnail slot="start">
+                <ion-skeleton-text animated></ion-skeleton-text>
+              </ion-thumbnail>
+              <ion-label>
+                <h3>
+                  <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                </h3>
+                <p>
+                  <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                </p>
+                <p>
+                  <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                </p>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </div>
+      </div>
+      
+    </ion-col>
+
+    <ion-col class="ion-no-padding" size="12" size-md="6">
+      <ion-item lines="full" class="box-shadow border-radius listBox"
+      *ngFor="let item of bookingList | filter:term" (click)="goDetails(item.key)">
+        <!-- Avatar -->
+        <ion-thumbnail class="border-radius" slot="start">
+          <img [src]="item.smallImg">
+        </ion-thumbnail>
+        <ion-label class="ion-padding-end">
+          <!-- Avatar title -->
+          <h2 class="ion-text-wrap text-size-xs text-color-accent font-bold">
+            {{item.name}}</h2>
+          <!-- category -->
+          
+          <!-- New price -->
+          <div class="text-size-xs text-color-accent font-bold">
+            {{item.open}} - {{item.close}}
+            </div>
+          <!-- Seller name -->
+          <h3 class="text-size-sm text-color-primary font-regular ion-text-wrap margin-half-top">
+            <ion-icon name="location"></ion-icon>{{item.location}}</h3>
+            <div class="ratting">
+              <ion-icon [name]="item.totalRatting >= 1 ? 'star-outline':'star'" [color]="item.totalRatting >= 1 ? 'warning':'medium'">
+              </ion-icon>
+              <ion-icon [name]="item.totalRatting >= 2 ? 'star-outline':'star'" [color]="item.totalRatting >= 2 ? 'warning':'medium'">
+              </ion-icon>
+              <ion-icon [name]="item.totalRatting >= 3 ? 'star-outline':'star'" [color]="item.totalRatting >= 3 ? 'warning':'medium'">
+              </ion-icon>
+              <ion-icon [name]="item.totalRatting >= 4 ? 'star-outline':'star'" [color]="item.totalRatting >= 4 ? 'warning':'medium'">
+              </ion-icon>
+              <ion-icon [name]="item.totalRatting >= 5 ? 'star-outline':'star'" [color]="item.totalRatting >= 5 ? 'warning':'medium'">
+              </ion-icon>
+              ({{item.ratting}})
+            </div>
+        </ion-label>
+      
+      </ion-item>
+    
+    </ion-col>
+
+    
+
+  </ion-row>
+</ion-grid>
+</ion-content>

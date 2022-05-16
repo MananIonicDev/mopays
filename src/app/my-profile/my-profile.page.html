@@ -1,0 +1,441 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start" *ngIf="from ==='menu'">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="start" *ngIf="from ==='home'">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="start" *ngIf="from ==='group'">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Profile
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button slot="end" color="light" (click)="goEdit()">
+        <ion-icon name="create"></ion-icon>
+        Edit
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<!-- PROFILE -- COMPONENT 4 -->
+
+<ion-content>
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col class="ion-no-padding" size="12">
+        <!-- Card with avatar -->
+        <ion-card class="ion-padding ion-text-center ion-no-margin
+          no-border-radius no-box-shadow info-section profilesec">
+
+          <ion-avatar class="profile" (click)="viewMyProfile(photoURL)">
+            <img src="{{photoURL}}" alt="">
+          </ion-avatar>
+          <!--<input id="file" type='file' style="display: none;"(change)="onSelectFile($event)" />-->
+
+          <ion-card-content class="ion-text-center ion-no-padding">
+            <!-- Avatar title and subtitle -->
+            <h1 class="text-size-md text-color-secondary font-bold">
+              {{displayName}}</h1>
+
+              <ion-badge color="success" *ngIf="verified">
+                <img src="assets/checked.png" style="width: 17px; height: 17px; margin-right: 3px; display: inline-block; vertical-align: middle;" />
+                <ion-label style="display: inline-block; vertical-align: middle;"> Verified </ion-label>
+              </ion-badge>
+
+
+            <!--<p class="text-size-xs text-color-secondary font-regular">
+                {{descriptio}}</p>-->
+            <p *ngIf="status == 'online'" style="color: green; font-weight: bold;text-align: center;">Online</p>
+            <p *ngIf="status == 'offline'" style="color: red; font-weight: bold;text-align: center;">Offline</p>
+            <p *ngIf="status == 'away'" style="color: orange; font-weight: bold;text-align: center;">Away</p>
+          </ion-card-content>
+          <div class="social-share">
+            <!-- Followers-->
+            <ion-item lines="none" class="transparent ion-no-padding" (click)="goFollowers(uid)">
+              <ion-label class="ion-text-center">
+                <span class="text-size-xs text-color-secondary font-bold">
+                  {{followersCount}}</span>
+                <h2 class="text-size-sm text-color-secondary font-regular">
+                  Connections</h2>
+              </ion-label>
+            </ion-item>
+            <!-- Following -->
+            <ion-item lines="none" class="transparent ion-no-padding">
+              <ion-label class="ion-text-center">
+                <span class="text-size-xs text-color-secondary font-bold">
+                  {{feedPhoto.length}}</span>
+                <h2 class="text-size-sm text-color-secondary font-regular">
+                  Photos</h2>
+              </ion-label>
+            </ion-item>
+            <!-- Post -->
+            <ion-item lines="none" class="transparent ion-no-padding">
+              <ion-label class="ion-text-center">
+                <span class="text-size-xs text-color-secondary font-bold">
+                  {{feeditems.length}}</span>
+                <h2 class="text-size-sm text-color-secondary font-regular">
+                  Posts</h2>
+              </ion-label>
+            </ion-item>
+          </div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <super-tabs [config]="{ debug: true, nativeSmoothScroll: true }">
+    <super-tabs-toolbar slot="top">
+      <super-tab-button>
+        <ion-label style="color: white;">
+          Items
+        </ion-label>
+      </super-tab-button>
+      <super-tab-button>
+        <ion-label style="color: white;">
+          Details
+        </ion-label>
+      </super-tab-button>
+      <super-tab-button>
+        <ion-label style="color: white;">
+          Feeds
+        </ion-label>
+      </super-tab-button>
+      <super-tab-button>
+        <ion-label style="color: white;">
+          Photos
+        </ion-label>
+      </super-tab-button>
+    </super-tabs-toolbar>
+    <super-tabs-container>
+
+      <super-tab>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="6" class="topfeatures image-carousel" (click)="dashboard()">
+              <ion-card class="image-card">
+                <img src="assets/profile/dashboard.png" alt="" class="image-round">
+                <div class="ion-text-center">
+                  <h6 class="ion-text-center custom-font" style="font-size: 15px;">Dashboard</h6>
+                </div>
+              </ion-card>
+            </ion-col>
+            <ion-col size="6" class="topfeatures image-carousel" (click)="goItems()">
+              <ion-card class="image-card">
+                <img src="assets/profile/items.png" alt="" class="image-round">
+                <div class="ion-text-center">
+                  <h6 class="ion-text-center custom-font" style="font-size: 15px;">My Items</h6>
+                </div>
+              </ion-card>
+            </ion-col>
+            <ion-col size="6" class="topfeatures image-carousel" (click)="goSerivce()">
+              <ion-card class="image-card">
+                <img src="assets/profile/service.png" alt="" class="image-round">
+                <div class="ion-text-center">
+                  <h6 class="ion-text-center custom-font" style="font-size: 15px;">My Services</h6>
+                </div>
+              </ion-card>
+            </ion-col>
+            <ion-col size="6" class="topfeatures image-carousel" (click)="goBusiness()">
+              <ion-card class="image-card">
+                <img src="assets/profile/business.png" alt="" class="image-round">
+                <div class="ion-text-center">
+                  <h6 class="ion-text-center custom-font" style="font-size: 15px;">My Business</h6>
+                </div>
+              </ion-card>
+            </ion-col>
+            <ion-col size="6" class="topfeatures image-carousel" (click)="goJobs()">
+              <ion-card class="image-card">
+                <img src="assets/profile/job.png" alt="" class="image-round">
+                <div class="ion-text-center">
+                  <h6 class="ion-text-center custom-font" style="font-size: 15px;">My Jobs</h6>
+                </div>
+              </ion-card>
+            </ion-col>
+            <ion-col size="6" class="topfeatures image-carousel" (click)="goEvents()">
+              <ion-card class="image-card">
+                <img src="assets/profile/events.png" alt="" class="image-round">
+                <div class="ion-text-center">
+                  <h6 class="ion-text-center custom-font" style="font-size: 15px;">My Events</h6>
+                </div>
+              </ion-card>
+            </ion-col>
+            <ion-col size="6" class="topfeatures image-carousel" (click)="openChat()">
+              <ion-card class="image-card">
+                <img src="assets/profile/chat.png" alt="" class="image-round">
+                <div class="ion-text-center">
+                  <h6 class="ion-text-center custom-font" style="font-size: 15px;">Messages</h6>
+                </div>
+              </ion-card>
+            </ion-col>
+            <ion-col size="6" class="topfeatures image-carousel" (click)="logOut()">
+              <ion-card class="image-card">
+                <img src="assets/profile/auth.png" alt="" class="image-round">
+                <div class="ion-text-center">
+                  <h6 class="ion-text-center custom-font" style="font-size: 15px;">Logout</h6>
+                </div>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </super-tab>
+
+      <super-tab>
+        <ion-list>
+          <ion-item lines="full" class="box-shadow border-radius listBox ion-padding-top" (click)="goEdit()">
+            <ion-icon name="person" slot="start" class="docIcon" style="background-color: red;"></ion-icon>
+            <ion-label>
+              <h3><b>{{displayName}}</b></h3>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="full" class="box-shadow border-radius listBox ion-padding-top" (click)="goEdit()">
+            <ion-icon name="mail" slot="start" class="docIcon" style="background-color: purple;"></ion-icon>
+            <ion-label>
+              <h3><b>{{email}}</b></h3>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="full" class="box-shadow border-radius listBox ion-padding-top" (click)="goEdit()">
+            <ion-icon name="transgender" slot="start" class="docIcon" style="background-color: green;"></ion-icon>
+            <ion-label>
+              <h3 *ngIf="gender"><b>{{gender}}</b></h3>
+              <p *ngIf="!gender"><b>Add Gender</b></p>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="full" class="box-shadow border-radius listBox ion-padding-top" (click)="goEdit()">
+            <ion-icon name="globe" slot="start" class="docIcon" style="background-color: deeppink;"></ion-icon>
+            <ion-label>
+              <h3 *ngIf="location"><b>{{location}}</b></h3>
+              <p *ngIf="!location"><b>Add Location</b></p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item lines="full" class="box-shadow border-radius listBox ion-padding-top" (click)="goEdit()">
+            <ion-icon name="people" slot="start" class="docIcon" style="background-color: red;"></ion-icon>
+            <ion-label>
+              <h3 *ngIf="marital"><b>{{marital}}</b></h3>
+              <p *ngIf="!marital"><b>Add Marital Status</b></p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item lines="full" class="box-shadow border-radius listBox ion-padding-top" (click)="goEdit()">
+            <ion-icon name="list" slot="start" class="docIcon" style="background-color: green;"></ion-icon>
+            <ion-label>
+              <h3 *ngIf="education"><b>{{education}}</b></h3>
+              <p *ngIf="!education"><b>Add Education</b></p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item *ngIf="interestfor" lines="full" class="box-shadow border-radius listBox ion-padding-top" (click)="goEdit()">
+            <ion-icon name="calendar" slot="start" class="docIcon" style="background-color: black;"></ion-icon>
+            <ion-label>
+              <h3 *ngIf="interestfor"><b>{{interestfor}}</b></h3>
+            </ion-label>
+          </ion-item>
+
+          <ion-item lines="none" style="margin-bottom: 0px;">
+            <ion-label style="font-weight: bold;">
+              Social Links
+            </ion-label>
+          </ion-item>
+          <ion-item lines="full" class="box-shadow border-radius listBox" (click)="goEdit()">
+            <ion-avatar class="border-radius" slot="start" style="margin-top: 0px;">
+              <img src="assets/social/facebook.png"/>
+            </ion-avatar>
+            <ion-avatar class="border-radius" slot="start" style="margin-top: 0px;">
+              <img src="assets/social/gmail.png"/>
+            </ion-avatar>
+            <ion-avatar class="border-radius" slot="start" style="margin-top: 0px;">
+              <img src="assets/social/instagram.png"/>
+            </ion-avatar>
+            <ion-avatar class="border-radius" slot="start" style="margin-top: 0px;">
+              <img src="assets/social/linkedin.png"/>
+            </ion-avatar>
+            <ion-avatar class="border-radius" slot="start" style="margin-top: 0px;">
+              <img src="assets/social/tik-tok.png"/>
+            </ion-avatar>
+          </ion-item>
+
+          <!--<ion-item>
+            <ion-item>
+            <ion-item>-->
+
+          <ion-item lines="full" class="box-shadow border-radius listBox ion-padding-top" (click)="goEdit()">
+            <ion-icon name="call" slot="start" class="docIcon" style="background-color: blue;"></ion-icon>
+            <ion-label>
+              <h3 *ngIf="phoneNumber"><b>{{phoneNumber}}</b></h3>
+              <p *ngIf="!phoneNumber"><b>Add Phone Number</b></p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item lines="full" class="box-shadow border-radius listBox ion-padding-top" (click)="goEdit()">
+            <ion-icon name="calendar" slot="start" class="docIcon" style="background-color: black;"></ion-icon>
+            <ion-label>
+              <h3 *ngIf="dob"><b>{{dob | date}}</b></h3>
+              <p *ngIf="!dob"><b>Add Date of Birth</b></p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label style="font-weight: bold;">
+              Interests
+            </ion-label>
+            <ion-buttons slot="end">
+              <ion-button fill="clear" (click)="addFavourite()" color="primary">
+                ADD
+              </ion-button>
+            </ion-buttons>
+          </ion-item>
+          <ion-item lines="full" *ngFor="let item of myfavourItems"
+            class="box-shadow border-radius listBox ion-padding-top">
+            <ion-avatar slot="start">
+              <img src="{{item.img}}">
+            </ion-avatar>
+            <ion-label>
+              <h3><b>{{item.name}}</b></h3>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </super-tab>
+      <super-tab style="background-color: rgb(248, 246, 246);">
+        <ion-card class="post-list-card" *ngFor="let item of feeditems?.slice().reverse()">
+          <ion-item lines="none">
+            <ion-avatar slot="start">
+              <img [src]="item.userPhoto">
+            </ion-avatar>
+            <ion-label class="custom-font">
+              {{item.userName}}
+              <!--<p>{{item.timeStamp | DateFormat | lowercase}}</p>-->
+              <p class="custom-font">{{item.timeStamp | DateFormat | lowercase}}</p>
+            </ion-label>
+            <ion-buttons slot="end" *ngIf="item.userId == currentUserId"
+              (click)="presentActionSheetUser(item.postId, item, item.description)">
+              <ion-button color="medium">
+                <ion-icon slot="icon-only" md="ellipsis-vertical-outline" ios="ellipsis-horizontal-outline"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </ion-item>
+
+          <ion-card-content class="post-list-content">
+
+            <p class="ion-no-margin-top custom-font
+              ion-padding-start ion-padding-end">{{item.description}}</p>
+            <p class="ion-no-margin-top custom-font 
+              ion-padding-start ion-padding-end" *ngIf="item.location">{{item.location}}</p>
+            <br>
+
+            <div *ngIf="item.video">
+              <video controls>
+                <source src="{{item.video}}#t=0.1" type="video/mp4" />
+              </video>
+            </div>
+
+            <div *ngIf="item.location">
+              <agm-map [latitude]="item.latitude" [longitude]="item.longitude" [zoom]="zoom">
+                <agm-marker [latitude]="item.latitude" [longitude]="item.longitude" [markerDraggable]="false">
+                </agm-marker>
+              </agm-map>
+            </div>
+
+            <ion-slides id="slider" pager="true" *ngIf="item.images" [options]="slideOptions">
+              <ion-slide *ngFor="let img of item.images">
+                <ion-img src="{{img.src}}"></ion-img>
+              </ion-slide>
+            </ion-slides>
+
+          </ion-card-content>
+
+          <ion-item lines="none" class="ion-no-padding" style="margin-left: 10px;">
+            <ion-buttons slot="start">
+              <ion-button color="medium" *ngIf="item.haveILiked === false" (click)="likePost(item, item.postId)">
+                <ion-icon slot="start" name="heart-outline" color="medium"></ion-icon>
+                <small>{{item.score}}</small>
+              </ion-button>
+              <ion-button color="medium" *ngIf="item.haveILiked === true" (click)="unlikePost(item, item.postId)">
+                <ion-icon slot="start" name="heart" color="danger"></ion-icon>
+                <small>{{item.score}}</small>
+              </ion-button>
+              <ion-button color="medium" (click)="goCommy(item.postId, item.userId, item.commentLength)">
+                <ion-icon slot="start" name="chatbox-outline" color="medium"></ion-icon>
+                <small>{{item.commentLength}}</small>
+              </ion-button>
+              <!--<ion-button color="medium" (click)="shareSheetShare(item.description)" *ngIf="item.description != null && !item.images">
+                  <ion-icon slot="start" name="return-up-forward-outline" color="medium"></ion-icon>
+                  <small></small>
+                </ion-button>
+                <ion-button color="medium" (click)="shareSheetShareImage(item.images[0].src)" *ngIf="item.description == null && item.images">
+                  <ion-icon slot="start" name="return-up-forward-outline" color="medium"></ion-icon>
+                  <small></small>
+                </ion-button>
+                <ion-button color="medium" (click)="shareSheetShareImageText(item.images[0].src, item.description)" *ngIf="item.description != null && item.images">
+                  <ion-icon slot="start" name="return-up-forward-outline" color="medium"></ion-icon>
+                  <small></small>
+                </ion-button>-->
+            </ion-buttons>
+
+            <ion-buttons slot="end">
+              <ion-button color="medium">
+                <ion-icon size="small" slot="start" name="eye-outline"></ion-icon>
+                <!--<small>20</small>-->
+              </ion-button>
+            </ion-buttons>
+          </ion-item>
+        </ion-card>
+      </super-tab>
+
+      <!--<super-tab>
+          <ion-grid class="ion-no-padding posts">
+            <ion-row>
+              <ion-col size="12" class="ion-text-start" *ngFor="let item of shops">
+                <ion-list>
+                 <img src="{{item.image}}" style="background-size: cover; width: 100%;" />
+                  <ion-item>
+                    <ion-label>
+                      <h6>{{item.displayName}}</h6>
+                      <p>{{item.description}}</p>
+                      <ion-row>
+                        <ion-col size="4">
+                          <ion-button (click)="goCoomys(item.id, item.commentLength)" fill="clear" style="text-transform: none;">
+                            {{item.commentLength}} Comments
+                          </ion-button>
+                        </ion-col>
+                        <ion-col size="4">
+                          <ion-button fill="claer" style="text-transform: none;" (click)="shareSheetShares(item.image)">
+                            Share
+                          </ion-button>
+                        </ion-col>
+                        <ion-col size="4">
+                          <ion-button fill="claer" style="text-transform: none; color: red;" (click)="deleteImage(item.id)">
+                            Delete
+                          </ion-button>
+                        </ion-col>
+                      </ion-row>
+                     </ion-label>
+                  </ion-item>
+                </ion-list>
+              </ion-col>
+              </ion-row>
+          </ion-grid>
+
+        </super-tab>-->
+
+      <super-tab>
+        <ion-grid>
+          <ion-row>
+            <div no-padding *ngFor="let item of feedPhoto"
+              (click)="viewmyImage(item.key, item.Name, item.Photo, item.image, item.date, item.userId, item.description)">
+              <div class="square-grid" [ngStyle]="{'background-image': 'url('+item.image+')'}">
+              </div>
+            </div>
+          </ion-row>
+        </ion-grid>
+
+      </super-tab>
+
+    </super-tabs-container>
+  </super-tabs>
+</ion-content>
+<ion-footer>
+  <ion-button expand="block" (click)="upload()">Upload Photos</ion-button>
+</ion-footer>

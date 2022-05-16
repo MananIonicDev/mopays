@@ -1,0 +1,155 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{items.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!--- Theme Parallax Component 3 -->
+<ion-content>
+  <!-- Parallax Big Image -->
+  <ion-slides pager="true" *ngIf="images" [options]="slideOpts">
+    <ion-slide *ngFor="let item of images" class="background-size" [ngStyle]="{ 'background': 'url(' + item.src + ')'}">
+    </ion-slide>
+  </ion-slides>
+
+  <ion-grid class="ion-no-padding" *ngIf="items">
+    <ion-row>
+      <ion-col class="ion-no-padding" size="12">
+        <!-- Card review-->
+        <ion-card class="ion-no-margin no-box-shadow no-border-radius ion-padding-end ion-padding-start">
+          <!-- Card review header -->
+          <ion-card-header class="ion-no-padding">
+            <h1 class="text-size-xs text-color-accent font-bold ion-no-margin-bottom ion-text-wrap" *ngIf="items.name">
+              {{items.name}} <span style="float: right;">{{items.price}}</span></h1>
+            <!-- Card review header title -->
+            <h2 *ngIf="items.photoURL"
+              class="text-size-xs text-color-accent font-bold ion-no-margin-bottom ion-text-wrap">
+              Seller</h2>
+            <ion-item class="transparent ion-no-padding" lines="none">
+              <!-- Avatar -->
+              <ion-avatar slot="start" *ngIf="items.photoURL" (click)="viewProfiles(items.userId)">
+                <img src="{{items.photoURL}}">
+              </ion-avatar>
+              <ion-label>
+                <!-- Avatar title -->
+                <h2 class="text-size-xs text-color-accent font-bold" (click)="viewProfiles(items.userId)">
+                  {{items.displayName}} <img *ngIf="items.Verified" src="assets/checked.png"
+                    style="width: 15px; height: 15px; display: inline-block;">
+                </h2>
+                <!-- Avatar subtitle -->
+                <h3 class="text-size-sm text-color-primary font-regular">
+                  {{items.location}}</h3>
+              </ion-label>
+            </ion-item>
+          </ion-card-header>
+          <!-- Card review content -->
+          <ion-card-content class="ion-no-padding">
+            <!-- Card review content description -->
+            <h2 class="text-size-xs text-color-accent font-bold ion-text-wrap
+               ion-padding-start ion-no-margin" slot="start">Description</h2>
+            <h2 class="text-size-xs text-color-accent font-regular">
+              {{items.description}}</h2>
+            <ion-buttons style="float: right;">
+              <ion-button color="dark" fill="clear"
+                (click)="shareSheetShareImageText(items.images[0].src, items.description)">
+                <ion-icon slot="start" name="arrow-redo-circle-outline" style="zoom: 1.0;" color="dark"></ion-icon>
+                <h3 class="text-size-xs text-color-accent font-bold">Share</h3>
+              </ion-button>
+            </ion-buttons>
+          </ion-card-content>
+        </ion-card>
+
+
+      </ion-col>
+      <ion-col class="ion-padding" *ngIf="items.phoneNumber">
+        <ion-item button (click)="callNo(items.phoneNumber)">
+          <div slot="start">
+            <ion-icon name="call" style="color: red;"></ion-icon>
+          </div>
+          <ion-label>
+            {{items.phoneNumber}}
+          </ion-label>
+        </ion-item>
+        <ion-item button>
+          <div slot="start">
+            <ion-icon name="location" style="color: green;"></ion-icon>
+          </div>
+          <ion-label class="ion-text-wrap">
+            {{items.location}}
+          </ion-label>
+        </ion-item>
+        <ion-item button>
+          <div slot="start">
+            <ion-icon name="calendar" style="color: purple;"></ion-icon>
+          </div>
+          <ion-label class="ion-text-wrap">
+            Posted: {{items.timeStamp | date}}
+          </ion-label>
+        </ion-item>
+        <ion-item button>
+          <div slot="start">
+            <ion-icon name="list" style="color: blue;"></ion-icon>
+          </div>
+          <ion-label>
+            {{items.pricetype}}
+          </ion-label>
+        </ion-item>
+        <ion-item button>
+          <div slot="start">
+            <ion-icon name="help" style="color: red;"></ion-icon>
+          </div>
+          <ion-label>
+            Report Seller
+          </ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12" class="ion-no-padding">
+        <h2 class="text-size-xs text-color-accent font-bold ion-text-wrap
+               ion-padding-start ion-no-margin" slot="start" *ngIf="items.photoURL">Get Direction</h2>
+        <agm-map [latitude]="items.latitude" [longitude]="items.longitude">
+          <agm-marker [latitude]="items.latitude" [longitude]="items.longitude"></agm-marker>
+        </agm-map>
+      </ion-col>
+
+      <div class="line_div"></div>
+
+      <ion-col class="ion-padding-top" size="12">
+        <h2 class="text-size-xs text-color-accent font-bold ion-padding-start
+        ion-padding-top ion-no-margin ion-float-start">{{itemsComment.length}} Comments</h2>
+        <h2 class="text-size-xs text-color-accent font-regular ion-padding-end
+        ion-no-margin ion-float-end ion-padding-top"></h2>
+      </ion-col>
+
+      <ion-col size="12" class="ion-padding-end ion-padding-start reviews">
+        <ion-card class="no-border-radius no-box-shadow ion-no-margin" *ngFor="let item of itemsComment">
+          <ion-item class="transparent ion-no-padding" lines="none">
+            <ion-avatar slot="start">
+              <img [src]="item.photoURL" (click)="viewProfiles(item.userId)">
+            </ion-avatar>
+            <ion-label>
+              <h3 class="text-size-xs font-bold text-color-accent" (click)="viewProfiles(item.userId)">
+                {{item.displayName}} <img *ngIf="item.Verified" src="assets/checked.png"
+                  style="width: 15px; height: 15px; display: inline-block;">
+              </h3>
+              <h3 class="text-size-sm font-regular text-color-accent">{{item.time | DateFormat | lowercase}}</h3>
+              <div class="rating">{{item.rate}}<ion-icon name="star"></ion-icon>
+              </div>
+              <h3 class="text-size-xs font-regular text-color-accent ion-text-wrap
+              ion-padding-top">{{item.description}}
+              </h3>
+            </ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-button *ngIf="items.userId === currentUserId" expand="block" color="danger" (click)="presentConfirm()">Delete
+    your item</ion-button>
+    <ion-button expand="full" (click)="goComment(items.userId)">Comment</ion-button>
+</ion-footer>

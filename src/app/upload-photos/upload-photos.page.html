@@ -1,0 +1,57 @@
+
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Upload Photos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-padding">
+    <ion-row>
+
+      <ion-col class="ion-no-padding" size="12">
+        <div class="profile-image">
+         
+    
+          <div *ngIf="!base64" (click)="presentImageSheet()">
+              <img src="assets/upload.jpg">
+          </div>
+     
+          <div *ngIf="base64">
+              <img [src]="base64" >
+          </div>
+         
+           <div class="image-upload" (click)="presentImageSheet()">
+             <!--<label for="file-input">-->
+
+               <!-- <input id="imagepick" type='file' style="display: none;" (change)="chooseFile($event)" required/>-->
+              <label>
+                <ion-icon name="camera" class="input" color="primary"> </ion-icon>
+              </label>
+              <!--<input id="file-input" type='file' (change)="onSelectFile($event)" />-->
+          </div>
+    
+        </div>
+      </ion-col>
+
+      <ion-col size="12" class="ion-no-padding">
+        <!---Input field description -->
+        <ion-item class="transparent input box-shadow border-radius" lines="none">
+          <ion-textarea rows="4" 
+          placeholder="Short text (optional)" [(ngModel)]="description"></ion-textarea>
+        </ion-item>
+      </ion-col>
+
+      
+    </ion-row>
+  </ion-grid>
+
+ 
+
+</ion-content>
+<ion-footer>
+  <ion-button expand="full" (click)="addTodo()" [disabled]="!base64">Submit</ion-button>
+</ion-footer>

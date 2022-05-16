@@ -1,0 +1,23 @@
+.scan-box {
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.5);
+    content: "";
+    display: block;
+    left: 50%;
+    height: 300px;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+}
+
+img {
+    opacity: 0.5;
+    max-width: 95%;
+    max-height: calc(98% - 100px);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+}

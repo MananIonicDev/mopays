@@ -1,0 +1,105 @@
+ion-slide {
+    height: 50px;
+    position: relative;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  
+    &:before {
+      //content: "";
+      position: absolute;
+      background-color: var(--cs-gradient-primary);
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+    }
+  
+    ion-searchbar {
+      z-index: 999;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+  }
+    
+  
+  .searchBox {
+    margin: 20px 10px 10px;
+    width: calc(100% - 20px) !important;
+    height: 160px;
+
+  }
+
+  .slider {
+    overflow-x: scroll;
+    display: -webkit-inline-box;
+    display: flex;
+    flex-direction: row;
+  
+    ion-card {
+      //margin: 0 0 0 16px;
+      position: relative;
+      width: 200px;
+      flex: none;
+  
+      img {
+        overflow: hidden;
+      }
+    }
+  }
+
+  .text-10pt{
+    font-size: 13px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+  }
+
+  
+  .listBox{
+    margin: -5px 10px 10px;
+  }
+
+ /* .flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}*/
+
+.ratting{
+    font-size: 1rem;
+}
+
+.catBox{
+    margin: -20px 10px 30px; 
+   // align-items: center;
+    //justify-content: center;
+   // display: flex;
+}
+
+.divs{
+     align-items: center;
+    justify-content: center;
+    display: flex;
+    //height: calc(100vh - 56px);  
+}
+
+.center-thumbnail {
+    margin: 0 auto;
+}
+
+.profile-pic {
+  height: 30px;
+  width: 30px;
+  background-position: center;
+  background-size: cover;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.sellbutton{
+  --ion-item-background: #00a8e1;
+  --background: #00a8e1;
+  --ion-item-color: #fff;
+}

@@ -1,0 +1,57 @@
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>My Events</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar [(ngModel)]="term" animated="true"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-grid class="ion-no-padding">
+  <ion-row>
+    <ion-col size="12">
+        <ion-list lines="none">
+      
+      <ion-col size="12" size-md="6" *ngFor="let item of eventList | filter:term">
+     
+        <ion-card class="border-radius box-shadow margin-half"
+        (click)="onItemEvent(item.$key)">
+        
+          <ion-card-header class="ion-no-padding background-size"
+          [ngStyle]="{'background': 'url(' + item.image + ')'}">
+          </ion-card-header>
+         
+          <ion-card-content>
+            <h1 class="ion-text-wrap text-size-xs text-color-accent font-bold ion-padding-top">
+              {{item.name}}</h1>
+            
+            <h3 class="text-size-sm text-color-danger font-bold ion-text-wrap" style="color: red;">
+              {{item.date | date}}</h3>
+            
+            <div class="clearfix"></div>
+            <h3 class="text-size-sm text-color-primary font-bold ion-text-wrap"><ion-icon name="location"></ion-icon>
+              {{item.venue}}</h3>
+          </ion-card-content>
+          <ion-button expand="block" (click)="presentConfirm(item.$key)">Delete Events</ion-button>
+        </ion-card>
+      </ion-col>
+      </ion-list>
+
+    </ion-col>
+
+    
+  </ion-row>
+</ion-grid>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button class="sellbutton" (click)="goAddEvent()">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+</ion-content>
+

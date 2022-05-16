@@ -1,0 +1,59 @@
+
+ion-slide {
+    height: 60px;
+    position: relative;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  
+    &:before {
+      //content: "";
+      position: absolute;
+      background-color: var(--cs-gradient-primary);
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+    }
+  
+    ion-searchbar {
+      z-index: 999;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+  }
+  
+  
+  ion-card {
+    background: var(--cs-background-primary) !important;
+    display: inline-flex;
+    position: relative;
+    width: calc(100% - 16px);
+    flex: none;
+  
+    ion-card-header {
+      width: 50%;
+      height: auto !important;
+      min-height: 150px;
+    }
+  
+    .background-size {
+      height: 100%;
+    }
+  
+    ion-card-content {
+      width: 50%;
+      align-self: center;
+    }
+  }
+  
+
+
+  
+.sellbutton{
+  --ion-item-background: #00a8e1;
+  --background: #00a8e1;
+  --ion-item-color: #fff;
+}

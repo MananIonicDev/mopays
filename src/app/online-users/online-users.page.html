@@ -1,0 +1,71 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Online Users</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col size="12">
+        <!-- List -->
+        <ion-list>
+            <ion-item class="ion-margin  box-shadow border-radius" lines="none"
+            *ngFor="let customer of users" (click)="chatWithUser(customer.displayName, customer.uid)">
+            <!-- Avatar -->
+              <ion-avatar slot="start">
+                <img src="{{customer.photoURL}}">
+              </ion-avatar>
+              <ion-label>
+                <!-- Avatar Title -->
+                <h1 class="text-size-md text-color-accent font-bold ion-text-wrap">
+                  {{customer.displayName}}</h1>
+                    <div style="float: right;" *ngIf="customer.status === 'online'">
+                      <p style="color: green;">Online</p>
+                    </div>
+                    <div style="float: right;" *ngIf="customer.status === 'offline'">
+                      <p style="color: red;" *ngIf="customer.status === 'offline'" >Offline</p>
+                    </div>
+                <!--  Description -->
+                <!-- <h3 class="text-size-sm text-color-primary font-regular ion-text-wrap ">
+                  {{customer.email}}</h3> -->
+              </ion-label>
+            </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+  <ion-grid class="ion-no-padding" *ngIf="users.length === 0">
+    <ion-row>
+      <ion-col size="12">
+        <!-- List -->
+        <ion-list>
+            <ion-item class="ion-margin  box-shadow border-radius" lines="none"
+            *ngFor="let i of [0,1,2,3,4]">
+            <!-- Avatar -->
+              <ion-avatar slot="start">
+                <ion-skeleton-text animated></ion-skeleton-text>
+              </ion-avatar>
+              <ion-label>
+                <!-- Avatar Title -->
+                <h1 class="text-size-md text-color-accent font-bold ion-text-wrap">
+                  <ion-skeleton-text animated style="width: 70%;"></ion-skeleton-text>
+                </h1>
+                    <ion-label slot="end">
+                      <p>
+                        <ion-skeleton-text animated style="float: right; width: 20%;"></ion-skeleton-text>
+                      </p>
+                    </ion-label>
+              </ion-label>
+            </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

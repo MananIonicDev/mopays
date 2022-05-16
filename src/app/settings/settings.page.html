@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+<!-- TOGGLE BUTTON --COMPONENT 3 -->
+<ion-grid class="ion-no-padding">
+  <ion-row>
+    <ion-col size="12">
+      <ion-list lines="none">
+        <!-- List -->
+        <ion-item class="transparent box-shadow ion-margin-end ion-margin-start
+        ion-margin-bottom border-radius">
+        <ion-icon name="chatbubbles" slot="start" class="icon-font-sm"></ion-icon>
+          <ion-label class="text-size-xs font-bold">
+            Comment</ion-label>
+          <ion-toggle slot="end"></ion-toggle>
+        </ion-item>
+        <ion-item class="transparent box-shadow ion-margin-end ion-margin-start
+        ion-margin-bottom border-radius">
+        <ion-icon name="thumbs-up" slot="start" class="icon-font-sm"></ion-icon>
+          <ion-label class="text-size-xs font-bold">
+            Like</ion-label>
+          <ion-toggle slot="end"></ion-toggle>
+        </ion-item>
+        <ion-item class="transparent box-shadow ion-margin-end ion-margin-start
+        ion-margin-bottom border-radius">
+        <ion-icon name="people" slot="start" class="icon-font-sm"></ion-icon>
+          <ion-label class="text-size-xs font-bold">
+            Following</ion-label>
+          <ion-toggle slot="end"></ion-toggle>
+        </ion-item>
+
+      </ion-list>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</ion-content>

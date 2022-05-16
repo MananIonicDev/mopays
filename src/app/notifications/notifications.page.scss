@@ -1,0 +1,18 @@
+ion-list {
+    padding: 5px;
+  }
+
+  .unread{
+   --background: #f3f1f1;
+    background: #f3f1f1;
+    border-radius: 5px;
+    margin-top: 5px;
+    //margin-half-start margin-half-end"
+  }
+
+  .read{
+    --background: #ffffff;
+    background: #ffffff;
+    border-radius: 5px;
+    margin-top: 5px;
+  }

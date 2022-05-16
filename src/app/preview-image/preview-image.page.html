@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Preview</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="send()">
+        Send
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+<ion-item *ngFor="let preview of previews">
+  <!--<ion-icon slot="start" name="{{getIcon(preview.type)}}" color="{{getColor(preview.type)}}"></ion-icon>-->
+  <ion-thumbnail slot="start">
+    <img src="{{preview.src}}" />
+  </ion-thumbnail>
+  <ion-label>
+    <h2>{{preview.name}}</h2>
+    <p>{{bytesToSize(preview.size)}}</p>
+  </ion-label>
+</ion-item>
+<ion-content>
+
+</ion-content>

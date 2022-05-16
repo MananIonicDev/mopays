@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Event Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- ACTION SHEET -- COMPONENT 1-->
+<ion-content>
+  <!-- Parallax Big Image -->
+  <div class="header-image background-size" [ngStyle]="{'background': 'url(' + items.image + ')'}">
+
+  </div>
+  <!--Content-->
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <!-- Description -->
+      <ion-col size="12">
+        <ion-card class="no-border-radius no-box-shadow ion-no-margin
+        ion-padding-start ion-padding-end ion-padding-top">
+          <ion-card-content>
+            <ion-item lines="none" class="transparent ion-no-padding">
+              <ion-label>
+                <h6 class="text-size-xs font-bold" style="color: red;">
+                  {{items.venue}} | {{items.date | date}}</h6>
+                <h2 class="text-size-md text-color-accent font-bold ion-padding-bottom">
+                  {{items.name}}</h2>
+                <p class="text-size-xs text-color-accent font-regular ion-text-wrap">
+                  {{items.description}}</p>
+              </ion-label>
+            </ion-item>
+            <ion-buttons style="float: right;">
+              <ion-button color="dark" fill="clear"
+                (click)="shareSheetShareImageText(items.image, items.description)">
+                <ion-icon slot="start" name="arrow-redo-circle-outline" style="zoom: 1.0;" color="dark"></ion-icon>
+                <h3 class="text-size-xs text-color-accent font-bold">Share</h3>
+              </ion-button>
+            </ion-buttons>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <!-- Slider Images-->
+      <ion-col class="ion-padding-top" size="12">
+        <h2 class="text-size-md text-color-accent font-bold ion-padding-bottom" style="padding-left: 10px;">
+          Event Creator</h2>
+      </ion-col>
+      <!-- Commnets --->
+      <ion-col class="ion-padding" size="12">
+        <ion-item class="transparent ion-no-padding" lines="none">
+          <!-- Avatar -->
+          <ion-avatar slot="start" *ngIf="items.photoURL" (click)="viewProfiles(items.userId)">
+            <img src="{{items.photoURL}}">
+          </ion-avatar>
+          <ion-label>
+            <!-- Avatar title -->
+            <h2 class="text-size-xs text-color-accent font-bold" (click)="viewProfiles(items.userId)">
+              {{items.displayName}} <img *ngIf="items.Verified" src="assets/checked.png"
+                style="width: 15px; height: 15px; display: inline-block;">
+            </h2>
+            <!-- Avatar subtitle -->
+            <h3 class="text-size-sm text-color-primary font-regular">
+              {{items.phoneNumber}}</h3>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+
+
+      <ion-col class="ion-padding-top" size="12">
+        <h2 class="text-size-xs text-color-accent font-bold ion-text-wrap
+               ion-padding-start ion-no-margin" slot="start">Get Direction</h2>
+        <agm-map [latitude]="items.latitude" [longitude]="items.longitude">
+          <agm-marker [latitude]="items.latitude" [longitude]="items.longitude"></agm-marker>
+        </agm-map>
+      </ion-col>
+
+
+    </ion-row>
+  </ion-grid>
+</ion-content>

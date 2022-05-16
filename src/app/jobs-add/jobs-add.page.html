@@ -1,0 +1,145 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Post Job</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-padding">
+    <ion-row>
+
+      <ion-col class="ion-no-padding" size="12">
+        <div class="profile-image">
+         
+    
+          <div *ngIf="!url" (click)="presentImageSheet()">
+              <img src=>
+          </div>
+     
+          <div *ngIf="url">
+              <img [src]="url" >
+          </div>
+         
+           <div class="image-upload" (click)="presentImageSheet()">
+             <!--<label for="file-input">-->
+              <label>
+                <ion-icon name="camera" class="input" color="primary"> </ion-icon>
+              </label>
+              <!--<input id="file-input" type='file' (change)="onSelectFile($event)" />-->
+          </div>
+    
+        </div>
+      </ion-col>
+
+      <ion-col class="ion-no-padding" size="12">
+        <!---Input field name -->
+        <ion-item class="transparent input box-shadow border-radius" lines="none">
+          <ion-input type="text" [(ngModel)]="name"
+          placeholder="Job title"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col class="ion-no-padding" size="12">
+        <ion-item lines="none" class="transparent input box-shadow border-radius" lines="none">
+          <ion-label class="text-size-sm text-color-accent font-regular">Job Category</ion-label>
+         <ion-select class="text-size-sm text-color-accent font-regular" multiple="false" [(ngModel)]="category">
+             <ion-select-option  value="{{item.$key}}" *ngFor="let item of CategoriesList">{{item.name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col class="ion-no-padding" size="12">
+        <ion-item class="transparent input box-shadow border-radius" lines="none">
+        <ion-label class="text-size-sm text-color-accent font-regular">Type</ion-label>
+         <ion-select class="text-size-sm text-color-accent font-regular" multiple="false" [(ngModel)]="type">
+             <ion-select-option  value="Contract">Contract</ion-select-option>
+             <ion-select-option  value="Permanent">Permanent</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col class="ion-no-padding" size="12">
+        <!---Input field name -->
+        <ion-item class="transparent input box-shadow border-radius" lines="none">
+          <ion-input type="text" [(ngModel)]="salary"
+          placeholder="Salary Range (optional)"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col class="ion-no-padding" size="12">
+        <!---Input field name -->
+        <ion-item class="transparent input box-shadow border-radius" lines="none">
+          <ion-input type="text"
+          placeholder="Location (optional)" [(ngModel)]="location" (focusin)="shareLocation()"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12" class="ion-no-padding">
+        <!---Input field description -->
+        <ion-item class="transparent input box-shadow border-radius" lines="none">
+          <ion-textarea rows="4" 
+          placeholder="Job Description" [(ngModel)]="description"></ion-textarea>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12" class="ion-no-padding">
+        <!---Input field description -->
+        <ion-item class="transparent input box-shadow border-radius" lines="none">
+          <ion-textarea rows="4" 
+          placeholder="How to Apply" [(ngModel)]="apply"></ion-textarea>
+        </ion-item>
+      </ion-col>
+
+      <ion-col class="ion-no-padding" size="12">
+        <!---Input field name -->
+        <ion-item class="transparent input box-shadow border-radius" lines="none">
+          <ion-input type="text" [(ngModel)]="website"
+          placeholder="Website (optional)"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col class="ion-no-padding" size="12">
+        <!---Input field name -->
+        <ion-item class="transparent input box-shadow border-radius" lines="none">
+          <ion-datetime [(ngModel)]="deadline" displayFormat="MM DD YY" placeholder="Deadline (optional)"></ion-datetime>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12" class="ion-no-padding">
+          <h5><b>Employer Information</b></h5>
+      </ion-col>
+
+      <ion-col class="ion-no-padding" size="12">
+        <!---Input field name -->
+        <ion-item class="transparent input box-shadow border-radius" lines="none">
+          <ion-input type="text" [(ngModel)]="displayName"
+          placeholder="Employer Name"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col class="ion-no-padding" size="12">
+        <!---Input field name -->
+        <ion-item class="transparent input box-shadow border-radius" lines="none">
+          <ion-input type="text" [(ngModel)]="phoneNumber"
+          placeholder="Employer Phone"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12" class="ion-no-padding">
+        <!--- Button Write comments -->
+        <ion-button expand="full" (click)="goImageUpload()" [disabled]="!apply || !name || !category || !type || !description || !phoneNumber || !displayName">Submit
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  
+  
+
+
+</ion-content>
+
+

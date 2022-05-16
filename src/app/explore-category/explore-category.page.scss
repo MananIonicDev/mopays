@@ -1,0 +1,20 @@
+ion-item {
+    .location-section {
+      align-items: center;
+      display: flex;
+  }
+  }
+
+
+  
+  .sellbutton{
+    --ion-item-background: #00a8e1;
+    --background: #00a8e1;
+    --ion-item-color: #fff;
+  }
+
+
+  ion-avatar {
+    max-width: 35px;
+    max-height: 35px;
+}

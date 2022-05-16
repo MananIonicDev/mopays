@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+<!-- ALERT --COMPONENT 1 -->
+<ion-grid class="padding-half ion-no-padding">
+  <ion-row>
+    <ion-col class="ion-no-padding" size="12">
+      <ion-slides pager="true" [options]="slideOpts">
+        <ion-slide *ngFor="let step of adverts" (click)="goAdsDetails(step.url)" 
+              class="background-size"
+                  [ngStyle]="{ 'background': 'url(' + step.image + ')'}">
+        </ion-slide>
+      </ion-slides>
+    </ion-col>
+    <ion-col class="ion-no-padding" size="12" size-md="6" *ngFor="let item of shops"
+    (click)="presentAlert(item.$key)">
+      <!-- Card -->
+      <ion-card class="border-radius box-shadow margin-half">
+        <!-- Card header with background image -->
+        <ion-card-header class="ion-no-padding background-size"
+        [ngStyle]="{'background': 'url(' + item.image + ')'}">
+        </ion-card-header>
+        <!-- Card content -->
+        <ion-card-content>
+          <!-- Card title -->
+          <h2 class="text-size-xs text-color-accent font-bold ion-text-wrap">
+            {{item.name}}</h2>
+          <!-- Card subtitle -->
+          <h3 class="ion-text-wrap text-size-sm text-color-primary font-bold">
+            <ion-icon name="call"></ion-icon> {{item.phoneNumber}}</h3>
+          <!-- Rating -->
+          <!-- Price -->
+          <h2 class="text-size-sm text-color-accent font-bold ion-text-wrap">
+            Rs{{item.minimum}} - Upward</h2>
+            <div class="ratting">
+              <ion-icon [name]="item.totalRatting >= 1 ? 'star-outline':'star'" [color]="item.totalRatting >= 1 ? 'warning':'medium'">
+              </ion-icon>
+              <ion-icon [name]="item.totalRatting >= 2 ? 'star-outline':'star'" [color]="item.totalRatting >= 2 ? 'warning':'medium'">
+              </ion-icon>
+              <ion-icon [name]="item.totalRatting >= 3 ? 'star-outline':'star'" [color]="item.totalRatting >= 3 ? 'warning':'medium'">
+              </ion-icon>
+              <ion-icon [name]="item.totalRatting >= 4 ? 'star-outline':'star'" [color]="item.totalRatting >= 4 ? 'warning':'medium'">
+              </ion-icon>
+              <ion-icon [name]="item.totalRatting >= 5 ? 'star-outline':'star'" [color]="item.totalRatting >= 5 ? 'warning':'medium'">
+              </ion-icon>
+              ({{item.ratting}})
+            </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</ion-content>

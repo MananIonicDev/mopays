@@ -1,0 +1,279 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Essentials</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid class="ion-no-padding">
+    <ion-row appAnimateItems className="zoomIn">
+      <ion-col size="12">
+        <!-- List -->
+        <ion-list>
+          <ion-item class="transparent box-shadow border-radius
+          margin-half-start margin-half-end image-carousel" lines="none" (click)="goApps()">
+
+            <ion-avatar slot="start">
+              <img src="assets/svg/user-interface.svg">
+            </ion-avatar>
+            <ion-label>
+
+              <h2 class="text-size-xs font-bold">
+                Top Apps</h2>
+
+            </ion-label>
+          </ion-item>
+          <ion-item class="transparent box-shadow border-radius
+          margin-half-start margin-half-end image-carousel" lines="none" (click)="goBill()">
+
+            <ion-avatar slot="start">
+              <img src="assets/svg/calendar.svg">
+            </ion-avatar>
+            <ion-label>
+
+              <h2 class="text-size-xs font-bold">
+                Pay Bills</h2>
+
+            </ion-label>
+          </ion-item>
+          <ion-item class="transparent box-shadow border-radius
+          margin-half-start margin-half-end image-carousel" lines="none" (click)="goAvis()">
+
+            <ion-avatar slot="start">
+              <img src="assets/svg/pink-cosmos.png">
+            </ion-avatar>
+            <ion-label>
+
+              <h2 class="text-size-xs font-bold">
+                Avis de décès</h2>
+
+            </ion-label>
+          </ion-item>
+          <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end image-carousel" lines="none" (click)="goScanner()">
+
+            <ion-avatar slot="start">
+              <img src="assets/svg/scanner.svg">
+            </ion-avatar>
+            <ion-label>
+
+              <h2 class="text-size-xs font-bold">
+                Scanner</h2>
+
+            </ion-label>
+          </ion-item>
+          <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end image-carousel" lines="none" (click)="goRadio()">
+
+            <ion-avatar slot="start">
+              <img src="assets/svg/radio.svg">
+            </ion-avatar>
+            <ion-label>
+
+              <h2 class="text-size-xs font-bold">
+                Radio</h2>
+
+            </ion-label>
+          </ion-item>
+          <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end image-carousel" lines="none" (click)="goWeather()">
+            <!--Avatar-->
+            <ion-avatar slot="start">
+              <img src="assets/svg/weather.svg">
+            </ion-avatar>
+            <ion-label>
+              <!--Title-->
+              <h2 class="text-size-xs font-bold">
+                Weather</h2>
+              <!--Subtitle-->
+            </ion-label>
+          </ion-item>
+          <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end image-carousel" lines="none" (click)="goGallery()">
+
+            <ion-avatar slot="start">
+              <img src="assets/svg/gallery.png">
+            </ion-avatar>
+            <ion-label>
+
+              <h2 class="text-size-xs font-bold">
+                Gallery</h2>
+
+            </ion-label>
+          </ion-item>
+          <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end image-carousel" lines="none" (click)="goMauritiusTourism()">
+
+            <ion-avatar slot="start">
+              <img src="assets/svg/beach.png">
+            </ion-avatar>
+            <ion-label>
+
+              <h2 class="text-size-xs font-bold">
+                Mauritius Tourism</h2>
+
+            </ion-label>
+          </ion-item>
+          <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end image-carousel" lines="none" (click)="goInvestMauritius()">
+
+            <ion-avatar slot="start">
+              <img src="assets/svg/teamwork.png">
+            </ion-avatar>
+            <ion-label>
+
+              <h2 class="text-size-xs font-bold">
+                Invest Mauritius</h2>
+
+            </ion-label>
+          </ion-item>
+          <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end image-carousel" lines="none" (click)="goFlights()">
+            <!--Avatar-->
+            <ion-avatar slot="start">
+              <img src="assets/svg/plane.png">
+            </ion-avatar>
+            <ion-label>
+              <!--Title-->
+              <h2 class="text-size-xs font-bold">
+                Flights</h2>
+              <!--Subtitle-->
+            </ion-label>
+          </ion-item>
+          <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end image-carousel" lines="none" (click)="goAirport()">
+            <!--Avatar-->
+            <ion-avatar slot="start">
+              <img src="assets/svg/airport.png">
+            </ion-avatar>
+            <ion-label>
+              <!--Title-->
+              <h2 class="text-size-xs font-bold">
+                Airport</h2>
+              <!--Subtitle-->
+            </ion-label>
+          </ion-item>
+          <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end image-carousel" lines="none" (click)="goTraffic()">
+            <!--Avatar-->
+            <ion-avatar slot="start">
+              <img src="assets/svg/traffic.svg">
+            </ion-avatar>
+            <ion-label>
+              <!--Title-->
+              <h2 class="text-size-xs font-bold">
+                Traffic</h2>
+              <!--Subtitle-->
+            </ion-label>
+          </ion-item>
+          <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end image-carousel" lines="none" (click)="goMauritiusTelecom()">
+            <!--Avatar-->
+            <ion-avatar slot="start">
+              <img src="assets/svg/telecommunications.png">
+            </ion-avatar>
+            <ion-label>
+              <!--Title-->
+              <h2 class="text-size-xs font-bold">
+                Mauritius Telecom</h2>
+              <!--Subtitle-->
+            </ion-label>
+          </ion-item>
+          <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end image-carousel" lines="none" (click)="goLotery()">
+            <!--Avatar-->
+            <ion-avatar slot="start">
+              <img src="assets/svg/dice.svg">
+            </ion-avatar>
+            <ion-label>
+              <!--Title-->
+              <h2 class="text-size-xs font-bold">
+                Lotto</h2>
+              <!--Subtitle-->
+            </ion-label>
+          </ion-item>
+          <!--<ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none">
+              <ion-avatar slot="start">
+                <img src="assets/more/videos.png">
+              </ion-avatar>
+              <ion-label>
+                <h2 class="text-size-xs font-bold">
+                  Videos</h2>
+              </ion-label>
+            </ion-item>-->
+          <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end image-carousel" lines="none" (click)="goConverter()">
+            <!--Avatar-->
+            <ion-avatar slot="start">
+              <img src="assets/svg/exchange.svg">
+            </ion-avatar>
+            <ion-label>
+              <!--Title-->
+              <h2 class="text-size-xs font-bold">
+                Currency Converter</h2>
+              <!--Subtitle-->
+            </ion-label>
+          </ion-item>
+          <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end image-carousel" lines="none" (click)="goTvGuide()">
+            <!--Avatar-->
+            <ion-avatar slot="start">
+              <img src="assets/svg/tv.svg">
+            </ion-avatar>
+            <ion-label>
+              <!--Title-->
+              <h2 class="text-size-xs font-bold">
+                TV Guide</h2>
+              <!--Subtitle-->
+            </ion-label>
+          </ion-item>
+          <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end image-carousel" lines="none" (click)="goFootball()">
+            <!--Avatar-->
+            <ion-avatar slot="start">
+              <img src="assets/svg/football.png">
+            </ion-avatar>
+            <ion-label>
+              <!--Title-->
+              <h2 class="text-size-xs font-bold">
+                Scores</h2>
+              <!--Subtitle-->
+            </ion-label>
+          </ion-item>
+          <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end image-carousel" lines="none" (click)="goEmergency()">
+            <!--Avatar-->
+            <ion-avatar slot="start">
+              <img src="assets/svg/emergency.svg">
+            </ion-avatar>
+            <ion-label>
+              <!--Title-->
+              <h2 class="text-size-xs font-bold">
+                Emergency</h2>
+              <!--Subtitle-->
+            </ion-label>
+          </ion-item>
+          <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end image-carousel" lines="none" (click)="goCinema()">
+            <!--Avatar-->
+            <ion-avatar slot="start">
+              <img src="https://i.ibb.co/GP9tGTQ/clapper.png">
+            </ion-avatar>
+            <ion-label>
+              <!--Title-->
+              <h2 class="text-size-xs font-bold">
+                Cinema</h2>
+              <!--Subtitle-->
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

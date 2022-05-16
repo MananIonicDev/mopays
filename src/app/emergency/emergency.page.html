@@ -1,0 +1,458 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Emergency</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="line1"></div>
+  <div class="line2"></div>
+  <div class="line3"></div>
+  <div class="line4"></div>
+  <ion-grid class="ion-no-padding">
+    <ion-row appAnimateItems className="zoomIn">
+      <ion-col size="12">
+        <!-- List -->
+        <ion-list>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('999')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: red;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Police</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('148')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: red;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Police Anonymous</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('150')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: red;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  National Directory</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('2122747')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: red;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Coastguards</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('2107070')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: red;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Air Mauritius</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('8900')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: red;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Mauritius Telecom</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('170')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: red;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  CWA (Water)</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('130')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: red;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  CEB (Electricity)</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('185')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: red;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Consumer Protection Unit</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('6861031')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: red;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Meteo</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('96')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: red;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Cyclone Report</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('139')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: red;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Domestic Violence</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('113')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: red;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Child Protection</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('2333054')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: red;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  SOS Femmes</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('199')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: red;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Elderly Care</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('8999')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: red;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Sida Info</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('8009393')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: red;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                Suicide Prevention</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('2105151')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: red;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Environment Police</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('6033030')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: red;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Airport</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('152')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: red;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Tourist Info</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('52513000')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: red;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Marketing & Advertising</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('114')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: red;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Ambulance</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('115')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: red;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Fire Service</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('148')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: red;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Crime Stopper</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('8002345')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: red;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Toll Free</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('2118434')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: red;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Traffic</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('8924')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: red;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Health Care</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <h5 style="text-align: center; color: green;"><b>Government Directories</b></h5>
+  <ion-grid class="ion-no-padding">
+    <ion-row appAnimateItems className="zoomIn">
+      <ion-col size="12">
+        <!-- List -->
+        <ion-list>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('2012409')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: green;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Prime Minister's Office</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('2012279')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: green;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Civil Status Division</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('2112513')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: green;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Pay Research Bureau</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('2417000')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: green;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Electoral Commission Office</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('4541423')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: green;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Financial intelligence Unit</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('2012409')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: green;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Home Affairs</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('2012410')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: green;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  External Communications Division</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('2065400')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: green;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Mauritius Ports Authority</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('6032000')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: green;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Department of Civil Aviation</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('181')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: green;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Ministry of Foreign Affairs</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end" lines="none" (click)="callNo('2033800')">
+              <!--Avatar-->
+              <ion-icon name="call" slot="start" style="color: green;"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  EDB</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+
+
+
+
+

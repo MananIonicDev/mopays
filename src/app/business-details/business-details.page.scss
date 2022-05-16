@@ -1,0 +1,87 @@
+/*  Style Action Sheet Layout 1
+===========================================*/
+
+// Settings Big Image
+
+.background-size {
+    height: 300px;
+    position: relative;
+  }
+  
+  ion-col {
+    background: var(--cs-background-primary);
+  }
+  
+  ion-item {
+    --inner-padding-end: 0;
+  }
+
+  agm-map {
+    height: 150px !important;
+    width: 100%;  /* This is really important*/
+  }
+
+  .ratting{
+    font-size: 1rem;
+  }
+
+  .line_div{
+    width: 100%;
+    height: 3px;
+    background: lightgray;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+  .content-style{
+    background: rgb(245, 244, 244);
+    --background: rgb(245, 244, 244);
+  }
+
+  
+  .slider {
+    overflow-x: scroll;
+    display: -webkit-inline-box;
+    display: flex;
+    flex-direction: row;
+  
+    ion-card {
+      margin: 0 0 0 16px;
+      position: relative;
+      width: 200px;
+      flex: none;
+  
+      ion-img {
+        overflow: hidden;
+      }
+    }
+  }
+  
+  .reviews {
+    ion-item {
+      ion-avatar {
+        align-self: start;
+        width: 40px;
+        height: 40px;
+      }
+  
+      ion-label {
+        align-self: start;
+      }
+
+      .rating{
+        position: absolute;
+        background: #b2d9b2;
+        border: 1px solid #7bdb7b;
+        padding: 3px 7px;
+        color: green;
+        border-radius: 25px;
+        font-size: 12px;
+        font-weight: 600;
+        margin-left: 5px;
+        right: 0;
+        top: 0;
+    }
+    }
+  }
+  

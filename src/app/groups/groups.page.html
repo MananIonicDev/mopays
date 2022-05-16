@@ -1,0 +1,57 @@
+
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Groups
+    </ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <div scrollX="true">
+      <ion-chip class="scrollX" (click)="goSearch()">
+        <ion-icon name="search" color="light"></ion-icon>
+        <ion-label color="light">Search Group</ion-label>
+      </ion-chip>
+      <ion-chip class="scrollX" (click)="createPost()">
+        <ion-icon name="create" color="light"></ion-icon>
+        <ion-label color="light">Create Group</ion-label>
+      </ion-chip>
+      <!--<ion-chip class="scrollX">
+        <ion-icon name="help" color="light"></ion-icon>
+        <ion-label color="light">Report Group</ion-label>
+      </ion-chip>-->
+     
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<super-tabs
+  [activeTabIndex]="0"
+  [config]="{ avoidElements: true, maxDragAngle: 30 }"
+>
+  <super-tabs-toolbar slot="top"  class="super-tabs-toolbar-custom">
+    <super-tab-button>
+      <ion-label style="color: white;">All Groups</ion-label>
+    </super-tab-button>
+    <super-tab-button>
+      <ion-label style="color: white;">My Groups</ion-label>
+    </super-tab-button>
+  
+   
+  </super-tabs-toolbar> 
+
+  <super-tabs-container>
+    <super-tab>
+      <ion-content>
+        <app-groups-all></app-groups-all>
+      </ion-content>
+    </super-tab> 
+    <super-tab>
+      <ion-content>
+        <app-groups-my></app-groups-my>
+      </ion-content>
+    </super-tab> 
+  </super-tabs-container>
+</super-tabs>

@@ -1,0 +1,67 @@
+<ion-content fullscreen="true">
+  <ion-slides [options]="sliderOpts">
+    <ion-slide>
+      <div class="swiper-zoom-container">
+        <img src="{{img}}"/>
+        <div class="btnMore">
+          <ion-item class="hedge" lines="none">
+            <div class="profile-pic" [style.background-image]="'url(' + photo + ')'"></div>
+            <ion-label class="ion-padding">
+              <h5 style="color: white;"><b>{{name}} - {{date | DateFormat | lowercase}}</b></h5>
+              <p style="color: white;">{{description}}</p>
+            </ion-label>
+            <ion-icon slot="end" (click)="shareSheetShares()" name="arrow-redo-circle-outline" color="light"></ion-icon>
+          </ion-item>
+        </div>
+      </div>
+    </ion-slide>
+    <ion-slide *ngFor="let item of feedPhoto">
+      <div class="swiper-zoom-container">
+        <img src="{{item.image}}"/>
+        <div class="btnMore">
+          <ion-item class="hedge" lines="none">
+            <div class="profile-pic" [style.background-image]="'url(' + item.Photo + ')'"></div>
+            <ion-label class="ion-padding">
+              <h5 style="color: white;"><b>{{item.Name}} - {{item.date | DateFormat | lowercase}}</b></h5>
+              <p style="color: white;">{{item.description}}</p>
+            </ion-label>
+            <ion-icon slot="end" (click)="shareSheetShare(item.image)"  name="arrow-redo-circle-outline" color="light"></ion-icon>
+          </ion-item>
+        </div>
+      </div>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
+<ion-footer>
+  <ion-row>
+    <ion-col size="4" class="ion-text-center">
+      <ion-button (click)="zoom(false)" fill="clear" color="primary">
+        <ion-icon name="remove" slot="start" color="primary"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col size="4" class="ion-text-center">
+      <ion-button (click)="zoom(true)" fill="clear" color="primary">
+        <ion-icon name="add" slot="start" color="primary"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col size="4" class="ion-text-center">
+      <ion-button (click)="close()" fill="clear" color="primary">
+        <ion-icon name="close" slot="start" color="primary"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="2">
+      <ion-button fill="clear" (click)="SelectLike()" ><ion-icon slot="icon-only" name="heart-circle-outline" color="liker === false ? light : primary" ></ion-icon></ion-button>
+    </ion-col>
+    <ion-col size="8">
+      <ion-button expand="block" shape="round" class="comment" (click)="showPrompt()">Write a Message</ion-button>
+    </ion-col>
+    <!--<ion-col size="2">
+      <ion-button fill="clear"><ion-icon slot="icon-only" name="arrow-redo-circle-outline" color="light"></ion-icon></ion-button>
+    </ion-col>-->
+  </ion-row>
+</ion-footer>
+
+
+

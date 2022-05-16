@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Messages</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-list>
+  <ion-item *ngFor= "let lMsg of lMsgList | async" (click)="goMessage(lMsg.lastmsg)">
+    <ion-avatar slot="start" *ngIf="lMsg.lastmsg.fromID != myuid">
+      <img src="{{lMsg.lastmsg.fromPhoto}}" *ngIf="lMsg.lastmsg.fromID != myuid">
+    </ion-avatar>
+    <ion-avatar slot="start" *ngIf="lMsg.lastmsg.fromID == myuid">
+      <img src="{{lMsg.lastmsg.toPhoto}}" *ngIf="lMsg.lastmsg.fromID == myuid">
+    </ion-avatar>
+    <ion-label>
+      <h2 *ngIf="lMsg.lastmsg.fromID == myuid">{{lMsg.lastmsg.toName}}</h2>
+      <h2 *ngIf="lMsg.lastmsg.fromID != myuid">{{lMsg.lastmsg.fromName}}</h2>
+      <div style="float: right;">
+        <h6 *ngIf="lMsg.lastmsg.timeStamp">{{lMsg.lastmsg.timeStamp | DateFormat | lowercase}}</h6>
+      </div>
+      <p *ngIf="lMsg.lastmsg.type == 'text'">{{lMsg.lastmsg.msg}}</p>
+      <p *ngIf="lMsg.lastmsg.type == 'images'">Image sent</p>
+    </ion-label>
+  </ion-item>
+</ion-list>
+</ion-content>

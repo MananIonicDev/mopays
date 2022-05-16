@@ -1,0 +1,14 @@
+.activated{
+    --background: #00a8e1;
+    background-color: #00a8e1;
+    background: #00a8e1;
+    color: white;
+    border-bottom: 10px;
+}
+
+.deactivated{
+    --background: white;
+    background-color: white;
+    background: white;
+    border-radius: 10px;
+}

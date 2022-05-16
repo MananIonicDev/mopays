@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Map</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar [(ngModel)]="term" animated="true"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+ 
+  <div >
+    <ion-row>
+      <ion-col size="6"  class="topfeatures image-carousel" *ngFor="let item of placeList | filter:term" (click)="goNearBy(item.nickname, item.img, item.name)">
+        <ion-card class="image-card">
+          <img src="{{item.img}}" alt="" style="height:120px; width: 100%">
+          <ion-card-content>
+            <ion-card-subtitle class="ion-padding-bottom name_title" >
+              {{item.name}}
+            </ion-card-subtitle>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      </ion-row>
+  </div>
+</ion-content>

@@ -1,0 +1,45 @@
+agm-map {
+  height: 150px !important;
+  width: 100%; /* This is really important*/
+}
+
+.background-size {
+  height: 300px;
+  position: relative;
+}
+
+.line_div {
+  width: 100%;
+  height: 3px;
+  background: lightgray;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.reviews {
+  ion-item {
+    ion-avatar {
+      align-self: start;
+      width: 40px;
+      height: 40px;
+    }
+
+    ion-label {
+      align-self: start;
+    }
+
+    .rating {
+      position: absolute;
+      background: #b2d9b2;
+      border: 1px solid #7bdb7b;
+      padding: 3px 7px;
+      color: green;
+      border-radius: 25px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-left: 5px;
+      right: 0;
+      top: 0;
+    }
+  }
+}

@@ -1,0 +1,186 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{items.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [scrollEvents]="true" class="explore-card">
+
+  <ion-slides pager="true" [options]="slideOpts">
+    <ion-slide *ngFor="let item of images" class="background-size" [ngStyle]="{ 'background': 'url(' + item.src + ')'}"
+      (click)="viewImage(item.src, item.name, item.date, item.userId)">
+    </ion-slide>
+  </ion-slides>
+
+
+  <super-tabs [config]="{ debug: true, nativeSmoothScroll: true }">
+
+    <super-tabs-toolbar slot="top" class="super-tabs-toolbar-custom">
+
+      <super-tab-button>
+        <ion-label style="text-transform: none; color: #000000;">Overview</ion-label>
+      </super-tab-button>
+
+      <super-tab-button>
+        <ion-label style="text-transform: none; color: #000000;">Gallery</ion-label>
+      </super-tab-button>
+
+      <super-tab-button>
+        <ion-label style="text-transform: none; color: #000000;">Videos</ion-label>
+      </super-tab-button>
+
+      <super-tab-button>
+        <ion-label style="text-transform: none; color: #000000;">Reviews</ion-label>
+      </super-tab-button>
+
+
+    </super-tabs-toolbar>
+
+
+
+
+
+
+    <super-tabs-container>
+      <super-tab>
+
+
+        <div class="ion-padding">
+          <h1 class="text-size-md text-color-follow font-bold ion-text-wrap ion-no-margin">
+            {{items.name}}</h1>
+
+          <ion-item class="ion-no-padding explore-card" lines="none">
+            <ion-label>
+              <div class="ratting" (click)="goComment()">
+                <ion-icon [name]="items.totalRatting >= 1 ? 'star-outline':'star'"
+                  [color]="items.totalRatting >= 1 ? 'warning':'medium'">
+                </ion-icon>
+                <ion-icon [name]="items.totalRatting >= 2 ? 'star-outline':'star'"
+                  [color]="items.totalRatting >= 2 ? 'warning':'medium'">
+                </ion-icon>
+                <ion-icon [name]="items.totalRatting >= 3 ? 'star-outline':'star'"
+                  [color]="items.totalRatting >= 3 ? 'warning':'medium'">
+                </ion-icon>
+                <ion-icon [name]="items.totalRatting >= 4 ? 'star-outline':'star'"
+                  [color]="items.totalRatting >= 4 ? 'warning':'medium'">
+                </ion-icon>
+                <ion-icon [name]="items.totalRatting >= 5 ? 'star-outline':'star'"
+                  [color]="items.totalRatting >= 5 ? 'warning':'medium'">
+                </ion-icon>
+                ({{items.ratting}} Ratings) {{itemsComment.length}} Reviews
+              </div>
+              <p class="text-size-sm text-color-follow font-regular ion-float-start">{{items.location}}</p>
+
+
+            </ion-label>
+          </ion-item>
+        </div>
+
+        <ion-item>
+          <ion-label>
+            <p class="text-size-sm  font-regular ion-padding-top ion-text-wrap">{{items.description}}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item (click)="callNo(items.tel)">
+          <ion-icon name="call" slot="start"></ion-icon>
+          <ion-label>
+            {{items.tel}}
+          </ion-label>
+        </ion-item>
+        <ion-item class="ion-no-margin explore-card">
+          <ion-icon name="location" slot="start" color="secondary"></ion-icon>
+          <ion-label class="ion-text-wrap">
+            {{items.location}}
+          </ion-label>
+          <ion-buttons slot="end">
+            <ion-button color="dark" fill="clear"
+              (click)="shareSheetShareImageText(images[0].src, items.description)">
+              <ion-icon slot="start" name="arrow-redo-circle-outline" style="zoom: 1.0;" color="dark"></ion-icon>
+              <h3 class="text-size-xs text-color-accent font-bold">Share</h3>
+            </ion-button>
+          </ion-buttons>
+        </ion-item>
+        <ion-item>
+          <agm-map [zoom]="5" [latitude]="items.lat" [longitude]="items.long">
+            <agm-marker [latitude]="items.lat" [longitude]="items.long"></agm-marker>
+          </agm-map>
+        </ion-item>
+        <ion-item (click)="launchNav(items.lat, items.long)">
+          <ion-icon name="compass-outline" slot="start" color="danger"></ion-icon>
+          <ion-label class="ion-text-wrap">
+            Get Direction
+          </ion-label>
+        </ion-item>
+      </super-tab>
+
+      <super-tab style="background-color: rgb(248, 246, 246);">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="6" *ngFor="let item of images"
+              (click)="viewImage(item.src, item.name, item.date, item.userId)">
+              <img [src]="item.src" height="120px" width="100%" />
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </super-tab>
+
+      <super-tab style="background-color: rgb(248, 246, 246);">
+        <ion-card style="margin: 0px; width: 100%;" class="iframe-container" *ngFor="let item of items.youtube">
+          <ion-card-content style="padding: 0px;">
+            <div id="{{item}}"></div>
+          </ion-card-content>
+        </ion-card>
+      </super-tab>
+
+      <super-tab>
+        <ion-card class="box-shadow border-radius" *ngFor="let item of itemsComment">
+          <!-- Card header -->
+          <ion-card-header class="ion-no-padding">
+            <ion-item class="transparent" lines="none">
+              <!-- Avatar -->
+              <ion-avatar slot="start">
+                <img [src]="item.photoURL">
+              </ion-avatar>
+              <ion-label>
+                <!-- Avatar title -->
+                <h3 class="text-color-follow text-size-xs font-bold ion-text-wrap">
+                  {{item.displayName}}</h3>
+                <!-- Time -->
+                <h3 class="text-color-follow text-size-sm font-regular ion-text-wrap">
+                  {{item.time | DateFormat | lowercase}}</h3>
+              </ion-label>
+            </ion-item>
+          </ion-card-header>
+          <!-- Card content -->
+          <ion-card-content class="ion-no-padding-top">
+            <!-- Card content description -->
+            <div class="rating">{{item.rate}}<ion-icon name="star"></ion-icon>
+            </div>
+            <p class="text-color-follow text-size-xs font-regular ion-text-wrap">
+              {{item.description}}
+            </p>
+          </ion-card-content>
+        </ion-card>
+      </super-tab>
+    </super-tabs-container>
+  </super-tabs>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-button (click)="showModal()" expand="block" style="text-transform: none;">
+      <ion-icon name="images" slot="start"></ion-icon>
+      Submit Photo
+    </ion-button>
+  </ion-fab>
+
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-button (click)="goComment()" expand="block" style="text-transform: none;">
+      <ion-icon name="create" slot="start"></ion-icon>
+      Comment
+    </ion-button>
+  </ion-fab>
+
+</ion-content>

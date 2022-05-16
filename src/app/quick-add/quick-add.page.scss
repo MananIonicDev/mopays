@@ -1,0 +1,47 @@
+.title, .stats {
+    animation: 1s slidein-right forwards;
+  }
+  .description {
+    animation: 1s description-slide forwards;
+    animation-delay: .3s;
+  }
+  .image-carousel {
+    animation: 1s images-slide forwards;
+    animation-delay: .4s;
+  }
+  
+  @keyframes slidein-right {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+  
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+  }
+  
+  @keyframes description-slide {
+    0% {
+        transform: translateX(50%);
+        opacity: 0;
+    }
+  
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+  }
+  
+  @keyframes images-slide {
+    0% {
+        transform: translateX(30%);
+        opacity: 0;
+    }
+  
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+  }

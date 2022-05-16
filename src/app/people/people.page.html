@@ -1,0 +1,128 @@
+
+ <!-- Theme Search Bars Layout 2 -->
+ <ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>People</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="filterAgeOffline()">
+        <ion-icon name="options" color="light"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <!--<ion-toolbar color="primary" *ngIf="currentUserId">
+    <ion-searchbar placeholder="Search name, location" [(ngModel)]="term"></ion-searchbar>
+  </ion-toolbar>-->
+  <ion-toolbar color="primary">
+    <ion-searchbar placeholder="Search name, location" [(ngModel)]="term"></ion-searchbar>
+  </ion-toolbar>
+  <!--<ion-toolbar color="primary" *ngIf="currentUserId">
+    <div scrollX="true">
+      <ion-chip class="scrollX" (click)="filterAllOnline()">
+        <ion-label color="light" class="custom-font">All People</ion-label>
+      </ion-chip>
+      <ion-chip class="scrollX" (click)="filtermaleOnline()">
+        <ion-label color="light" class="custom-font">Male</ion-label>
+      </ion-chip>
+      <ion-chip class="scrollX" (click)="filterfemaleOnline()">
+        <ion-label color="light" class="custom-font">Female</ion-label>
+      </ion-chip>
+      <ion-chip class="scrollX" (click)="filterTransOnline()">
+        <ion-label color="light" class="custom-font">Transgender</ion-label>
+      </ion-chip>
+      <ion-chip class="scrollX" (click)="filterAgeOnline()">
+        <ion-label color="light" class="custom-font">Age</ion-label>
+      </ion-chip>
+      <ion-chip class="scrollX" (click)="filterInterestOnline()">
+        <ion-label color="light" class="custom-font">Interest</ion-label>
+      </ion-chip>
+    </div>
+  </ion-toolbar>-->
+  <!--<ion-toolbar color="primary">
+    <div scrollX="true">
+      <ion-chip class="scrollX" (click)="filterAllOffline()">
+        <ion-label color="light" class="custom-font">All People</ion-label>
+      </ion-chip>
+      <ion-chip class="scrollX" (click)="filtermaleOffline()">
+        <ion-label color="light" class="custom-font">Male</ion-label>
+      </ion-chip>
+      <ion-chip class="scrollX" (click)="filterfemaleOffline()">
+        <ion-label color="light" class="custom-font">Female</ion-label>
+      </ion-chip>
+      <ion-chip class="scrollX" (click)="filterTransOffline()">
+        <ion-label color="light" class="custom-font">Transgender</ion-label>
+      </ion-chip>
+      <ion-chip class="scrollX" (click)="filterAgeOffline()">
+        <ion-label color="light" class="custom-font">Age</ion-label>
+      </ion-chip>
+      <ion-chip class="scrollX" (click)="filterInterestOffline()">
+        <ion-label color="light" class="custom-font">Interest</ion-label>
+      </ion-chip>
+    </div>
+  </ion-toolbar>-->
+
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <!--<ion-col size="12">
+        <ion-searchbar placeholder="Search people" (ionInput)="getItems($event)"></ion-searchbar>
+      </ion-col>-->
+      <ion-col size="12">
+        <!-- List -->
+        <ion-list>
+          
+            <ion-item class="transparent box-shadow border-radius ion-margin-top
+            margin-half-start margin-half-end" lines="none"
+            *ngFor="let contact of contactsList | filter:term" (click)="goProfile(contact.uid)">
+              <!--Avatar-->
+              <ion-avatar slot="start" class="story-avatar" [ngClass]="{'seen': false}">
+                <img [src]="contact.photoURL">
+              </ion-avatar>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs  font-bold">
+                  {{contact.displayName}}</h2>
+                  <!--<p *ngIf="contact.status == 'online'" style="float: right; color: green; font-weight: bold;">Online</p>
+                  <p *ngIf="contact.status == 'offline'" style="float: right; color: red; font-weight: bold;">Offline</p>
+                  <p *ngIf="contact.status == 'away'" style="float: right; color: orange; font-weight: bold;">Away</p>-->
+                <!--Subtitle-->
+                <h3 class="text-size-sm text-color-prima font-regular">
+                  {{contact.gender}}, {{contact.age}}, {{contact.marital}}, {{contact.interestfor}} </h3>
+              </ion-label>
+            </ion-item>
+            <!--<ion-infinite-scroll (ionInfinite)="doInfiniteAll($event)" threshold="100px">
+              <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+              </ion-infinite-scroll-content>
+            </ion-infinite-scroll>-->
+            
+            <section>
+              <div *ngFor="let item of dummyBook">
+                <ion-list lines="none">
+                  <ion-item>
+                    <ion-avatar slot="start">
+                      <ion-skeleton-text animated></ion-skeleton-text>
+                    </ion-avatar>
+                    <ion-label>
+                      <h3>
+                        <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                      </h3>
+                      <p>
+                        <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                      </p>
+                    </ion-label>
+                  </ion-item>
+                </ion-list>
+              </div>
+            </section>
+           
+
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+  
+  </ion-content>

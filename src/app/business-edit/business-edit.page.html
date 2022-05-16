@@ -1,0 +1,126 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit Business</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-padding">
+    <ion-row>
+      <ion-col class="ion-no-padding" size="12">
+        <!---Input field name -->
+        <ion-item class="transparent input box-shadow border-radius" lines="none">
+          <ion-input type="text" [(ngModel)]="items.name"
+          placeholder="Business Name"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col class="ion-no-padding" size="12">
+        <ion-item lines="none" class="transparent input box-shadow border-radius" lines="none">
+          <ion-label class="text-size-sm text-color-accent font-regular">Business Category</ion-label>
+         <ion-select class="text-size-sm text-color-accent font-regular" multiple="false" [(ngModel)]="items.category">
+             <ion-select-option  value="{{item.$key}}" *ngFor="let item of CategoriesList">{{item.name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col class="ion-no-padding" size="12">
+        <!---Input field name -->
+        <ion-item class="transparent input box-shadow border-radius" lines="none">
+          <ion-input type="text" [(ngModel)]="items.open"
+          placeholder="Opening time"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col class="ion-no-padding" size="12">
+        <!---Input field name -->
+        <ion-item class="transparent input box-shadow border-radius" lines="none">
+          <ion-input type="text" [(ngModel)]="items.close"
+          placeholder="Closing time"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col class="ion-no-padding" size="12">
+        <!---Input field name -->
+        <ion-item class="transparent input box-shadow border-radius" lines="none">
+          <ion-input type="text"
+          placeholder="Location" [(ngModel)]="items.location" (focusin)="shareLocation()"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12" class="ion-no-padding">
+        <!---Input field description -->
+        <ion-item class="transparent input box-shadow border-radius" lines="none">
+          <ion-textarea rows="4" 
+          placeholder="Description" [(ngModel)]="items.description"></ion-textarea>
+        </ion-item>
+      </ion-col>
+
+      <ion-col class="ion-no-padding" size="12">
+        <!---Input field name -->
+        <ion-item class="transparent input box-shadow border-radius" lines="none">
+          <ion-input type="text" [(ngModel)]="items.phoneNumber"
+          placeholder="Phone"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col class="ion-no-padding" size="12">
+        <!---Input field name -->
+        <ion-item class="transparent input box-shadow border-radius" lines="none">
+          <ion-input type="text" [(ngModel)]="items.website"
+          placeholder="Website (optional)"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col class="ion-no-padding" size="12">
+        <!---Input field name -->
+        <ion-item class="transparent input box-shadow border-radius" lines="none">
+          <ion-input type="text" [(ngModel)]="items.facebook"
+          placeholder="Facebook Link (optional)"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col class="ion-no-padding" size="12">
+        <!---Input field name -->
+        <ion-item class="transparent input box-shadow border-radius" lines="none">
+          <ion-input type="text" [(ngModel)]="items.youtube"
+          placeholder="Youtube Video ID e.g. 9ao4FEaDGhQ (optional)"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col class="ion-no-padding" size="12">
+      <div class="profile-image">
+        <p style="text-align: center; font-weight: bold;">Add Photos</p>
+  
+      
+      </div>
+  
+     
+  
+      <ion-grid>
+        <ion-row>
+          <ion-col size="4" *ngFor="let image of items.images">
+            <img [src]="image.src"/>
+            <ion-icon name="close" color="danger" (click)="removePhoto(image)"></ion-icon>
+          </ion-col>
+          <ion-col size="4">
+            <div  (click)="presentImageSheet()">
+              <img src="assets/upload.jpg">
+          </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  
+      </ion-col>
+
+    <ion-col class="ion-no-padding" size="12">
+      <ion-button class="ion-float-end ion-margin-top button-round ion-text-capitalize"
+      shape="round" fill="outline" (click)="goSubmit()" [disabled]="!items.name || !items.description || !items.close || !items.category || !items.phoneNumber || !items.location || !items.images">Update
+      </ion-button>
+    </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+
+
+</ion-content>
+

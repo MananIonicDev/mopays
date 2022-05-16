@@ -1,0 +1,135 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-capitalize">Job Details</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+
+      <ion-col lass="ion-no-padding" size="12">
+        <!-- List -->
+        <ion-list>
+          <ion-item class="border-radius box-shadow listpart" lines="none">
+            <!--Avatar-->
+            <ion-thumbnail class="border-radius" slot="start">
+              <img src="assets/job-seeker.png" width="200" height="200">
+            </ion-thumbnail>
+            <!--Title and Subtitle-->
+            <ion-label>
+              <h3 class="ion-text-wrap text-size-xp text-color-accent font-bold">{{items.name}}</h3>
+
+              <p class="text-size-sm text-color-primary font-regular ion-text-wrap ion-margin-top">
+                {{items.location}}</p>
+
+              <p style="font-weight: bold;"
+                class="text-size-sm text-color-primary font-regular ion-text-wrap ion-margin-top">
+                Job ID: {{items.jobId}}</p>
+
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      <ion-col lass="ion-no-padding" size="12">
+        <ion-card class="no-border-radius no-box-shadow ion-no-margin ion-no-padding">
+          <ion-card-content>
+            <p style="color: black; font-weight: bold;" *ngIf="items.deadline">Deadline: <span
+                style="padding-left: 15px; color: gray">{{items.deadline | date}}</span></p>
+            <p style="padding-left: 5px; color: black; font-weight: bold;">Type: <span
+                style="padding-left: 15px;color: gray">{{items.type}}</span></p>
+            <p style="padding-left: 5px; color: black; font-weight: bold;" *ngIf="items.salary">Salary Range: <span
+                style="padding-left: 15px;color: gray">{{items.salary}}</span></p>
+            <p style="padding-left: 5px; color: black; font-weight: bold;" text-wrap *ngIf="items.location">Location:
+              <span style="padding-left: 15px;color: gray">{{items.location}}</span></p>
+            <p style="padding-left: 5px; color: black; font-weight: bold;">Job ID: <span
+                style="padding-left: 15px;color: gray">{{items.jobId}}</span></p>
+            <p style="padding-left: 5px; color: black; font-weight: bold;">Posted by: <span
+                style="padding-left: 15px;color: gray">{{items.displayName}} <img *ngIf="items.Verified"
+                  src="assets/checked.png" style="width: 15px; height: 15px; display: inline-block;"></span></p>
+            <br>
+            <h5 class="text-size-md font-bold ion-padding-bottom" style="padding-left: 5px; color: #00a8e1;">
+              How to Apply</h5>
+            <p class="text-size-xs text-color-accent font-regular ion-text-wrap" style="padding-left: 5px;">
+              {{items.apply}}</p>
+            <br>
+            <h5 class="text-size-md font-bold ion-padding-bottom" style="padding-left: 5px; color: #00a8e1;">
+              Job Description</h5>
+            <p class="text-size-xs text-color-accent font-regular ion-text-wrap" style="padding-left: 5px;">
+              {{items.description}}</p>
+
+            <div *ngIf="items.image" class="header-image background-size"
+              [ngStyle]="{'background': 'url(' + items.image + ')'}" (click)="viewImage(items.image)">
+
+            </div>
+            <ion-buttons class="ion-text-center">
+              <ion-button *ngIf="items.website" color="dark" fill="clear" (click)="goLink(items.website)">
+                <ion-icon slot="start" name="open-outline" style="zoom: 1.0;" color="dark"></ion-icon>
+                <h3 class="text-size-xs text-color-accent font-bold">Open Website</h3>
+              </ion-button>
+              <ion-button *ngIf="items.image === 'assets/upload.jpg'" color="dark" fill="clear"
+                (click)="shareSheetShare(items.description)">
+                <ion-icon slot="start" name="arrow-redo-circle-outline" style="zoom: 1.0;" color="dark"></ion-icon>
+                <h3 class="text-size-xs text-color-accent font-bold">Share</h3>
+              </ion-button>
+              <ion-button *ngIf="items.image !== 'assets/upload.jpg'" color="dark" fill="clear"
+                (click)="shareSheetShareImageText(items.image, items.description)">
+                <ion-icon slot="start" name="arrow-redo-circle-outline" style="zoom: 1.0;" color="dark"></ion-icon>
+                <h3 class="text-size-xs text-color-accent font-bold">Share</h3>
+              </ion-button>
+            </ion-buttons>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col class="ion-padding-top" size="12" *ngIf="items.location">
+        <agm-map [latitude]="items.latitude" [longitude]="items.longitude">
+          <agm-marker [latitude]="items.latitude" [longitude]="items.longitude"></agm-marker>
+        </agm-map>
+      </ion-col>
+
+      <div class="line_div"></div>
+
+      <ion-col class="ion-padding-top" size="12">
+        <h2 class="text-size-xs text-color-accent font-bold ion-padding-start
+        ion-padding-top ion-no-margin ion-float-start">{{itemsComment.length}} Comments</h2>
+        <h2 class="text-size-xs text-color-accent font-regular ion-padding-end
+        ion-no-margin ion-float-end ion-padding-top"></h2>
+      </ion-col>
+
+      <ion-col size="12" class="ion-padding-end ion-padding-start reviews">
+        <ion-card class="no-border-radius no-box-shadow ion-no-margin" *ngFor="let item of itemsComment">
+          <ion-item class="transparent ion-no-padding" lines="none">
+            <ion-avatar slot="start">
+              <img [src]="item.photoURL" (click)="viewProfiles(item.userId)">
+            </ion-avatar>
+            <ion-label>
+              <h3 class="text-size-xs font-bold text-color-accent" (click)="viewProfiles(item.userId)">
+                {{item.displayName}} <img *ngIf="item.Verified" src="assets/checked.png"
+                  style="width: 15px; height: 15px; display: inline-block;">
+              </h3>
+              <h3 class="text-size-sm font-regular text-color-accent">{{item.time | DateFormat | lowercase}}</h3>
+              <div class="rating">{{item.rate}}<ion-icon name="star"></ion-icon>
+              </div>
+              <h3 class="text-size-xs font-regular text-color-accent ion-text-wrap
+              ion-padding-top">{{item.description}}
+              </h3>
+            </ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>
+<ion-footer>
+  <ion-button *ngIf="items.userId === currentUserId" expand="block" color="danger" (click)="presentConfirm()">Delete
+    your Job
+  </ion-button>
+  <ion-button expand="full" (click)="goComment(items.userId)">Comment</ion-button>
+</ion-footer>

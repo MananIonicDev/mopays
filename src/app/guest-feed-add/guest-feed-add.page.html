@@ -1,0 +1,164 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add Feed as Guest</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" color="light" disabled
+        [hidden]="name && category != '' && description || description || url || imageResponse.length > 0 || location || latitude || longitude || youtubelink">
+        Post
+      </ion-button>
+      <ion-button fill="clear" color="light" (click)="addFeedTextOnly()"
+        *ngIf="name && category != '' && description && !url && imageResponse.length === 0 && !location && !latitude && !longitude && !youtubelink">
+        Post
+      </ion-button>
+      <ion-button fill="clear" color="light" (click)="addFeedImageOnly()"
+        *ngIf="name && category != '' && !description && !url  && imageResponse.length > 0 && !location && !latitude && !longitude && !youtubelink">
+        Post
+      </ion-button>
+      <ion-button fill="clear" color="light" (click)="addFeedTextImage()"
+        *ngIf="name && category != '' && description && !url  && imageResponse.length > 0 && !location && !latitude && !longitude && !youtubelink">
+        Post
+      </ion-button>
+      <ion-button fill="clear" color="light" (click)="addFeedTextVideo()"
+        *ngIf="name && category != '' && description && url  && imageResponse.length === 0 && !location && !latitude && !longitude && !youtubelink">
+        Post
+      </ion-button>
+      <ion-button fill="clear" color="light" (click)="addFeedVideo()"
+        *ngIf="name && category != '' && !description && url  && imageResponse.length === 0 && !location && !latitude && !longitude && !youtubelink">
+        Post
+      </ion-button>
+      <ion-button fill="clear" color="light" (click)="addFeedTextYoutube()"
+        *ngIf="name && category != '' && description && !url  && imageResponse.length === 0 && !location && !latitude && !longitude && youtubelink">
+        Post
+      </ion-button>
+      <ion-button fill="clear" color="light" (click)="addFeedYoutube()"
+        *ngIf="name && category != '' && !description && !url  && imageResponse.length === 0 && !location && !latitude && !longitude && youtubelink">
+        Post
+      </ion-button>
+      <ion-button fill="clear" color="light" (click)="addFeedLocation()"
+        *ngIf="name && category != '' && !description && !url  && imageResponse.length === 0 && location && latitude && longitude && !youtubelink">
+        Post
+      </ion-button>
+      <ion-button fill="clear" color="light" (click)="addFeedTextLocation()"
+        *ngIf="name && category != '' && description && !url  && imageResponse.length === 0 && location && latitude && longitude && !youtubelink">
+        Post
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-list>
+
+    <ion-item class="transparent input box-shadow border-radius" lines="none">
+      <ion-input placeholder="Enter your name" [(ngModel)]="name"></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-list>
+
+    <ion-item class="transparent input box-shadow border-radius" lines="none">
+      <ion-input placeholder="Enter your age (optional)" [(ngModel)]="age"></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-list>
+
+    <ion-item class="transparent input box-shadow border-radius" lines="none">
+      <ion-input placeholder="Enter your location (optional)" [(ngModel)]="ulocation"></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-list>
+    <ion-col class="ion-no-padding" size="12">
+      <ion-item lines="none" class="transparent input box-shadow border-radius" lines="none">
+        <ion-label class="text-size-sm text-color-accent font-regular">Select Category</ion-label>
+        <ion-select class="text-size-sm text-color-accent font-regular" multiple="true" [(ngModel)]="category">
+          <ion-select-option value="{{item.key}}" *ngFor="let item of CategoriesList">{{item.name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+  </ion-list>
+
+  <ion-list>
+
+    <ion-item class="transparent input box-shadow border-radius" lines="none">
+      <ion-textarea rows="10" cols="1" placeholder="Your Post will remain Anonymous and Data will not be saved. We may share your post to Mopays Facebook page"
+        [(ngModel)]="description"></ion-textarea>
+    </ion-item>
+
+    <ion-grid *ngIf="imageResponse.length > 0">
+      <ion-row>
+        <ion-col size="3" *ngFor="let image of imageResponse">
+          <img [src]="image.src" />
+          <ion-icon name="close" color="danger" (click)="removePhoto(image)"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <div *ngIf="location">
+      <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+        <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="false"></agm-marker>
+      </agm-map>
+
+    </div>
+
+
+    <video [src]="url" *ngIf="format==='video' && url" height="200" width="100%" controls></video> <br />
+
+
+    <ion-list lines="none">
+
+      <ion-item (click)="presentImageSheet()">
+        <ion-icon name="images" style="color: green;" slot="start"></ion-icon>
+        <ion-label>
+          <h6>Add Images</h6>
+        </ion-label>
+      </ion-item>
+      <ion-item (click)="presentVideoSheet()">
+        <input id="filevideo" type='file' style="display: none;" (change)="onSelectFile($event)" />
+        <ion-icon name="videocam" style="color: red;" slot="start"></ion-icon>
+        <ion-label>
+          <h6>Add Video</h6>
+        </ion-label>
+      </ion-item>
+      <!--<ion-item (click)="shareGif()">
+  <ion-icon name="videocam" style="color: black;" slot="start"></ion-icon>
+<ion-label>
+  <h6>Add Gif</h6>
+</ion-label>
+</ion-item>-->
+      <ion-item (click)="shareLocation()">
+        <ion-icon name="location" style="color: purple;" slot="start"></ion-icon>
+        <ion-label>
+          <h6>Share Location</h6>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-list>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-label (click)="goLink()" color="primary">Please Read the Rules before Posting</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label (click)="goEmergency()" style="color: red;">Click here for Emergency Numbers</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label (click)="goRegister()" color="primary">** Sign Up and Post Here</ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

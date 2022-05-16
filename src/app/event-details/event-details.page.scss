@@ -1,0 +1,101 @@
+agm-map {
+    height: 300px !important;
+    width: 100%;  /* This is really important*/
+  }
+
+
+  /*  Style Action Sheet Layout 1
+===========================================*/
+
+// Settings Big Image
+
+.background-size {
+    height: 300px;
+    position: relative;
+  }
+  
+  ion-col {
+    background: var(--cs-background-primary);
+  }
+  
+  ion-item {
+    --inner-padding-end: 0;
+  }
+  
+  .slider {
+    overflow-x: scroll;
+    display: -webkit-inline-box;
+    display: flex;
+    flex-direction: row;
+  
+    ion-card {
+      margin: 0 0 0 16px;
+      position: relative;
+      width: 200px;
+      flex: none;
+  
+      ion-img {
+        overflow: hidden;
+      }
+    }
+  }
+  
+  .reviews {
+    ion-item {
+      ion-avatar {
+        align-self: start;
+        width: 40px;
+        height: 40px;
+      }
+  
+      ion-label {
+        align-self: start;
+      }
+    }
+  }
+  
+
+  .title-icon{
+    font-size: 32px;
+}
+.title-text{
+    padding-left: 5px;
+    align-self: center;
+}
+.first-tick{
+    font-size: 25px;
+    position: absolute;
+    left: -24px;
+    top: -4px;
+}
+.second-tick{
+    font-size: 25px;
+    position: absolute;
+    left: -28px;
+    top: -4px;
+}
+.custom-footer{
+    height: 65px;
+}
+
+.attach-icon {
+    font-size: 2.2em;
+    color: black;
+    transform: rotate(-45deg);
+    margin-left: -10px;
+}
+
+.send-icon{
+    font-size: 1.8em;
+}
+
+.attachment-row-left{
+    background: #0c96df;
+    min-height: 10vw;
+    display: flex;
+    align-items: center;
+    border-top-right-radius: 5vw;
+    border-bottom-right-radius: 5vw;
+    color: white;
+    position: relative;
+}

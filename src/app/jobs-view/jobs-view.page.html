@@ -1,0 +1,114 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Jobs</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="primary" class="ion-no-padding">
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col class="ion-no-padding">
+          <ion-searchbar placeholder="Search" [(ngModel)]="searchitem" (ionInput)="searchName($event)"></ion-searchbar>
+        </ion-col>
+        <ion-col class="ion-no-padding">
+          <ion-searchbar search-icon="location" placeholder="Where" (ionInput)="searchLocation($event)"></ion-searchbar>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col size="12">
+         
+            <ion-slides pager="true" [options]="slideOpts">
+              <ion-slide *ngFor="let step of adverts" (click)="goAdsDetails(step.url)" 
+                    class="background-size"
+                        [ngStyle]="{ 'background': 'url(' + step.image + ')'}">
+              </ion-slide>
+            </ion-slides>
+      </ion-col>
+  
+            <br>
+          
+           
+  
+       
+        <ion-col size="12" size-md="6">
+          <ion-button expand="full" (click)="addJob()">Post Job</ion-button>
+        </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+        <div class="top-features">
+          <ion-item class="transparent ion-no-padding" lines="none">
+            <!-- Similar List -->
+            <h2 class="text-size-pp  font-bold ion-text-wrap
+            ion-padding-start ion-no-margin" slot="start" style="color: #00a8e1;">
+            Job Categories</h2>
+          </ion-item>
+          <div class="stories-card topfeatures image-carousel sliderBook">
+            <ion-card class="image-card" *ngFor="let item of jobCategories" (click)="goJobCat(item.$key, item.name)">
+              <img src="{{item.image}}" alt="" style="height:120px; width: 100%">
+              <ion-card-content>
+                <ion-card-subtitle class="name_title" >
+                  <h2>{{item.name}}</h2>
+                </ion-card-subtitle>
+              </ion-card-content>
+            </ion-card>
+          </div> 
+        </div>
+
+        <div *ngIf="jobCategories.length === 0">
+          <div class="stories-card topfeatures image-carousel sliderBook">
+            <ion-card class="image-card" *ngFor="let item of dummy">
+              <ion-skeleton-text animated style="width: 100%; height: 120px;"></ion-skeleton-text>
+              <ion-card-content>
+                <ion-card-subtitle class="name_title" >
+                  <ion-skeleton-text animated style="width: 50px;"></ion-skeleton-text>
+                </ion-card-subtitle>
+              </ion-card-content>
+            </ion-card>
+          </div> 
+        </div>
+
+        <ion-item class="transparent ion-no-padding" lines="none">
+          <!-- Similar List -->
+          <h2 class="text-size-pp  font-bold ion-text-wrap
+          ion-padding-start ion-no-margin" slot="start" style="color: #00a8e1;">
+          Latest Jobs</h2>
+        </ion-item>
+       
+        <ion-list>
+          <ion-item class="border-radius box-shadow listpart listBox" lines="none"
+          *ngFor="let post of ItemsList?.slice().reverse()" (click)="goToPostDetails(post.key)">
+            <!--Avatar-->
+            <ion-thumbnail class="border-radius" slot="start">
+              <img src="assets/job-seeker.png" width="200" height="200">
+            </ion-thumbnail>
+            <!--Title and Subtitle-->
+            <ion-label>
+              <h3  class="ion-text-wrap text-size-xp text-color-accent font-bold">{{post.name}}</h3>
+      
+                <p  class="text-size-sm text-color-primary font-regular ion-text-wrap ion-margin-top">
+                  {{post.location}}</p>
+
+                  <p style="font-weight: bold;"  class="text-size-sm text-color-primary font-regular ion-text-wrap ion-margin-top">
+                    Job ID: {{post.jobId}}</p>
+                  
+            </ion-label>
+          </ion-item>
+          </ion-list>
+    
+        
+    
+  
+      
+       
+  
+  
+</ion-content>

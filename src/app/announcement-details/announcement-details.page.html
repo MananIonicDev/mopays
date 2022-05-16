@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Announcement</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card class="post-list-card" *ngIf="data">
+    <ion-item lines="none">
+      <ion-avatar slot="start" class="story-avatar" [ngClass]="{'seen': false}">
+        <img [src]="data.image">
+      </ion-avatar>
+      <ion-label class="custom-font">
+        {{data.name}}
+        <!--<p>{{item.timeStamp | DateFormat | lowercase}}</p>-->
+        <p class="custom-font">{{data.Date | DateFormat | lowercase}}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-card-content class="post-list-content">
+
+      <p class="ion-no-margin-top custom-font
+          ion-padding-start ion-padding-end">
+        {{data.description}}
+      </p>
+      <br>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

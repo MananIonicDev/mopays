@@ -1,0 +1,179 @@
+
+
+  .sellbutton{
+    --ion-item-background: #00a8e1;
+    --background: #00a8e1;
+    --ion-item-color: #fff;
+  }
+
+  /*.background-size {
+    height: 100%;
+  }*/
+
+  ion-slide {
+    height: 60px;
+    position: relative;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+
+
+
+
+  .topfeatures{
+    padding: 5px !important;
+  .image-card {
+    margin: 0;
+    border-radius: 4px;
+    height: 95%;
+    min-height: 120px;
+  
+    .name_title{
+      font-size: 16px;
+      font-weight: bold;
+    }
+    /*ion-buttons {
+        position: absolute;
+        left: 10px;
+        text-align: center;
+        top: 20px;
+        right: 10px;
+  
+        .button {
+            --color: #ffffff !important;
+        }
+    }*/
+  }
+  }
+  
+  .post-image {
+  
+  }
+  
+  .post-full {
+  
+  }
+  
+  .post-image, .post-full {
+    ion-avatar {
+        width: 32px;
+        height: 32px;
+    }
+  }
+  
+  
+  
+  
+  
+  
+  
+  .card {
+    margin: 0;
+    margin-right: 50px;
+    width: 80%;
+    box-shadow: none;
+    border-radius: 14px;
+  
+   
+  }
+  
+  .title {
+    font-size: 20px;
+    font-weight: normal;
+  }
+  
+  .category {
+    width: 100%;
+    box-shadow: none;
+    border-radius: 14px;
+  }
+  
+  
+  ion-card-content {
+    .img-wrapper {
+      border-radius: 14px;
+      height: 200px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+  
+    ion-icon {
+      color: #f2994a;
+      padding-right: 4px;
+    }
+  
+    ion-card-subtitle:last-of-type {
+      padding-top:6px;
+    }
+  
+  }
+  
+  ion-card-header {
+    ion-icon {
+      font-size: 60px;
+    }
+  
+    ion-card-title {
+      font-size: 18px;
+      font-weight: bolder;
+    }
+  }
+  
+  .wrapper {
+    padding-bottom: 0;
+  }
+  
+  ion-badge {
+    padding: 10px;
+    font-size: 14px;
+  }
+  
+  
+  .title, .stats {
+    animation: 1s slidein-right forwards;
+  }
+  .description {
+    animation: 1s description-slide forwards;
+    animation-delay: .3s;
+  }
+  .image-carousel {
+    animation: 1s images-slide forwards;
+    animation-delay: .4s;
+  }
+  
+  @keyframes slidein-right {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+  
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+  }
+  
+  @keyframes description-slide {
+    0% {
+        transform: translateX(50%);
+        opacity: 0;
+    }
+  
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+  }
+  
+  @keyframes images-slide {
+    0% {
+        transform: translateX(30%);
+        opacity: 0;
+    }
+  
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+  }

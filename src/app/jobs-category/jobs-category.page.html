@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title  class="ion-text-capitalize">{{name}}</ion-title>
+
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar placeholder="Search Job by title or id" [(ngModel)]="term" animated="true"></ion-searchbar>
+  </ion-toolbar>
+  </ion-header>
+<ion-content [fullscreen]="true">
+      <ion-grid class="ion-no-padding">
+        <ion-row>
+        <ion-col class="ion-no-padding" size="12">
+          <ion-item class="transparent ion-no-padding catpart" lines="none">
+            <!-- Similar List -->
+            <h2 class="text-size-xs font-bold ion-text-wrap
+            ion-padding-start ion-no-margin" slot="start">
+            Latest {{name}} Jobs</h2>
+            <!-- See All -->  
+          </ion-item>
+        </ion-col>
+
+
+
+          <ion-col lass="ion-no-padding" size="12"> 
+            <!-- List -->
+            <ion-list>
+                <ion-item class="border-radius box-shadow listpart" lines="none"
+                *ngFor="let post of shops | filter:term" (click)="goToPostDetails(post.key)">
+                  <!--Avatar-->
+                  <ion-thumbnail class="border-radius" slot="start">
+                    <img src="assets/bag.png" width="200" height="200">
+                  </ion-thumbnail>
+                  <!--Title and Subtitle-->
+                  <ion-label>
+                    <h3  class="ion-text-wrap text-size-xp text-color-accent font-bold">{{post.name}}</h3>
+            
+                      <p  class="text-size-sm text-color-primary font-regular ion-text-wrap ion-margin-top">
+                        {{post.location}}</p>
+
+                        <p style="font-weight: bold;"  class="text-size-sm text-color-primary font-regular ion-text-wrap ion-margin-top">
+                          Job ID: {{post.jobId}}</p>
+                        
+                  </ion-label>
+                </ion-item>
+
+                <div class="ion-text-center ion-padding">
+                  <p class="ion-text-center" *ngIf="!dummy?.length && !shops?.length">No Jobs Found</p>
+                </div>
+
+                <div>
+                  <div *ngFor="let item of dummy">
+                    <ion-list>
+                      <ion-item>
+                        <ion-thumbnail slot="start">
+                          <ion-skeleton-text animated></ion-skeleton-text>
+                        </ion-thumbnail>
+                        <ion-label>
+                          <h3>
+                            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                          </h3>
+                          <p>
+                            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                          </p>
+                          <p>
+                            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                          </p>
+                        </ion-label>
+                      </ion-item>
+                    </ion-list>
+                  </div>
+                </div>
+
+            </ion-list>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      
+    
+</ion-content>

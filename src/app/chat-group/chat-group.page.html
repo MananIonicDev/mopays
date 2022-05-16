@@ -1,0 +1,133 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Chats</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list *ngIf="moderate">
+    <ion-grid>
+      <ion-row class="page1">
+
+        <ion-col size="12">
+          <ion-item class="transparent ion-no-padding" lines="none">
+            <!-- Similar List -->
+            <h6 class="font-bold ion-text-wrap custom-font
+            ion-padding-start ion-no-margin" slot="start" style="color: #00a8e1;">
+              Recently Online Users
+            </h6>
+          </ion-item>
+          <div class="stories-card sliderBook" style="margin-top: 0px;">
+            <ion-list lines="none" class="story-list" *ngFor="let item of contactsList" (click)="goProfile(item.uid)">
+              <ion-item lines="none" class="story-item">
+                <ion-avatar class="story-avatar" [ngClass]="{'seen': false}">
+                  <img src="{{item.photoURL}}">
+                </ion-avatar>
+              </ion-item>
+              <div class="story-author">
+                <ion-text color="dark" style="font-size: 13px;">
+                  {{item.displayName}}
+                </ion-text>
+              </div>
+            </ion-list>
+          </div>
+        </ion-col>
+
+
+        <ion-col size="12" class="ion-padding-end ion-padding-start reviews">
+
+          <ion-card class="no-border-radius no-box-shadow ion-no-margin explore-card"
+            *ngFor="let item of messagesList; let i = index;">
+            <ion-item-sliding #item>
+
+              <ion-item class="transparent ion-no-padding explore-card">
+                <ion-avatar slot="start">
+                  <img [src]="item.photo">
+                </ion-avatar>
+                <ion-label>
+                  <h3 class="text-size-xs font-bold" *ngIf="item.name.indexOf('user')" (click)="goProfile(item.userId)">{{item.name}} <span style="float: right;"
+                      class="text-size-sm font-regular">{{item.timestamp | DateFormat | lowercase}} </span></h3>
+                  <h3 class="text-size-xs font-bold" *ngIf="!item.name.indexOf('user')" (click)="anonymousProfile()">{{item.name}} <span style="float: right;"
+                      class="text-size-sm font-regular">{{item.timestamp | DateFormat | lowercase}} </span></h3>
+                  <h3 class="text-size-sm font-regular ion-text-wrap">{{item.message}}</h3>
+                  <!--<h3 class="text-size-xs font-regular  ion-text-wrap
+                     ion-padding-top">{{item.message}}
+                     </h3>-->
+                </ion-label>
+              </ion-item>
+              <ion-item-options side="end">
+                <ion-item-option (click)="reportChat(item.name)" color="danger">
+                  <ion-icon name="alert-circle-outline"></ion-icon>
+                </ion-item-option>
+              </ion-item-options>
+            </ion-item-sliding>
+
+          </ion-card>
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+</ion-content>
+
+<ion-footer [style.height]="showEmojiPicker ? '260px' : '55px'" *ngIf="moderate">
+  <ion-row class="input-position" *ngIf="currentUserId">
+    <ion-col size="9">
+      <ion-input class="input restrict" (focusin)="onFocus()" type="text" placeholder="Type a message  ( Register to have a name )"
+        [(ngModel)]="message" padding-start>
+      </ion-input>
+    </ion-col>
+    <ion-col size="1" no-padding align-self-center>
+      <ion-button no-margin fill="clear" (click)="switchEmojiPicker()">
+        <ion-icon class="attach-icon" name="happy-outline"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col size="1" no-padding align-self-center>
+      <ion-button no-margin fill="clear" (click)="send()">
+        <ion-icon class="send-icon" color="primary" name="send"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+  <ion-row class="input-position" *ngIf="!currentUserId">
+    <ion-col size="9">
+      <ion-input class="input restrict" type="text" (focusin)="onFocus()" placeholder="Type a message"
+        [(ngModel)]="message" padding-start>
+      </ion-input>
+    </ion-col>
+    <ion-col size="1" no-padding align-self-center>
+      <ion-button no-margin fill="clear" (click)="switchEmojiPicker()">
+        <ion-icon class="attach-icon" name="happy-outline"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col size="1" no-padding align-self-center>
+      <ion-button no-margin fill="clear" (click)="sendAnonymous()">
+        <ion-icon class="send-icon" color="primary" name="send"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+  <div>
+    <ngx-emoj (onemojipick)="handleEmoji($event)" (onchardelete)="handleCharDelete($event)" [width]="'60vh'"
+      [height]="'40vh'" [theme]="{
+         martShowHeader: true,
+         martShowFooter: true,
+         martHeaderPadding: {x: '0', y: '0'},
+         martFooterPadding: {x: '0', y: '0'},
+         martHeaderFontSize: '14px',
+         martHeaderBG: '#e3e7e8',
+         martFooterBG: '#e3e7e8',
+         martBG: '#ebeff2',
+         martCategoryColor: '#94a0a6',
+         martCategoryColorActive: '#455a64',
+         martActiveCategoryIndicatorColor: '#00897b',
+         martEmojiFontSize: '150%',
+         martCategoryFontSize: '20px',
+         martBorderRadius: '5px',
+         martActiveCategoryIndicatorHeight: '4px',
+         martEmojiPadding: {x: '40px', y: '40px'}
+       }" [recentEmojiStoreKey]="'String'" [searchEmojiPlaceholderText]="'String'" [emojiNotFoundText]="'String'">
+    </ngx-emoj>
+  </div>
+</ion-footer>

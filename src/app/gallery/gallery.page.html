@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-capitalize">Gallery</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+
+      <ion-col size="12">
+
+        <ion-slides [options]="slideOptions">
+          <ion-slide *ngFor="let item of GalleryList" (click)="onItemClickFunc(item.$key)">
+            <ul class="ion-no-margin ion-no-padding collapsible image-carousel" style="width: 100%;">
+              <li class="margin-half border-radius explorelist image-carousel">
+
+                <div class="collapsible-header background-size border-radius box-shadow explorelist"
+                  [ngStyle]="{background: 'linear-gradient(-225deg, rgba(0,0,0,0.4) 90%, rgba(0,36,61,0.4) 80%), url('+ item.image +')', 'background-size': 'cover'}">
+                  <ion-item lines="none" class="transparent">
+                    <ion-label lines="none" class="ion-text-center">
+
+                      <h2 class="text-size-md font-bold text-color-secondary ion-text-wrap">
+                        {{item.name}}</h2>
+                    </ion-label>
+                  </ion-item>
+
+                </div>
+
+              </li>
+            </ul>
+          </ion-slide>
+        </ion-slides>
+
+        <ion-grid class="ion-no-padding" *ngIf="GalleryList.length === 0">
+          <ion-row>
+            <ion-col size="12" *ngFor="let i of [0]">
+              <ion-skeleton-text animated style="width: 100%; height: 200px;"></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="6" style="padding: 5px;" *ngFor="let item of dummy">
+              <ion-card class="card-custom">
+                <ion-skeleton-text animated style="height: 200px; width: 100%;"></ion-skeleton-text>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+      </ion-col>
+
+      <ion-col size="6" style="padding: 5px;" *ngFor="let item of galleryList?.slice().reverse()">
+        <ion-card class="card-custom" (click)="viewImage(item)">
+          <div class="gallery-thumbnail" [style.backgroundImage]="'url(' + item.image + ')'">
+            <div class="gallery-caption custom-font">
+              {{ (item.description.length>50)? (item.description | slice:0:50)+'...' : (item.description) }}
+            </div>
+          </div>
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-button (click)="showModal()" expand="block">
+      <ion-icon name="images" slot="start"></ion-icon>
+      Upload Image
+    </ion-button>
+  </ion-fab>
+
+
+
+</ion-content>

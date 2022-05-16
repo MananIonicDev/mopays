@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>My Items</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar [(ngModel)]="term" animated="true" placeholder="Search"></ion-searchbar>
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-item color = "light">
+      <!--<ion-label stacked color="primary">Sort by:</ion-label>-->
+      <ion-select [(ngModel)]="sorting" (ngModelChange)="sort()" placeholder="Sort by">
+              <ion-select-option value = "1" selected="true">Title: A -> Z</ion-select-option>
+              <ion-select-option value = "2">Title: Z -> A</ion-select-option>
+               <ion-select-option value = "3">Price: Low to High</ion-select-option>
+              <ion-select-option value = "4">Price: High to Low</ion-select-option>
+              <ion-select-option value = "5">Newest</ion-select-option>
+              <ion-select-option value = "6">Oldest</ion-select-option>
+              <ion-select-option value = "7">Filter item</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<!-- Theme Search Bars Layout 3 -->
+<ion-grid class="ion-no-padding">
+  <ion-row>
+      <ion-col size="12" size-md="6" class="ion-no-padding"
+       *ngFor="let item of shops | filter:term">
+       <!-- Card -->
+        <ion-card class="border-radius box-shadow" (click)="goDetails(item.$key)">
+        <!-- Card Header With Background Image -->
+          <ion-card-header class="ion-no-padding background-size"
+          [ngStyle]="{'background': 'url(' + item.smallImg + ')'}">
+          </ion-card-header>
+          <!-- Card Content -->
+          <ion-card-content>
+            <h1 class="ion-text-wrap text-size-xs text-color-accent font-bold ion-padding-top">
+              {{item.name}}</h1>
+            <!--<h3 class="text-size-sm text-color-primary font-bold ion-text-wrap">
+              {{item.oldPrice}}</h3>-->
+            <h4 class="text-size-md text-color-accent font-bold ion-text-wrap">
+              {{item.price}}</h4>
+            <div class="clearfix"></div>
+            <h3 class="text-size-sm text-color-primary font-bold ion-text-wrap">
+              {{item.location}}</h3>
+              <p style="font-size: 12px;">Posted: {{item.timeStamp | date}}</p>
+          </ion-card-content>
+        </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+</ion-content>
+

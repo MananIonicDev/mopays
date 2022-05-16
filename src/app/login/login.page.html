@@ -1,0 +1,148 @@
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+  <div id="sign-in-button"></div>
+  <ion-fab vertical="top" horizontal="start" slot="fixed" (click)="goBack()">
+    <ion-fab-button>
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <div class="ion-text-center description" style="margin-left: 50px;">
+    <h1 class="ion-text-center custom-font" style="color: white; text-shadow: 2px 2px 2px #000;"><b>Register & Enjoy more Benefits</b></h1>
+  </div>
+
+  <div class="ion-padding">
+
+
+    <form #loginForm="ngForm" novalidate class="ion-padding">
+
+      <div class="wrap-input">
+        <input class="input" [(ngModel)]="login.full_name" type="text" placeholder="Full Name"
+          name="full_name" #full_name="ngModel" spellcheck="false" autocapitalize="off" required>
+      </div>
+      <ion-label style="font-size: 12px;" color="danger" [hidden]="full_name.valid || submitted == false">Name is
+        required</ion-label>
+
+      <div class="wrap-input">
+        <input class="input" [(ngModel)]="login.email" type="email" name="email" placeholder="Email" #email="ngModel"
+          spellcheck="false" autocapitalize="off" required>
+      </div>
+      <ion-label style="font-size: 12px;" color="danger" [hidden]="email.valid || submitted == false">Email is required
+      </ion-label>
+
+
+      <div class="wrap-input">
+        <input class="input" [(ngModel)]="login.password" name="password" type="password" #password="ngModel" required
+          placeholder="Password">
+      </div>
+      <ion-label style="font-size: 12px;" color="danger" [hidden]="password.valid || submitted == false">Password is
+        required</ion-label>
+
+      <div class="wrap-input">
+        <input class="input" [(ngModel)]="login.confirmPassword" name="cpassword" type="password" #cpassword="ngModel"
+          required placeholder="Confirm Password">
+      </div>
+      <ion-label style="font-size: 12px;" color="danger" [hidden]="cpassword.valid || submitted == false">Confirm
+        Password is required</ion-label>
+
+
+
+        <ion-grid>
+          <ion-row>
+            <ion-col size="4" class="ion-no-padding">
+              <div class="wrap-input" style="border-radius: 20px 0px 0px 20px;">
+                <ion-select class="select" name="login.countryCode" (ionChange)="countryCodeChange($event)"
+                  [value]="countryCode">
+                  <ion-select-option value="{{item.code}}" *ngFor="let item of countries">
+                    {{item.code}} - {{item.name}}
+                  </ion-select-option>
+                </ion-select>
+              </div>
+            </ion-col>
+            <ion-col size="8" class="ion-no-padding">
+              <div class="wrap-input" style="border-radius: 0px 20px 20px 0px;">
+                <input class="input" [(ngModel)]="login.PhoneNo" type="text" placeholder="Mobile Number" name="PhoneNo"
+                  #PhoneNo="ngModel" spellcheck="false" autocapitalize="off" required>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+      
+
+      
+      <ion-label style="font-size: 12px;" color="danger" [hidden]="PhoneNo.valid || submitted == false">Phone No is
+        required</ion-label>
+
+      <div class="container-form-btn">
+        <ion-button style="text-transform: none;" expand="block" class="form-google" color="danger"
+          (click)="onLogin(loginForm)" type="submit" [disabled]="isLogin">
+          <span *ngIf="!isLogin">Register</span>
+          <ion-spinner name="circles" *ngIf="isLogin" color="light"></ion-spinner>
+        </ion-button>
+      </div>
+
+
+    </form>
+
+
+    <span class="divider line one-line">OR</span>
+  </div>
+
+
+  <div class="ion-text-center container-form-btn" style="text-align:center;">
+    <ion-button expand="block" class="form-facebook description" style="text-transform: none;" color="tertiary"
+      (click)="FBRegister()">
+      <ion-icon name="logo-facebook" slot="start"></ion-icon>
+      Continue with Facebook
+    </ion-button>
+  </div>
+  <br>
+
+
+  <div class="ion-text-center" style="text-align:center;">
+    <ion-button (click)="goLogin()" style="text-transform: none;" class="form-register" color="primary">
+      Already have an account? Sign In
+    </ion-button>
+  </div>
+
+  <br>
+  <div class="ion-text-center description" style="text-align:center;">
+    <ion-button fill="clear" (click)="Terms()" color="light" style="text-transform: none; font-size: 12px">
+      By Signing up, you agree to our Terms & Conditions
+    </ion-button>
+  </div>
+
+  <!--<ion-grid>
+    <ion-row>
+      <ion-col size="6" class="description">
+        <ion-button expand="block" class="form-facebook" color="tertiary" (click)="FBRegister()">
+          <ion-icon name="logo-facebook" slot="start"></ion-icon>
+          Facebook
+        </ion-button>
+      </ion-col>
+      <ion-col size="6" class="description">
+        <ion-button expand="block" color="danger" class="form-google">
+          <ion-icon name="logo-facebook" slot="start"></ion-icon>
+          Google
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>-->
+
+
+</ion-content>
+
+<!--<ion-footer class="ion-no-border">
+	<ion-toolbar (click)="goLogin()">
+		<p class="ion-text-center custom-font"  style="color: white;">Already have an account? Sign In</p>
+  </ion-toolbar>
+ 
+</ion-footer>-->

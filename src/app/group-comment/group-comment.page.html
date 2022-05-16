@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Comment</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- ACTION SHEET -- COMPONENT 1-->
+<ion-content [scrollEvents]="true">
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col class="ion-no-padding" size="12">
+        <!-- List -->
+        <ion-list lines="none">
+          <!-- List header -->
+          <ion-list-header>
+            <!-- List header title -->
+            <span class="text-color-follow text-size-xs font-bold">
+              {{feedsComment.length}} Comments</span>
+          </ion-list-header>
+          <!-- Card -->
+          <ion-card class="box-shadow border-radius" *ngFor="let item of feedsComment">
+            <!-- Card header -->
+            <ion-card-header class="ion-no-padding">
+              <ion-item class="transparent" lines="none">
+                <!-- Avatar -->
+                <ion-avatar slot="start" (click)="viewProfiles(item.userId)">
+                  <img [src]="item.photoURL">
+                </ion-avatar>
+                <ion-label>
+                  <!-- Avatar title -->
+                  <h3 class="text-color-follow text-size-xs font-bold ion-text-wrap" (click)="viewProfiles(item.userId)">
+                    {{item.displayName}}</h3>
+                  <!-- Time -->
+                  <h3 class="text-color-follow text-size-sm font-regular ion-text-wrap">
+                    {{item.date | DateFormat | lowercase }}</h3>
+                </ion-label>
+                <ion-label class="icon-star-section" (click)="presentActionSheet(item.id, item)">
+                  <ion-icon class="icon-color-accent icon-font-sm" slot="start" name="ellipsis-vertical"></ion-icon>
+                </ion-label>
+              </ion-item>
+            </ion-card-header>
+            <!-- Card content -->
+            <ion-card-content class="ion-no-padding-top">
+              <!-- Card content description -->
+              <p class="text-color-follow text-size-xs font-regular ion-text-wrap">
+                {{item.message}}
+              </p>
+            </ion-card-content>
+          </ion-card>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer translucent>
+  <ion-row class="input-position">
+     <ion-col size="9">
+       <ion-input class="input restrict" type="text" placeholder="Type a message" [(ngModel)]="message" padding-start>
+       </ion-input>
+     </ion-col>
+     <!--<ion-col size="1" no-padding align-self-center>
+       <ion-button no-margin fill="clear">
+         <ion-icon class="attach-icon" name="attach"></ion-icon>
+       </ion-button>
+     </ion-col>-->
+     <ion-col size="1" no-padding align-self-center>
+       <ion-button no-margin fill="clear" (click)="send()" [disabled]="">
+         <ion-icon class="send-icon" color="primary" name="send"></ion-icon>
+       </ion-button>
+     </ion-col>
+   </ion-row>
+   </ion-footer>

@@ -1,0 +1,113 @@
+
+
+<ion-content>
+
+   
+  <section *ngIf="posts">
+  <ion-slides [options]="slideOpts">
+    <ion-slide *ngFor="let post of posts" (click)="goToPostDetails(post)" 
+          class="background-size top-slide"
+              [ngStyle]="{ 'background': 'url(' + post.media_url + ')'}">
+              <div class="hello-title" text-wrap>
+                {{post.title.rendered}}
+              </div>
+    </ion-slide>
+</ion-slides>
+</section>
+
+<!-- ALERT --COMPONENT 1 -->
+<section *ngIf="posts">
+<ion-grid class="padding-half ion-no-padding">
+  <ion-row>
+
+    <ion-col class="ion-padding" size="12">
+      <ion-slides pager="true" [options]="slideOpts">
+        <ion-slide *ngFor="let step of adverts" (click)="goAdsDetails(step.url)" 
+              class="background-size down-slide"
+                  [ngStyle]="{ 'background': 'url(' + step.image + ')'}">
+        </ion-slide>
+      </ion-slides>
+    </ion-col>
+
+    <ion-col class="ion-no-padding" size="12" size-md="6">
+      <ion-item lines="full" class="box-shadow border-radius listBox"
+      *ngFor="let post of posts" (click)="goToPostDetails(post)">
+        <!-- Avatar -->
+        <ion-thumbnail class="border-radius" slot="start">
+          <img [src]="post.media_url" *ngIf="post.media_url">
+        </ion-thumbnail>
+        <ion-label class="ion-padding-end">
+          <!-- Avatar title -->
+          <h6 class="ion-text-wrap text-color-accent" [innerHTML]="post.title.rendered"></h6>
+          <!-- category -->
+          
+          <!-- New price -->
+          <div class="text-color-accent" style="font-size: 13px">
+            {{ post.date_gmt | date }}
+            </div>
+        </ion-label>
+      
+      </ion-item>
+    </ion-col>
+
+    
+
+  </ion-row>
+</ion-grid>
+</section>
+
+<ion-infinite-scroll threshold="100px" (ionInfinite)="loadMore($event)">
+  <ion-infinite-scroll-content loadingText="Loading more posts...">
+  </ion-infinite-scroll-content>
+</ion-infinite-scroll>
+
+  <div>
+    <div *ngFor="let item of [0,1,2,3,4,5,6]">
+      <ion-list>
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-thumbnail>
+          <ion-label>
+            <h3>
+              <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+            </h3>
+            <p>
+              <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+            </p>
+            <p>
+              <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+            </p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+
+  
+  <!--<ion-searchbar (ionChange)="searchChanged($event)" debounce="1000" [(ngModel)]="searchTerm"></ion-searchbar>
+
+  
+  <div *ngIf="totalPosts > 0" class="ion-text-center ion-padding">
+  Found {{ totalPosts }}
+</div>-->
+ 
+<!--<ion-card *ngFor="let post of posts">
+  <ion-card-header>
+    <ion-card-title [innerHTML]="post.title.rendered"></ion-card-title>
+    <ion-card-subtitle>{{ post.date_gmt | date }}</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content>
+    <img [src]="post.media_url" *ngIf="post.media_url" class="post-img">
+    <div [innerHTML]="post.excerpt.rendered"></div>
+    <ion-button expand="full" fill="clear" [routerLink]="['/', 'posts', post.id]" text-right>Read More...</ion-button>
+  </ion-card-content>
+</ion-card>
+
+<ion-infinite-scroll threshold="100px" (ionInfinite)="loadMore($event)">
+  <ion-infinite-scroll-content loadingText="Loading more posts...">
+  </ion-infinite-scroll-content>
+</ion-infinite-scroll>-->
+
+
+</ion-content>

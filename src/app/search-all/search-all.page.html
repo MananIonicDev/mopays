@@ -1,0 +1,103 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Search</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid class="ion-no-padding">
+    <ion-row appAnimateItems className="zoomIn">
+      <ion-col size="12">
+        <!-- List -->
+        <ion-list>
+          <ion-item class="transparent box-shadow border-radius
+          margin-half-start margin-half-end image-carousel" lines="none" (click)="searchPeople()">
+            
+            <ion-icon name="search" slot="start"></ion-icon>
+             
+            <ion-label>
+         
+              <h2 class="text-size-xs font-bold">
+                People</h2>
+             
+            </ion-label>
+          </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end image-carousel" lines="none" (click)="searchBusiness()">
+            <ion-icon name="search" slot="start"></ion-icon>
+              <ion-label>
+           
+                <h2 class="text-size-xs font-bold">
+                  Business</h2>
+               
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end image-carousel" lines="none" (click)="searchService()">
+              <!--Avatar-->
+              <ion-icon name="search" slot="start"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Services</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end image-carousel" lines="none" (click)="searchExplore()">
+              <!--Avatar-->
+              <ion-icon name="search" slot="start"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Explore</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end image-carousel" lines="none" (click)="searchJobs()">
+              <!--Avatar-->
+              <ion-icon name="search" slot="start"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Jobs</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end image-carousel" lines="none" (click)="searchMap()">
+              <!--Avatar-->
+              <ion-icon name="search" slot="start"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Nearby</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+            <ion-item class="transparent box-shadow border-radius
+            margin-half-start margin-half-end image-carousel" lines="none" (click)="searchItem()">
+              <!--Avatar-->
+              <ion-icon name="search" slot="start"></ion-icon>
+              <ion-label>
+                <!--Title-->
+                <h2 class="text-size-xs font-bold">
+                  Classifieds</h2>
+                <!--Subtitle-->
+              </ion-label>
+            </ion-item>
+
+           
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+
+

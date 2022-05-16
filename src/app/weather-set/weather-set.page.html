@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+          <ion-item>
+            <ion-label>
+              City
+            </ion-label>
+            <ion-input [(ngModel)]="city" name="city" type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              Country
+            </ion-label>
+            <ion-input [(ngModel)]= "country" name="country" type="text"></ion-input>
+          </ion-item>
+          <ion-button expand="block" (click)="saveForm()">Save Changes</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,100 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+    Search Options
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button slot="end" color="light" (click)="goDiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+<ion-item>
+<ion-label>
+<h6>I'm here for</h6>
+</ion-label>
+</ion-item>
+
+<ion-item>
+<ion-select [(ngModel)]="interest" placeholder="Select">
+  <ion-label>Select</ion-label>
+<ion-select-option *ngFor="let item of favourItems" [value]="item.name">{{item.name}}</ion-select-option>
+</ion-select>
+</ion-item>
+
+<ion-item>I want to meet</ion-item>
+<ion-grid class="select-amount ion-no-padding">
+    <ion-row>
+        <ion-col class="ion-text-center" *ngFor="let item of genderMethod; let idx = index">
+            <ion-card (click)="Selectgender(idx, item.code)" [ngClass]="{'activated': (gender == idx), 'deactivated': (gender != idx)}">
+                <ion-card-content>
+                    <ion-text class="sub-title itemtext"> {{item.name}} </ion-text>
+                </ion-card-content>
+            </ion-card>
+        </ion-col>
+    </ion-row>
+</ion-grid>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Age Range - {{age.lower}} - {{age.upper}}</ion-card-title>
+    </ion-card-header>
+    <ion-item>
+      <ion-range dualKnobs="true" pin="true" snaps="true" [(ngModel)]="age" [min]="0" [max]="maxAmount">
+        <ion-label slot="start" style="font-size: 20px;">{{age.lower}}</ion-label>
+        <ion-label slot="end" style="font-size: 20px;">{{age.upper}}</ion-label>
+      </ion-range>
+    </ion-item>
+  </ion-card>
+
+  <ion-item>
+  Location: {{location}}
+  </ion-item>
+  <!--<ion-input [(ngModel)]="location" type="text"></ion-input>-->
+  <ion-searchbar 
+        [(ngModel)]="autocomplete.query"  
+        (ionInput)="updateSearch()" 
+        placeholder="Search Location...">
+    </ion-searchbar>
+    <ion-list>
+        <ion-item *ngFor="let item of autocompleteItems" 
+            (click)="chooseItem(item)" style="font-size: 13px; font-weight: bold;">
+            {{item}}
+        </ion-item>
+    </ion-list>
+
+    <ion-item>Marital Status</ion-item>
+    <ion-grid class="select-amount ion-no-padding">
+      <ion-row>
+          <ion-col class="ion-text-center" *ngFor="let item of maritalMethod; let idx = index">
+              <ion-card (click)="Selectmarital(idx, item.code)" [ngClass]="{'activated': (marital == idx), 'deactivated': (marital != idx)}">
+                  <ion-card-content>
+                      <ion-text class="sub-title itemtext"> {{item.name}} </ion-text>
+                  </ion-card-content>
+              </ion-card>
+          </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  <!--<ion-list>
+    <ion-radio-group [(ngModel)]="gender">
+      <ion-item *ngFor="let item of genderMethod" class="list cart-item itemback">
+        <ion-label>
+          <h3><b>{{item.name}}</b></h3>
+        </ion-label>
+        <ion-radio [value]="item.code" slot="start" mode="md"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>-->
+
+  <ion-button expand="block" (click)="chooseItems()" *ngIf="age.lower && age.upper">Apply Filter</ion-button>
+
+  <br>
+  <ion-button expand="block" fill="clear" (click)="goDiss()">Close</ion-button>
+
+
+</ion-content>
